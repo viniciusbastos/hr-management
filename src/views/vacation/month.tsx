@@ -1,12 +1,10 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import logo from "../assets/profile.png";
 import { format, compareAsc, parseISO } from "date-fns";
 import fetchVacationMonth from "../../services/fetchVacationMonth";
-import { tr } from "date-fns/locale";
+import ButtonBack from "../../components/buttonBack";
 
 const VacationMonth = () => {
-  const navigate = useNavigate();
   const { month } = useParams();
   const results = useQuery(["vacation", month], fetchVacationMonth);
   if (results.isLoading) {
@@ -16,15 +14,14 @@ const VacationMonth = () => {
       </div>
     );
   }
+
   if (results.data.vacation[0].month === 1) {
-    let monthName = "Janeiro";
-    console.log(monthName);
   } else {
     const monthName = "";
   }
 
   return (
-    <div className="ml-20 mr-20 mx-auto my-10 bg-white rounded-lg p-10 shadow-xl">
+    <div className=" mx-auto my-10 bg-white rounded-lg p-10 shadow-xl">
       <h2 className="text-center text-2xl font-semibold mt-3">
         Férias do mês de {}
       </h2>
@@ -32,6 +29,10 @@ const VacationMonth = () => {
 
       <div className="mt-5 flex-auto">
         <table className="min-w-full ">
+          <caption className="caption-bottom">
+            Férias do mês de {} de {results.data.vacation[0].year} -{" "}
+            {results.data.vacation.length}
+          </caption>
           <thead className="text-sm text-gray-700">
             <tr>
               <th className="py-3 px-8 text-left border border-slate-200">
@@ -47,7 +48,7 @@ const VacationMonth = () => {
                 Início
               </th>
               <th className="py-3 px-8 text-left border border-slate-200">
-                Termino
+                Término
               </th>
               <th className="py-3 px-8 text-left border border-slate-200">
                 Período
@@ -56,7 +57,7 @@ const VacationMonth = () => {
           </thead>
 
           <tbody className="text-sm text-gray-600">
-            {results.data.vacation.map((vacation) => (
+            {results.data.vacation.map((vacation: any) => (
               <tr key={vacation.id}>
                 <td className="whitespace-nowrap py-3 px-4 border border-slate-200">
                   {vacation.mat}
@@ -81,18 +82,7 @@ const VacationMonth = () => {
           </tbody>
         </table>
       </div>
-
-      <div className="flex flex-row-reverse mt-6">
-        <button
-          className="bg-stone-400 text-white rounded-2xl p-3 align-"
-          type="button"
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
-          Voltar
-        </button>
-      </div>
+      <ButtonBack />
     </div>
   );
 };

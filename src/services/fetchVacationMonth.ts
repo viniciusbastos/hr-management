@@ -1,15 +1,9 @@
 import { api } from "./api";
 
 const fetchUser = async ({ queryKey }) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("authorization")}`,
-    },
-  };
   const month = queryKey[1];
   const apiRes = api
-    .get(`/vacation/month/${month}`, config)
+    .get(`/vacation/month/${month}`)
     .then((response) => {
       return response.data;
     })

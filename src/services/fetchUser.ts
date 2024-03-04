@@ -1,15 +1,9 @@
 import { api } from "./api";
 
 const fetchUser = async ({ queryKey }) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("authorization")}`,
-    },
-  };
   const id = queryKey[1];
   const apiRes = api
-    .get(`/user/${id}`, config)
+    .get(`/user/${id}`)
     .then((response) => {
       return response.data;
     })

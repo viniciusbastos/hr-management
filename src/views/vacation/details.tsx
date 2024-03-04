@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import logo from "../assets/profile.png";
 import { format, compareAsc, parseISO } from "date-fns";
 import fetchVacation from "../../services/fetchVacation";
+import ButtonBack from "../../components/buttonBack";
 
 const VacationDetails = () => {
   const navigate = useNavigate();
@@ -16,35 +17,46 @@ const VacationDetails = () => {
     );
   }
   const vacation = results.data.vacation[0];
+  console.log(vacation);
   return (
-    <div className="max-w-lg mx-auto my-10 bg-white rounded-lg p-10 shadow-xl">
+    <div className="max-w-xl mx-auto my-10 bg-white rounded-lg p-10 shadow-xl">
       <h2 className="text-center text-2xl font-semibold mt-3">Férias</h2>
       <p className="text-center text-gray-600 mt-1"></p>
+      <div className="mt-5 flex-auto">
+        <table className="min-w-full ">
+          <thead className="text-sm text-gray-700">
+            <tr>
+              <th className="py-3 px-8 text-left border border-slate-200">
+                Início
+              </th>
+              <th className="py-3 px-8 text-left border border-slate-200">
+                Término
+              </th>
+              <th className="py-3 px-8 text-left border border-slate-200">
+                Período
+              </th>
+            </tr>
+          </thead>
 
-      <div className="mt-5 flex-auto">
-        <h3 className="text-sm font-semibold inline-block">
-          Período Aquisitivo:{"  "}
-        </h3>
-        <h3 className="text-gray-600 mt-2 inline-block ml-1">
-          {vacation.period}
-        </h3>
+          <tbody className="text-sm text-gray-600">
+            {results.data.vacation.map((vacation: any) => (
+              <tr key={vacation.id}>
+                <td className="whitespace-nowrap py-3 px-4 border border-slate-200">
+                  {format(parseISO(vacation.startAt), "dd/MM/yyyy")}
+                </td>
+                <td className="whitespace-nowrap py-3 px-4 border border-slate-200">
+                  {format(parseISO(vacation.finishAt), "dd/MM/yyyy")}
+                </td>
+                <td className="whitespace-nowrap py-3 px-4 border border-slate-200">
+                  {vacation.period}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      <div className="mt-5 flex-auto">
-        <h3 className="text-sm font-semibold inline-block">Inicio:{"  "}</h3>
-        <h3 className="text-gray-600 mt-2 inline-block ml-1">
-          {vacation.startAt}
-        </h3>
-      </div>
-      <div className="flex flex-row-reverse mt-6">
-        <button
-          className="bg-stone-400 text-white rounded-2xl p-3 align-"
-          type="button"
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
-          Voltar
-        </button>
+      <div className="mt-5">
+        <ButtonBack />
       </div>
     </div>
   );

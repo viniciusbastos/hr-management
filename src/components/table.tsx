@@ -3,17 +3,27 @@ import { api } from "../services/api";
 import { Link, useNavigate } from "react-router-dom";
 import foto from "../assets/profile.png";
 import config from "../utils/config";
+import { useQuery } from "@tanstack/react-query";
+import fetchUsers from "../services/fetchUsers";
 
 function Table() {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
+  const results = useQuery(["vacation"], fetchUsers);
+  if (results.isLoading) {
+    return (
+      <div className="loading-pane">
+        <h2 className="loader">🌀</h2>
+      </div>
+    );
+  }
 
-  useEffect(() => {
-    api.get("/user", config).then((response) => {
-      setUsers(response.data);
-      console.log(users);
-    });
-  }, []);
+  // useEffect(() => {
+  //   api.get("/user", config).then((response) => {
+  //     setUsers(response.data);
+  //     console.log(users);
+  //   });
+  // }, []);
   const getData = () => {
     api.get(`/user`).then((getData) => {
       setUsers(getData.data);
@@ -27,31 +37,31 @@ function Table() {
 
   return (
     <div className="flex flex-col mt-10">
-      <div className="shadow-lg overflow-hidden border-b border-gray-200 sm:rounded-lg mr-10 ml-10">
-        <table className="rounded-xl min-w-full divide-y divide-gray-200">
-          <thead className="bg-stone-500">
+      <div className="shadow-lg overflow-scrool border-b border-gray-200 dark:border-gray-700 sm:rounded-lg mr-10 ml-10">
+        <table className="rounded-xl min-w-full divide-y divide-gray-200 dark:divide-gray-700 dark:border-gray-700">
+          <thead className="bg-caqui-800 dark:bg-gray-700">
             <tr>
               <th
                 scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-stone-200 uppercase tracking-wider"
+                className="px-6 py-3 text-left text-xs font-medium text-black dark:text-white uppercase tracking-wider"
               >
                 Nome
               </th>
               <th
                 scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-stone-200 uppercase tracking-wider"
+                className="px-6 py-3 text-left text-xs font-medium text-black dark:text-white uppercase tracking-wider"
               >
                 Posto/Grad
               </th>
               <th
                 scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-stone-200 uppercase tracking-wider"
+                className="px-6 py-3 text-left text-xs font-medium text-black dark:text-white uppercase tracking-wider"
               >
                 Status
               </th>
               <th
                 scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider"
+                className="px-6 py-3 text-left text-xs font-medium text-black  dark:text-white uppercase tracking-wider"
               >
                 Matrícula
               </th>
@@ -63,8 +73,8 @@ function Table() {
               </th> */}
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {users.map((user) => (
+          <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+            {results.data.map((user) => (
               <tr key={user.id}>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">
@@ -86,15 +96,19 @@ function Table() {
                         navigate(`/details/${user.id}`);
                       }}
                     >
-                      <div className="text-sm font-medium text-gray-900">
+                      <div className="text-sm font-medium text-gray-900 dark:text-white">
                         {user.name}
                       </div>
-                      <div className="text-sm text-gray-500">{user.email}</div>
+                      <div className="text-sm text-gray-500 dark:text-gray-200">
+                        {user.email}
+                      </div>
                     </div>
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{user.posto}</div>
+                  <div className="text-sm text-gray-900 dark:text-white">
+                    {user.posto}
+                  </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span
@@ -104,7 +118,7 @@ function Table() {
                     Active
                   </span>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-white">
                   {user.mat}
                 </td>
                 {/* <td>

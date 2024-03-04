@@ -1,63 +1,208 @@
-import { Link } from "react-router-dom";
 import logo from "../assets/6 CIPM.png";
-import HomeIcon from "@mui/icons-material/Home";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import FlightIcon from "@mui/icons-material/Flight";
+import {
+  Card,
+  Typography,
+  List,
+  ListItem,
+  ListItemPrefix,
+  ListItemSuffix,
+  Chip,
+  Accordion,
+  AccordionHeader,
+  AccordionBody,
+} from "@material-tailwind/react";
+import {
+  PresentationChartBarIcon,
+  ShoppingBagIcon,
+  UserCircleIcon,
+  GlobeAmericasIcon,
+  AcademicCapIcon,
+  PowerIcon,
+  UserGroupIcon,
+} from "@heroicons/react/24/solid";
+import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
-export default function SideBar() {
+export default function SidebarWithContentSeparator() {
+  const [open, setOpen] = useState(0);
+
+  const handleOpen = (value: any) => {
+    setOpen(open === value ? 0 : value);
+  };
+
   return (
-    <>
-      <aside className="bg-gray-800 text-white w-64 min-h-screen p-4 h-screen sticky top-0">
-        <div className="object-center">
+    <div className="h-[calc(100vh)] bg-caqui-900 sticky top-0 w-full max-w-[20rem]  p-4 shadow-xl shadow-blue-gray-900/5 ">
+      <div className="mb-2 p-4">
+        <Typography variant="h5" color="blue-gray">
           <img className="mx-auto" src={logo} height={65} width={65} />
-        </div>
-        <ul className="flex flex-col mx-auto">
-          <li className="ml-6 mt-4">
-            <Link
-              className="text-base hover:text-stone-400 mt-3 text-stone-200	 font-sans"
-              to="/home"
+        </Typography>
+      </div>
+      <List>
+        <Accordion
+          open={open === 1}
+          icon={
+            <ChevronDownIcon
+              strokeWidth={2.5}
+              className={`mx-auto h-4 w-4 transition-transform ${
+                open === 1 ? "rotate-180" : ""
+              }`}
+            />
+          }
+        >
+          <ListItem className="p-0" selected={open === 1}>
+            <AccordionHeader
+              onClick={() => handleOpen(1)}
+              className="border-b-0 p-3"
             >
-              <div className="flex ">
-                <HomeIcon />
-                <p className="ml-2">Home</p>
-              </div>
-            </Link>
-          </li>
-          <li className="ml-6 mt-4">
-            <Link
-              className="text-base hover:text-stone-400 mt-3 text-stone-200	 font-bold"
-              to="/home"
+              <ListItemPrefix>
+                <PresentationChartBarIcon className="h-5 w-5 text-white" />
+              </ListItemPrefix>
+              <Typography
+                color="blue-gray"
+                className="mr-auto font-normal text-white"
+              >
+                Dashboard
+              </Typography>
+            </AccordionHeader>
+          </ListItem>
+          <AccordionBody className="py-1">
+            <List className="p-0">
+              <Link to="/dashboard">
+                <ListItem>
+                  <ListItemPrefix>
+                    <ChevronRightIcon
+                      strokeWidth={3}
+                      className="h-3 w-5 text-white"
+                    />
+                  </ListItemPrefix>
+                  ...
+                </ListItem>
+              </Link>
+              <ListItem>
+                <ListItemPrefix>
+                  <ChevronRightIcon
+                    strokeWidth={3}
+                    className="h-3 w-5 text-white"
+                  />
+                </ListItemPrefix>
+                ...
+              </ListItem>
+              <ListItem>
+                <ListItemPrefix>
+                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                </ListItemPrefix>
+                ...
+              </ListItem>
+            </List>
+          </AccordionBody>
+        </Accordion>
+        <Accordion
+          open={open === 2}
+          icon={
+            <ChevronDownIcon
+              strokeWidth={2.5}
+              className={`mx-auto h-4 w-4 transition-transform ${
+                open === 2 ? "rotate-180" : ""
+              }`}
+            />
+          }
+        >
+          <ListItem className="p-0" selected={open === 2}>
+            <AccordionHeader
+              onClick={() => handleOpen(2)}
+              className="border-b-0 p-3"
             >
-              <div className="flex">
-                <PeopleAltIcon /> <p className="ml-2">Efetivo</p>
-              </div>
-            </Link>
-          </li>
-          <li className="ml-6 mt-4">
-            <Link
-              className="text-base hover:text-stone-400 mt-3 text-gray-200	 font-bold"
-              to="/dashboard"
+              <ListItemPrefix>
+                <ShoppingBagIcon className="h-5 w-5 text-white" />
+              </ListItemPrefix>
+              <Typography
+                color="blue-gray"
+                className="mr-auto font-normal text-white"
+              >
+                Teste
+              </Typography>
+            </AccordionHeader>
+          </ListItem>
+          <AccordionBody className="py-1">
+            <List className="p-0">
+              <ListItem>
+                <ListItemPrefix>
+                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                </ListItemPrefix>
+                ...
+              </ListItem>
+              <ListItem>
+                <ListItemPrefix>
+                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                </ListItemPrefix>
+                ...
+              </ListItem>
+            </List>
+          </AccordionBody>
+        </Accordion>
+        <hr className="my-2 border-caqui-700" />
+        <Link to="/home">
+          <ListItem>
+            <ListItemPrefix>
+              <UserGroupIcon className="h-5 w-5 text-white" />
+            </ListItemPrefix>
+            <Typography
+              color="blue-gray"
+              className="mr-auto font-normal text-white"
             >
-              <div className="flex">
-                <DashboardIcon />
-                <p className="ml-2">Dashboard </p>
-              </div>
-            </Link>
-          </li>
-          <li className="ml-6 mt-4">
-            <Link
-              className="text-base hover:text-stone-400 mt-3 text-gray-200	 font-bold"
-              to="/vacation"
+              Efetivo
+            </Typography>
+
+            <ListItemSuffix>
+              <Chip
+                value="14"
+                size="sm"
+                variant="ghost"
+                color="gray"
+                className="rounded-full"
+              />
+            </ListItemSuffix>
+          </ListItem>
+        </Link>
+        <Link to="vacation">
+          <ListItem>
+            <ListItemPrefix>
+              <GlobeAmericasIcon className="h-5 w-5 text-white" />
+            </ListItemPrefix>
+            <Typography
+              color="blue-gray"
+              className="mr-auto font-normal text-white"
             >
-              <div className="flex">
-                <FlightIcon />
-                <p className="ml-2">Férias </p>
-              </div>
-            </Link>
-          </li>
-        </ul>
-      </aside>
-    </>
+              Férias
+            </Typography>
+          </ListItem>
+        </Link>
+        <Link to={"/courses"}>
+          <ListItem>
+            <ListItemPrefix>
+              <AcademicCapIcon className="h-5 w-5 text-white" />
+            </ListItemPrefix>
+            <Typography
+              color="blue-gray"
+              className="mr-auto font-normal text-white"
+            >
+              Cursos
+            </Typography>
+          </ListItem>
+        </Link>
+        <ListItem>
+          <ListItemPrefix>
+            <PowerIcon className="h-5 w-5 text-white" />
+          </ListItemPrefix>
+          <Typography
+            color="blue-gray"
+            className="mr-auto font-normal text-white"
+          >
+            Log Out
+          </Typography>
+        </ListItem>
+      </List>
+    </div>
   );
 }
