@@ -9,7 +9,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "tailwind": "npx tailwindcss -i ./src/index.css -o ./src/main.css --watch",
-    "start": "react-scripts start"
+    "start": "vite start"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
