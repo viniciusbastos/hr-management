@@ -58,7 +58,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   async function signIn({ email, password }: SignInCredentials) {
     try {
-      const response = await axios.post("http://localhost:3001/signin", {
+      const response = await axios.post("https://hr-manager-backend.onrender.com/signin", {
         email,
         password,
       });
