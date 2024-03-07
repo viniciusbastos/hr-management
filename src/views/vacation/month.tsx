@@ -3,6 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { format, compareAsc, parseISO } from "date-fns";
 import fetchVacationMonth from "../../services/fetchVacationMonth";
 import ButtonBack from "../../components/buttonBack";
+import { api } from "../../services/api";
+import config from "../../utils/config";
 
 const VacationMonth = () => {
   const { month } = useParams();
@@ -15,10 +17,10 @@ const VacationMonth = () => {
     );
   }
 
-  if (results.data.vacation[0].month === 1) {
-  } else {
-    const monthName = "";
-  }
+  function handleDelete(id: any) {
+    api.delete(`/vacation/${id}`, config).then(() => {
+    });
+  } 
 
   return (
     <div className=" mx-auto my-10 bg-white rounded-lg p-10 shadow-xl">
@@ -76,6 +78,15 @@ const VacationMonth = () => {
                 </td>
                 <td className="whitespace-nowrap py-3 px-4 border border-slate-200">
                   {vacation.period}
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    className="px-2  bg-red-600  py-1 border hover:bg-red-400 rounded-full"
+                    onClick={() => handleDelete(vacation.id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}

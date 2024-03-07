@@ -21,12 +21,20 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
 import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+
+
 
 export default function SidebarWithContentSeparator() {
   const [open, setOpen] = useState(0);
+  const navigate = useNavigate();
 
+  function handleLogout() {
+    localStorage.removeItem("token");
+     navigate('/signin')
+  };
+  
   const handleOpen = (value: any) => {
     setOpen(open === value ? 0 : value);
   };
@@ -191,15 +199,19 @@ export default function SidebarWithContentSeparator() {
             </Typography>
           </ListItem>
         </Link>
-        <ListItem>
+        <ListItem onClick={handleLogout}>
           <ListItemPrefix>
             <PowerIcon className="h-5 w-5 text-white" />
           </ListItemPrefix>
-          <Typography
+          <Typography 
+            
             color="blue-gray"
-            className="mr-auto font-normal text-white"
-          >
+            className="mr-auto font-normal text-white">
+        
+
             Log Out
+       
+
           </Typography>
         </ListItem>
       </List>

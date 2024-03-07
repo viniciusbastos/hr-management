@@ -4,6 +4,8 @@ import logo from "../assets/profile.png";
 import { format, compareAsc, parseISO } from "date-fns";
 import fetchVacation from "../../services/fetchVacation";
 import ButtonBack from "../../components/buttonBack";
+import { api } from "../../services/api";
+import config from "../../utils/config";
 
 const VacationDetails = () => {
   const navigate = useNavigate();
@@ -17,7 +19,7 @@ const VacationDetails = () => {
     );
   }
   const vacation = results.data.vacation[0];
-  console.log(vacation);
+
   return (
     <div className="max-w-xl mx-auto my-10 bg-white rounded-lg p-10 shadow-xl">
       <h2 className="text-center text-2xl font-semibold mt-3">Férias</h2>
@@ -50,6 +52,7 @@ const VacationDetails = () => {
                 <td className="whitespace-nowrap py-3 px-4 border border-slate-200">
                   {vacation.period}
                 </td>
+              
               </tr>
             ))}
           </tbody>
