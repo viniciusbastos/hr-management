@@ -36,6 +36,30 @@ const Vacation = () => {
         <li className=" justify-between gap-x-6">
           <GenericList path="./month/4" name="Abril" />
         </li>
+        <li className=" justify-between gap-x-6">
+          <GenericList path="./month/5" name="Maio" />
+        </li>
+        <li className=" justify-between gap-x-6">
+          <GenericList path="./month/6" name="Junho" />
+        </li>
+        <li className=" justify-between gap-x-6">
+          <GenericList path="./month/7" name="Julho" />
+        </li>
+        <li className=" justify-between gap-x-6">
+          <GenericList path="./month/8" name="Agosto" />
+        </li>
+        <li className=" justify-between gap-x-6">
+          <GenericList path="./month/9" name="Setembro" />
+        </li>
+        <li className=" justify-between gap-x-6">
+          <GenericList path="./month/10" name="Outubro" />
+        </li>
+        <li className=" justify-between gap-x-6">
+          <GenericList path="./month/11" name="Novembro" />
+        </li>
+        <li className=" justify-between gap-x-6">
+          <GenericList path="./month/12" name="Dezembro" />
+        </li>
       </ul>
       <ButtonBack />
     </div>
