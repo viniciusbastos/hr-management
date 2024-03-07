@@ -32,8 +32,8 @@ const VacationMonth = () => {
 
       <div className="mt-5 flex-auto">
         <table className="min-w-full ">
-          <caption className="caption-bottom">
-            Total de {results.data.vacation.length} de Férias no mês 
+          <caption className="caption-bottom mt-5">
+            Total de {results.data.vacation.length} policiais de Férias no mês 
             
           </caption>
           <thead className="text-sm text-gray-700">
