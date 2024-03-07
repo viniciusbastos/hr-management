@@ -17,6 +17,7 @@ const VacationMonth = () => {
     );
   }
 
+
   function handleDelete(id: any) {
     api.delete(`/vacation/${id}`, config).then(() => {
     });
@@ -25,15 +26,15 @@ const VacationMonth = () => {
   return (
     <div className=" mx-auto my-10 bg-white rounded-lg p-10 shadow-xl">
       <h2 className="text-center text-2xl font-semibold mt-3">
-        Férias do mês de {}
+        Férias do mês {month}/{results.data.vacation[0].year}
       </h2>
       <p className="text-center text-gray-600 mt-1"></p>
 
       <div className="mt-5 flex-auto">
         <table className="min-w-full ">
           <caption className="caption-bottom">
-            Férias do mês de {} de {results.data.vacation[0].year} -{" "}
-            {results.data.vacation.length}
+            Total de {results.data.vacation.length} de Férias no mês 
+            
           </caption>
           <thead className="text-sm text-gray-700">
             <tr>
