@@ -84,7 +84,7 @@ const Details = () => {
       </div>
       <div className="mt-5 flex-auto">
         <h3 className="text-sm font-semibold inline-block  dark:text-gray-200">
-          Admissão:{user.profile[0]?.serviceTime}
+          Admissão: {format(parseISO(user.profile[0]?.serviceTime), "dd/MM/yyyy")}
         </h3>
         <h3 className="text-gray-600  dark:text-gray-200 mt-2 inline-block ml-1">
           {}
