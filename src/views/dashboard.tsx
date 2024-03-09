@@ -31,7 +31,7 @@ const Dashboard = () => {
               <CardDashboard
                 link="/vacation/month/1"
                 title={"Férias"}
-                quant={19}
+                quant={9}
                 info={"Policiais Militares"}
               />
             </div>
@@ -39,15 +39,13 @@ const Dashboard = () => {
               <CardDashboard
                 link="/courses"
                 title={"Cursos"}
-                quant={4}
+                quant={0}
                 info={"Policiais Militares"}
               />
             </div>
           </div>
           <TableQuantityPosto />
-          <TableQuantityPosto />
-          <TableQuantityPosto />
-          <TableQuantityPosto />
+          
         </div>
       </div>
     </>

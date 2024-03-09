@@ -40,7 +40,7 @@ export default function SidebarWithContentSeparator() {
   };
 
   return (
-    <div className="h-[calc(100vh)] bg-caqui-900 sticky top-0 w-full max-w-[20rem]  p-4 shadow-xl shadow-blue-gray-900/5 ">
+    <div className="hidden md:visible h-[calc(100vh)] bg-caqui-900 sticky top-0 w-full max-w-[20rem]  p-4 shadow-xl shadow-blue-gray-900/5 ">
       <div className="mb-2 p-4">
         <Typography variant="h5" color="blue-gray">
           <img className="mx-auto" src={logo} height={65} width={65} />
