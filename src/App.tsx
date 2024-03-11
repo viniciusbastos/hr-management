@@ -23,6 +23,7 @@ import Sidebar from "./components/sidebar";
 import { CookiesProvider } from "react-cookie";
 import Sicknote from "./views/sicknote";
 import SicknoteDetails from "./views/sicknote/details";
+import VacationCheck from "./views/vacationcheck";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -55,7 +56,8 @@ function App() {
                     element={<VacationMonth />}
                   ></Route>
                   <Route path="/courses" element={<Courses />}></Route>
-                  <Route path="/test" element={<Teste />}></Route>
+                  
+                  <Route path="/vacation/vacationcheck" element={<VacationCheck />}></Route>
 
                   <Route path="/courses/:name" element={<CourseName />}></Route>
                   <Route

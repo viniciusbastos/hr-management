@@ -4,8 +4,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 import config from "../utils/config";
+import { format, compareAsc, parseISO } from "date-fns";
 
-const Teste = () => {
+const VacationCheck = () => {
   const [vacation, setVacation] = useState({
     period: "",
     finishAt: "",
@@ -68,6 +69,7 @@ const Teste = () => {
                 <input
                   type="text"
                   name="mat"
+                  maxLength={8}
                   onChange={(e) => setMat(e.target.value)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Pesquisar Policial"
@@ -113,90 +115,23 @@ const Teste = () => {
             </form>
           </div>
           <label className="block">
-            <span className="text-gray-500 text-sm">Nome</span>
-            <div>
-              <p>
-                {user.posto} {user.name} {user.id}
-              </p>
-            </div>
+            
           </label>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              const obj = {
-                period: period,
-                startAt: startAt,
-                finishAt: finishAt,
-                belongsToId: user.id,
-                year: year,
-                month: month,
-              };
-              api
-                .post(`/vacation/`, obj, config)
-                .then(function (response) {
-                  window.alert("Success");
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
-            }}
-          >
-            <div className={fieldStyle}>
-              <input
-                className="ext-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block max-w-sm pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="period"
-                type="text"
-                value={period}
-                onChange={(e) => setPeriod(e.target.value)}
-              />
-            </div>
-            <div className={fieldStyle}>
-              <label>Ano</label>
-              <input
-                className="ext-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block max-w-sm pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="year"
-                type="int"
-                onChange={(e) => setYear(e.target.value)}
-              />
-            </div>
-            <div className={fieldStyle}>
-              <label>Mês</label>
-              <input
-                className="ext-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block max-w-sm pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="month"
-                type="int"
-                onChange={(e) => setMonth(e.target.value)}
-              />
-            </div>
-            <div className={fieldStyle}>
-              <label>Data de Inicio</label>
-              <input
-                name="startAt"
-                type="datetime-local"
-                onChange={(e) => setStartAt(e.target.value)}
-              />
-            </div>
-            <div className={fieldStyle}>
-              <label>Data do Término</label>
-              <input
-                name="finishAt"
-                type="datetime-local"
-                onChange={(e) => setFinishAt(e.target.value)}
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="mt-2 h-10 px-6 font-semibold
- bg-slate-800 hover:bg-slate-600 text-white rounded-2xl"
-            >
-              Enviar
-            </button>
-          </form>
+         <div>
+          <h2>Consultar Ferias</h2>
+          <p>Mat:{user.mat} {"    "} </p>
+          <p>Nome:{user.posto} {"  "} {user.name}</p>
+          <p>Férias: {"  "} {user.aproved}{user.month} {" / "} {user.year}</p>
+          <p>Período aquisitivo: {user.period}</p>
+          <p>Nome:{user.startAt}</p>
+                  
+             
+          <p>{user.finishAt} </p>
+         </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Teste;
+export default VacationCheck;
