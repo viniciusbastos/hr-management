@@ -10,6 +10,8 @@ import { GiCommercialAirplane } from "react-icons/gi";
 import { FaGun } from "react-icons/fa6";
 import { FaBook } from "react-icons/fa";
 import { FaUserDoctor } from "react-icons/fa6";
+import ButtonBack from "../components/buttonBack";
+import { Breadcrumbs } from "@material-tailwind/react";
 
 const Details = () => {
   const { id } = useParams();
@@ -31,11 +33,22 @@ const Details = () => {
   console.log(user?.profile[0]?.photo.length > 0);
 
   return (
+    <>
+  
+    <Breadcrumbs>
+    <Link to="/dashboard" className="opacity-60">
+      Home
+    </Link>
+    <Link to="/users" className="opacity-60">
+      User
+    </Link>
+    <a href="#">Breadcrumbs</a>
+  </Breadcrumbs>
     <div className="max-w-lg mx-auto my-10 bg-gray-50 dark:bg-slate-700 rounded-lg p-10 shadow-xl">
       <img
         className="w-32 border-slate-600 h-32 rounded-full mx-auto shadow-xl"
         src={
-          user.profile[0]?.photo?.lenght > 0 ? logo : user?.profile[0]?.photo
+          user.profile[6]?.photo?.lenght > 0 ? logo : user?.profile[0]?.photo
         }
         alt="Profile picture"
       />
@@ -111,7 +124,11 @@ const Details = () => {
           {user.profile[0]?.state}
         </h3>
       </div>
+      <div className="mt-5">
+        <ButtonBack />
+      </div>
     </div>
+    </>
   );
 };
 
