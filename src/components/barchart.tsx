@@ -5,7 +5,7 @@ import {
     Typography,
   } from "@material-tailwind/react";
   import Chart from "react-apexcharts";
-  import { Square3Stack3DIcon } from "@heroicons/react/24/outline";
+  import { GlobeAmericasIcon } from "@heroicons/react/24/outline";
    
   // If you're using Next.js please use the dynamic import for react-apexcharts and remove the import from the top for the react-apexcharts
   // import dynamic from "next/dynamic";
@@ -32,7 +32,7 @@ import {
       dataLabels: {
         enabled: false,
       },
-      colors: ["#020617"],
+      colors: ["#5d5953"],
       plotOptions: {
         bar: {
           columnWidth: "40%",
@@ -112,7 +112,7 @@ import {
           className="flex flex-col gap-4 rounded-none md:flex-row md:items-center"
         >
           <div className="w-max rounded-lg bg-gray-900 p-5 text-white">
-            <Square3Stack3DIcon className="h-6 w-6" />
+            <GlobeAmericasIcon className="h-6 w-6" />
           </div>
           <div>
             <Typography variant="h6" color="blue-gray">

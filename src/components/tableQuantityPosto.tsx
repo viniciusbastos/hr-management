@@ -1,11 +1,18 @@
-import { useEffect, useState } from "react";
+import { JSXElementConstructor, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../services/api";
 import config from "../utils/config";
 import fetchEfetivo from "../services/fetchEfetivo";
 import { useQuery } from "@tanstack/react-query";
+import {
+  List,
+  ListItem,
+  ListItemSuffix,
+  Chip,
+  Card,
+} from "@material-tailwind/react";
 
-export default function TableQuantityPosto() {
+export default function ListQuantityPosto() {
   interface efetivo {
     id: string;
     posto: string;
@@ -21,25 +28,28 @@ export default function TableQuantityPosto() {
     );
   }
   return (
-    <div className="max-w-sm ml-28 items-center justify-center">
-      <div className="overflow-auto max-h-52 ">
-        <table className="min-w-full bg-white shadow-md rounded-xl">
-          <thead>
-            <tr className="bg-blue-gray-100 text-gray-700">
-              <th className="py-3 px-4 text-left">Posto/Grad</th>
-              <th className="py-3 px-4 text-left">Quantity</th>
-            </tr>
-          </thead>
-          <tbody className="text-blue-gray-900">
-            {results.data.map((efetivo) => (
-              <tr className="border-b border-blue-gray-200" key={efetivo.id}>
-                <td className="py-3 px-4">{efetivo.posto}</td>
-                <td className="py-3 px-4">{efetivo.qtd}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <Card className="mb-5">
+      <List>
+      {results.data.map((efetivo: { posto: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; qtd: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }) => (
+        <ListItem>
+         {efetivo.posto}
+          <ListItemSuffix>
+            <Chip
+              value={efetivo.qtd}
+              variant="ghost"
+              size="sm"
+              className="rounded-full"
+            />
+          </ListItemSuffix>
+        </ListItem>
+         
+     ))}
+      </List>
+    </Card>
+            
+             
+        
   );
 }
+
+
