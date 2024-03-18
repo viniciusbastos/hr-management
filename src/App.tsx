@@ -43,6 +43,8 @@ function App() {
                   <Route path="users/" element={<MembersTable />}></Route>
                   <Route path="users/details/:id" element={<Details />}></Route>
                   <Route path="/home" element={<Home />}></Route>
+                  <Route path="/vacation/submit" element={<Teste />}></Route>
+
                   <Route path="/dashboard" element={<Dashboard />}></Route>
                   <Route path="/formUser" element={<FormUser />}></Route>
                   <Route
