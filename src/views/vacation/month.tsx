@@ -5,6 +5,8 @@ import fetchVacationMonth from "../../services/fetchVacationMonth";
 import ButtonBack from "../../components/buttonBack";
 import { api } from "../../services/api";
 import config from "../../utils/config";
+import { Card, Typography } from "@material-tailwind/react";
+
 
 const VacationMonth = () => {
   const { month } = useParams();
@@ -24,14 +26,12 @@ const VacationMonth = () => {
   } 
 
   return (
-    <div className=" mx-auto my-10 bg-white rounded-lg p-10 shadow-xl">
+      <Card className="h-full w-full overflow-scroll">
+        <div className=" mx-auto my-10 bg-white rounded-lg p-10 shadow-xl">
       <h2 className="text-center text-2xl font-semibold mt-3">
         Férias do mês {month}/{results.data.vacation[0].year}
       </h2>
-      <p className="text-center text-gray-600 mt-1"></p>
-
-      <div className="mt-5 flex-auto">
-        <table className="min-w-full ">
+      <table className="w-full min-w-max table-auto text-left">
           <caption className="caption-bottom mt-5">
             Total de {results.data.vacation.length} policiais de Férias no mês 
             
@@ -93,9 +93,11 @@ const VacationMonth = () => {
             ))}
           </tbody>
         </table>
+        <ButtonBack />
+
       </div>
-      <ButtonBack />
-    </div>
+        </Card>
+
   );
 };
 

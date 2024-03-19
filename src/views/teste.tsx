@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 import config from "../utils/config";
+import { Button } from "@material-tailwind/react";
 
 const Teste = () => {
   const [vacation, setVacation] = useState({
@@ -185,13 +186,12 @@ const Teste = () => {
               />
             </div>
 
-            <button
+            <Button
               type="submit"
-              className="mt-2 h-10 px-6 font-semibold
- bg-slate-800 hover:bg-slate-600 text-white rounded-2xl"
+              
             >
               Enviar
-            </button>
+            </Button>
           </form>
         </div>
       </div>
