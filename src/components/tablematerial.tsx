@@ -19,7 +19,7 @@ import {
 import foto from "../assets/profile.png";
 import { useNavigate } from "react-router-dom";
 import fetchUsers from "../services/fetchUsers";
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../services/api";
  
@@ -43,28 +43,42 @@ const TABLE_HEAD = ["Member", "Function", "Status", "Employed", ""];
 
  
 export function MembersTable() {
+   
+
     const navigate = useNavigate();
-    const [users, setUsers] = useState([]);
-    const results = useQuery(["vacation"], fetchUsers);
-    if (results.isLoading) {
+
+
+    const { data, isLoading, isError, error } = useQuery(["vacation"], fetchUsers);
+  
+  
+    const [filteredUsers, setFilteredUsers] = useState(data)
+    
+    const [searchItem, setSearchItem] = useState('')
+    if (isLoading) {
       return (
         <div className="loading-pane">
           <h2 className="loader">🌀</h2>
         </div>
       );
     }
-const newArray = results.data.filter(function (el: any) {
-    console.log(el.name)
-    return  el
-        
+    if (isError) return <p>Error: {error}</p>;
+    if (!data) return <p>No data available</p>;
+
+
+const handleInputChange = (e) => { 
+  const searchTerm = e.target.value;
+  setSearchItem(searchTerm)
+
+  const filteredItems = data.filter((user) =>
+  user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  setFilteredUsers(filteredItems);
 }
-);
-console.log(newArray);    
-const getData = () => {
-        api.get(`/user`).then((getData: { data: SetStateAction<never[]>; }) => {
-          setUsers(getData.data);
-        });
-      };
+
+const filteredData = filteredUsers ?? data
+
+
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -98,8 +112,13 @@ const getData = () => {
           </Tabs>
           <div className="w-full md:w-72">
             <Input
+            value={searchItem}
+            onChange={handleInputChange}
+
+            
                           label="Search"
-                          icon={<MagnifyingGlassIcon className="h-5 w-5" />} crossOrigin={undefined}            />
+                          icon={<MagnifyingGlassIcon className="h-5 w-5" />} crossOrigin={undefined}            
+                          />
           </div>
         </div>
       </CardHeader>
@@ -124,7 +143,7 @@ const getData = () => {
             </tr>
           </thead>
           <tbody>
-          {newArray.map((user) => (
+          {filteredData?.map((user) => (
               <tr key={user.id}>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">

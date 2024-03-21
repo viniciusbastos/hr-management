@@ -22,6 +22,7 @@ import Sicknote from "./views/sicknote";
 import SicknoteDetails from "./views/sicknote/details";
 import VacationCheck from "./views/vacationcheck";
 import { MembersTable } from "./components/tablematerial";
+import NotFound from "./views/Notfound";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -71,6 +72,8 @@ function App() {
                     element={<SicknoteDetails />}
                   ></Route>
                   <Route path="/sicknote" element={<Sicknote />}></Route>
+                  <Route path='*' element={<NotFound />}/>
+
                 </Route>
               </Route>
             </Routes>

@@ -4,7 +4,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 import config from "../utils/config";
-import { Button } from "@material-tailwind/react";
+import { Button, Card, CardBody, CardHeader, Input, Typography } from "@material-tailwind/react";
+import { Alert } from "@material-tailwind/react";
+ 
+
 
 const Teste = () => {
   const [vacation, setVacation] = useState({
@@ -38,10 +41,14 @@ const Teste = () => {
   };
   const fieldStyle = "flex flex-col mb-2";
   return (
-    <div className="bg-gray-50">
-      <div className="p-8 mr-32 ml-32 mt-8  bg-white rounded-xl shadow-lg ">
-        <div className="w-10/12">
-          <div className="w-10/12 text-xl font-medium text-black">
+    <Card className="m-10 p-2  rounded-2xl shadow-xl bg-gray-50">
+        <CardHeader variant="gradient" mt-4 floated={true} className="bg-caqui-700 p-2 grid h-12 mb-4  place-items-center">
+        <Typography variant="h5" color="white" className=" mb-2">
+          Lançamento de Férias
+        </Typography>
+      </CardHeader>
+      <CardBody className="p-6">
+          <div className="m-2 w-10/12 text-xl font-medium text-black">
             <form
               method="post"
               className="w-full items-center flex"
@@ -52,20 +59,7 @@ const Teste = () => {
             >
               <label className="sr-only">Search</label>
               <div className="relative w-full">
-                <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                  <svg
-                    className="w-5 h-5 text-gray-500 dark:text-gray-400"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                      clipRule="evenodd"
-                    ></path>
-                  </svg>
-                </div>
+           
                 <input
                   type="text"
                   name="mat"
@@ -113,14 +107,17 @@ const Teste = () => {
               </button>
             </form>
           </div>
-          <label className="block">
-            <span className="text-gray-500 text-sm">Nome</span>
-            <div>
-              <p>
-                {user.posto} {user.name} {user.id}
-              </p>
+          <div className="mb-3 mt-3">
+              <Input
+                variant="standard" 
+                label="Nome" 
+                placeholder="Nome"
+                size="sm"
+                disabled
+                name="period"
+                value={user.posto + " " + user.name}
+              />
             </div>
-          </label>
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -135,7 +132,7 @@ const Teste = () => {
               api
                 .post(`/vacation/`, obj, config)
                 .then(function (response) {
-                  window.alert("Success");
+                  <Alert>A simple alert for showing message.</Alert>;
                 })
                 .catch(function (error) {
                   console.log(error);
@@ -143,8 +140,11 @@ const Teste = () => {
             }}
           >
             <div className={fieldStyle}>
-              <input
-                className="ext-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block max-w-sm pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              <Input
+                variant="standard" 
+                label="Período" 
+                placeholder="período"
+                size="md"
                 name="period"
                 type="text"
                 value={period}
@@ -152,26 +152,33 @@ const Teste = () => {
               />
             </div>
             <div className={fieldStyle}>
-              <label>Ano</label>
-              <input
-                className="ext-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block max-w-sm pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              <Input
+              variant="standard" 
+              label="Ano" 
+              placeholder="Ano"
+              size="md"
                 name="year"
                 type="int"
                 onChange={(e) => setYear(e.target.value)}
               />
             </div>
             <div className={fieldStyle}>
-              <label>Mês</label>
-              <input
-                className="ext-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block max-w-sm pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              <Input
+              variant="standard" 
+              label="Mês" 
+              placeholder="Mês"
+              size="md"
                 name="month"
                 type="int"
                 onChange={(e) => setMonth(e.target.value)}
               />
             </div>
             <div className={fieldStyle}>
-              <label>Data de Inicio</label>
-              <input
+              <Input
+              variant="standard" 
+              label="Mês" 
+              placeholder="Mês"
+              size="md"
                 name="startAt"
                 type="datetime-local"
                 onChange={(e) => setStartAt(e.target.value)}
@@ -193,9 +200,8 @@ const Teste = () => {
               Enviar
             </Button>
           </form>
-        </div>
-      </div>
-    </div>
+          </CardBody>
+    </Card>
   );
 };
 

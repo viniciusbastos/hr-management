@@ -2,6 +2,7 @@ import { useState } from "react";
 import "../main.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { api } from "../services/api";
 
 const FormUser = () => {
   const navigate = useNavigate();
@@ -11,8 +12,8 @@ const FormUser = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const postData = () => {
-    axios
-      .post(`http://localhost:3001/api/product`, {
+    api
+      .post(`/user`, {
         name,
         mat,
         posto,
