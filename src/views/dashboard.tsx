@@ -4,13 +4,14 @@ import CardDashboard from "../components/cardDashboard";
 import TableQuantityPosto from "../components/tableQuantityPosto";
 import fetchUsers from "../services/fetchUsers";
 import BarChart from "../components/barchart";
+import { Spinner } from "@material-tailwind/react";
 
 const Dashboard = () => {
   const results = useQuery(["vacation"], fetchUsers);
   if (results.isLoading) {
     return (
-      <div className="loading-pane">
-        <h2 className="loader">🌀</h2>
+      <div className="loading-pane"> 
+         <Spinner />
       </div>
     );
   }
@@ -23,7 +24,7 @@ const Dashboard = () => {
             <div className="bg-white">
               <CardDashboard
                 link="/home"
-                title={"Total"}
+                title={"Efetivo"}
                 quant={results.data.length}
                 info={"Policiais Militares"}
               />
@@ -32,7 +33,7 @@ const Dashboard = () => {
               <CardDashboard
                 link="/vacation/month/1"
                 title={"Férias"}
-                quant={9}
+                quant={8}
                 info={"Policiais Militares"}
               />
             </div>

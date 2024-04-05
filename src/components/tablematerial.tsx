@@ -22,6 +22,7 @@ import fetchUsers from "../services/fetchUsers";
 import { SetStateAction, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../services/api";
+import { Table, TableBody, TableCell, TableFooter, TableHead, TablePagination, TableRow } from "@mui/material";
  
 const TABS = [
   {
@@ -38,22 +39,17 @@ const TABS = [
   },
 ];
  
-const TABLE_HEAD = ["Member", "Function", "Status", "Employed", ""];
+const TABLE_HEAD = ["Nome", "Posto/Grad", "Status", "Matrícula", ""];
  
 
  
 export function MembersTable() {
    
-
     const navigate = useNavigate();
-
-
     const { data, isLoading, isError, error } = useQuery(["vacation"], fetchUsers);
-  
-  
     const [filteredUsers, setFilteredUsers] = useState(data)
-    
     const [searchItem, setSearchItem] = useState('')
+    const [page, setPage] = useState(0)
     if (isLoading) {
       return (
         <div className="loading-pane">
@@ -95,8 +91,8 @@ const filteredData = filteredUsers ?? data
             <Button variant="outlined" size="sm">
               view all
             </Button>
-            <Button className="flex items-center gap-3" size="sm">
-              <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add member
+            <Button className="flex items-center gap-3" size="sm" onClick={() => navigate('/formUser')}>
+              <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Cadastrar
             </Button>
           </div>
         </div>
@@ -123,11 +119,11 @@ const filteredData = filteredUsers ?? data
         </div>
       </CardHeader>
       <CardBody className="overflow-scroll px-0">
-        <table className="mt-4 w-full min-w-max table-auto text-left">
-          <thead>
-            <tr>
+        <Table className="mt-4 w-full min-w-max table-auto text-left">
+          <TableHead>
+            <TableRow>
               {TABLE_HEAD.map((head) => (
-                <th
+                <TableCell
                   key={head}
                   className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
                 >
@@ -138,14 +134,14 @@ const filteredData = filteredUsers ?? data
                   >
                     {head}
                   </Typography>
-                </th>
+                </TableCell>
               ))}
-            </tr>
-          </thead>
-          <tbody>
+            </TableRow>
+          </TableHead>
+          <TableBody>
           {filteredData?.map((user) => (
-              <tr key={user.id}>
-                <td className="px-6 py-4 whitespace-nowrap">
+              <TableRow key={user.id}>
+                <TableCell className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">
                     <div
                       className="flex-shrink-0 h-10 w-10"
@@ -173,23 +169,23 @@ const filteredData = filteredUsers ?? data
                       </div>
                     </div>
                   </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                </TableCell>
+                <TableCell className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-900 dark:text-white">
                     {user.posto}
                   </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                </TableCell>
+                <TableCell className="px-6 py-4 whitespace-nowrap">
                   <span
                     className="px-2 inline-flex text-xs leading-5
                           font-semibold rounded-full bg-green-100 text-green-800"
                   >
                     Active
                   </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-white">
+                </TableCell>
+                <TableCell className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-white">
                   {user.mat}
-                </td>
+                </TableCell>
                 {/* <td>
                   <button
                     type="button"
@@ -199,24 +195,21 @@ const filteredData = filteredUsers ?? data
                     Delete
                   </button>
                 </td> */}
-              </tr>
+              </TableRow>
             ))}
-            </tbody>
-        </table>
+            </TableBody>
+            {/* <TableFooter>
+              <TablePagination 
+              count={data.lenght}
+              onPageChange={(e, newPage) => setPage(newPage) }
+              page={page}
+              rowsPerPage={10}>
+
+              </TablePagination>
+            </TableFooter> */}
+        </Table>
       </CardBody>
-      <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-        <Typography variant="small" color="blue-gray" className="font-normal">
-          Page 1 of 10
-        </Typography>
-        <div className="flex gap-2">
-          <Button variant="outlined" size="sm">
-            Previous
-          </Button>
-          <Button variant="outlined" size="sm">
-            Next
-          </Button>
-        </div>
-      </CardFooter>
+     
     </Card>
   );
 }

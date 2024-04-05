@@ -23,6 +23,11 @@ import SicknoteDetails from "./views/sicknote/details";
 import VacationCheck from "./views/vacationcheck";
 import { MembersTable } from "./components/tablematerial";
 import NotFound from "./views/Notfound";
+import DashboardTakeCareGuardian from "./views/takingcareofguardian/dashboardTakeCareGuardian";
+import Appointment from "./views/takingcareofguardian/appointment";
+import TakingCareGuardianList from "./views/takingcareofguardian/list";
+import 'react-toastify/dist/ReactToastify.css';
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -71,8 +76,11 @@ function App() {
                     path="/sicknote/:id"
                     element={<SicknoteDetails />}
                   ></Route>
-                  <Route path="/sicknote" element={<Sicknote />}></Route>
                   <Route path='*' element={<NotFound />}/>
+                  <Route path="/sicknote" element={<Sicknote />}></Route>
+                  <Route path="/dashboadtakecareguardians" element={<DashboardTakeCareGuardian />}></Route>
+                  <Route path="/appointment" element={<Appointment />}></Route>
+                  <Route path="/takingcareguardian/list" element={<TakingCareGuardianList />}></Route>
 
                 </Route>
               </Route>

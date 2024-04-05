@@ -17,7 +17,6 @@ const FormUser = () => {
         name,
         mat,
         posto,
-        username,
         email,
       })
       .then(function (response) {})
@@ -66,14 +65,8 @@ const FormUser = () => {
                   type="text"
                   onChange={(e) => setPosto(e.target.value)}
                 />
-                <span className="text-gray-500 text-sm">Nome de Guerra</span>
 
-                <input
-                  type="text"
-                  id="username"
-                  onChange={(e) => setUsername(e.target.value)}
-                  className="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-gray-400 mb-4"
-                />
+               
                 <label className="block">
                   <span className="text-gray-500 text-sm">email</span>
                   <input

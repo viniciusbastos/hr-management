@@ -84,7 +84,7 @@ export default function SidebarWithContentSeparator() {
                       className="h-3 w-5 text-white"
                     />
                   </ListItemPrefix>
-                  ...
+                  Efetivo
                 </ListItem>
               </Link>
               <ListItem>
@@ -149,8 +149,67 @@ export default function SidebarWithContentSeparator() {
             </List>
           </AccordionBody>
         </Accordion>
+        <Accordion
+          open={open === 3}
+          icon={
+            <ChevronDownIcon
+              strokeWidth={2.5}
+              className={`mx-auto h-4 w-4 transition-transform ${
+                open === 2 ? "rotate-180" : ""
+              }`}
+            />
+          }
+        >
+          
+          <ListItem className="p-0" selected={open === 3}>
+            <AccordionHeader
+              onClick={() => handleOpen(3)}
+              className="border-b-0 p-3"
+            >
+              <ListItemPrefix>
+              <svg className="bg-white" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M160-80q-33 0-56.5-23.5T80-160v-480q0-33 23.5-56.5T160-720h160v-80q0-33 23.5-56.5T400-880h160q33 0 56.5 23.5T640-800v80h160q33 0 56.5 23.5T880-640v480q0 33-23.5 56.5T800-80H160Zm0-80h640v-480H160v480Zm240-560h160v-80H400v80ZM160-160v-480 480Zm280-200v120h80v-120h120v-80H520v-120h-80v120H320v80h120Z"/></svg>               </ListItemPrefix>
+              <Typography
+                color="blue-gray"
+                className="mr-auto font-normal text-white"
+              >
+                Cuidando do Cuidador
+              </Typography>
+            </AccordionHeader>
+          </ListItem>
+
+          <AccordionBody className="py-1">
+            <List className="p-0 text-white">
+            <Link to="/dashboadtakecareguardians">
+
+              <ListItem>
+                <ListItemPrefix>
+                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                </ListItemPrefix>
+                Dashboard
+              </ListItem>
+              </Link>
+
+            <Link to="/takingcareguardian/list">
+              <ListItem className="text-white">
+                <ListItemPrefix>
+                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5 text-white" />
+                </ListItemPrefix>
+                Policiais Atendidos
+              </ListItem>
+              </Link>
+              <ListItem className="text-white">
+                <ListItemPrefix>
+                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5 text-white" />
+                </ListItemPrefix>
+                Cadastrar Atendimentos
+              </ListItem>
+            </List>
+          </AccordionBody>
+
+        </Accordion>
+      
         <hr className="my-2 border-caqui-700" />
-        <Link to="/home">
+        <Link to="/users">
           <ListItem>
             <ListItemPrefix>
               <UserGroupIcon className="h-5 w-5 text-white" />

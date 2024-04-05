@@ -6,6 +6,7 @@ import fetchVacation from "../../services/fetchVacation";
 import VacationList from "../../components/genericList";
 import ButtonBack from "../../components/buttonBack";
 import GenericList from "../../components/genericList";
+import { Card, CardBody, CardHeader, List, ListItem, Typography } from "@material-tailwind/react";
 
 const Vacation = () => {
   const navigate = useNavigate();
@@ -19,50 +20,55 @@ const Vacation = () => {
     );
   }
   return (
-    <div className="max-w-2xl mx-auto my-10 bg-white rounded-lg p-10 shadow-xl">
-      <h2 className="text-center text-2xl font-semibold mt-3">Férias</h2>
-
-      <p className="text-center text-gray-600 mt-1"></p>
-      <ul className="list-outside divide-y divide-gray-100 mt-6">
-        <li className=" justify-between gap-x-6 ">
+    <Card className="m-10 p-2  rounded-2xl shadow-xl bg-gray-50">
+    <CardHeader variant="gradient" mt-4 floated={true} className="bg-caqui-700 p-2 grid h-12 mb-4  place-items-center">
+    <Typography variant="h5" color="white" className=" mb-2">
+       Plano de Férias
+    </Typography>
+  </CardHeader>
+  <CardBody className="p-6">
+      <List className="list-outside divide-y divide-gray-100 mt-6">
+        <ListItem className=" justify-between gap-x-6 ">
           <GenericList path="./month/1" name="Janeiro" />
-        </li>
-        <li className=" justify-between gap-x-6">
+        </ListItem>
+        <ListItem className=" justify-between gap-x-6">
           <GenericList path="./month/2" name="Fevereiro" />
-        </li>
-        <li className=" justify-between gap-x-6">
+        </ListItem>
+        <ListItem className=" justify-between gap-x-6">
           <GenericList path="./month/3" name="Março" />
-        </li>
-        <li className=" justify-between gap-x-6">
+        </ListItem>
+        <ListItem className=" justify-between gap-x-6">
           <GenericList path="./month/4" name="Abril" />
-        </li>
-        <li className=" justify-between gap-x-6">
+        </ListItem>
+        <ListItem className=" justify-between gap-x-6">
           <GenericList path="./month/5" name="Maio" />
-        </li>
-        <li className=" justify-between gap-x-6">
+        </ListItem>
+        <ListItem className=" justify-between gap-x-6">
           <GenericList path="./month/6" name="Junho" />
-        </li>
-        <li className=" justify-between gap-x-6">
+        </ListItem>
+        <ListItem className=" justify-between gap-x-6">
           <GenericList path="./month/7" name="Julho" />
-        </li>
-        <li className=" justify-between gap-x-6">
+        </ListItem>
+        <ListItem className=" justify-between">
           <GenericList path="./month/8" name="Agosto" />
-        </li>
-        <li className=" justify-between gap-x-6">
+        </ListItem>
+        <ListItem className=" justify-between gap-x-6">
           <GenericList path="./month/9" name="Setembro" />
-        </li>
-        <li className=" justify-between gap-x-6">
+        </ListItem>
+        <ListItem className=" justify-between gap-x-6">
           <GenericList path="./month/10" name="Outubro" />
-        </li>
-        <li className=" justify-between gap-x-6">
+        </ListItem>
+        <ListItem className=" justify-between gap-x-6">
           <GenericList path="./month/11" name="Novembro" />
-        </li>
-        <li className=" justify-between gap-x-6">
+        </ListItem>
+        <ListItem className=" justify-between gap-x-6">
           <GenericList path="./month/12" name="Dezembro" />
-        </li>
-      </ul>
+        </ListItem>
+      </List>
       <ButtonBack />
-    </div>
+    </CardBody>
+    </Card>
+
   );
 };
 

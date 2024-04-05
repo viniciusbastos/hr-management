@@ -17,12 +17,8 @@ import {
     series: [
       {
         name: "2024",
-        data: [15, 6, 14, 8, 9, 10, 13, 7, 8, 12, 18, 22],
-      },
-      {
-        name: "2023",
-        data: [0, 0, 0, 0, 9, 10, 13, 7, 8, 12, 18, 22],
-      },
+        data: [0, 0, 11, 3, 0, 0, 0, 0, 0, 0, 0, 0],
+      }
     ],
     options: {
       chart: {
@@ -31,12 +27,12 @@ import {
         },
       },
       title: {
-        show: "Policiais Militares de Férias por mês",
+        show: "Policiais Militares da 6ªCIPM impactados pelo Projeto 2023 x 2024",
       },
       dataLabels: {
         enabled: false,
       },
-      colors: ["#5d5953", '#000000'],
+      colors: ["#2ea65e", '#000000'],
       plotOptions: {
         bar: {
           columnWidth: "40%",
@@ -106,7 +102,7 @@ import {
     },
   };
    
-  export default function BarChart() {
+  export default function BarChartTakeCareGuardian() {
     return (
       <Card>
         <CardHeader
@@ -115,12 +111,12 @@ import {
           color="transparent"
           className="flex flex-col gap-4 rounded-none md:flex-row md:items-center"
         >
-          <div className="w-max rounded-lg bg-gray-900 p-5 text-white">
-            <GlobeAmericasIcon className="h-6 w-6" />
+          <div className="w-max rounded-lg p-5 text-white bg-green-400">
+            <GlobeAmericasIcon className="h-6 w-6 bg-green-400" />
           </div>
           <div>
             <Typography variant="h6" color="blue-gray">
-            Policiais Militares de Férias por mês no ano de 2024
+            Policiais Militares da 6ªCIPM impactados pelo Projeto 2023 x 2024
             </Typography>
             
           </div>
