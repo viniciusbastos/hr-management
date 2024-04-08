@@ -1,4 +1,4 @@
-# Hr-Manager: Frontend who manage a entire Human Resourse Organization 
+# Hr-Manager: Frontend who manage a entire Human Resources Organization 
 
 [![Last commit](https://img.shields.io/github/last-commit/ecosse3/nvim?style=for-the-badge)](https://github.com/ecosse3/nvim/commits/master)
 ![Stars](https://img.shields.io/github/stars/ecosse3/nvim?style=for-the-badge)
