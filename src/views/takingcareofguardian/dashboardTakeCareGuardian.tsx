@@ -9,6 +9,7 @@ import fechAppointments from "../../services/fetchAppointments";
 
 const DashboardTakeCareGuardian = () => {
   const appointments = useQuery(["appointments"], fechAppointments);
+
   const results = useQuery(["vacation"], fetchUsers);
   if (results.isLoading) {
     return (
@@ -26,38 +27,36 @@ const DashboardTakeCareGuardian = () => {
             <div className="bg-white">
               <CardDashboard
                 link="/home"
-                title={"Atendimentos Realizados"}
+                title={'Atendimentos Realizados'}
                 quant={appointments.data.length}
-                info={"por Mês"}
+                info={'no Ano'}
               />
             </div>
             <div className="    bg-white    ">
               <CardDashboard
                 link="/vacation/month/1"
-                title={"Especialidades"}
+                title={'Especialidades'}
                 quant={10}
-                info={"Ofertadas aos Policias da 6ªCIPM"}
+                info={'Ofertadas aos Policias da 6ªCIPM'}
               />
             </div>
             <div className="    bg-white    ">
               <CardDashboard
                 link="/courses"
-                title={"Palestras Realizadas"}
-                quant={15}
-                info={"no último ano"}
+                title={'Palestras Realizadas'}
+                quant={1}
+                info={'no último ano'}
               />
             </div>
-        
           </div>
           <div className="h-full">
-
-          <BarChartTakeCareGuardian />
-          <BarChartTakeCareGuardianCategorie />
+            <BarChartTakeCareGuardian />
+            <BarChartTakeCareGuardianCategorie />
           </div>
         </div>
       </div>
     </>
-  );
+  )
 };
 
 export default DashboardTakeCareGuardian;

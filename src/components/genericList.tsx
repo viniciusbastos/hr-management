@@ -12,9 +12,7 @@ export default function GenericList(props: { path: string; name: string }) {
           </Link>
         </div>
         <div className="basis-1/12 mb-3">
-          <Link to={props.path}>
-            
-          </Link>
+          <Link to={props.path}></Link>
         </div>
       </div>
     </>

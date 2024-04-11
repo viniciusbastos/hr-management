@@ -7,7 +7,6 @@ import { api } from "../../services/api";
 import config from "../../utils/config";
 import { Card, Typography } from "@material-tailwind/react";
 
-
 const VacationMonth = () => {
   const { month } = useParams();
   const results = useQuery(["vacation", month], fetchVacationMonth);
@@ -19,22 +18,19 @@ const VacationMonth = () => {
     );
   }
 
-
   function handleDelete(id: any) {
-    api.delete(`/vacation/${id}`, config).then(() => {
-    });
-  } 
+    api.delete(`/vacation/${id}`, config).then(() => {});
+  }
 
   return (
-      <Card className="h-full w-full overflow-scroll">
-        <div className=" mx-auto my-10 bg-white rounded-lg p-10 shadow-xl">
-      <h2 className="text-center text-2xl font-semibold mt-3">
-        Férias do mês {month}/{results.data.vacation[0].year}
-      </h2>
-      <table className="w-full min-w-max table-auto text-left">
+    <Card className="h-full w-full overflow-scroll">
+      <div className=" mx-auto my-10 bg-white rounded-lg p-10 shadow-xl">
+        <h2 className="text-center text-2xl font-semibold mt-3">
+          Férias do mês {month}/{results.data.vacation[0].year}
+        </h2>
+        <table className="w-full min-w-max table-auto text-left">
           <caption className="caption-bottom mt-5">
-            Total de {results.data.vacation.length} policiais de Férias no mês 
-            
+            Total de {results.data.vacation.length} policiais de Férias no mês
           </caption>
           <thead className="text-sm text-gray-700">
             <tr>
@@ -94,10 +90,8 @@ const VacationMonth = () => {
           </tbody>
         </table>
         <ButtonBack />
-
       </div>
-        </Card>
-
+    </Card>
   );
 };
 

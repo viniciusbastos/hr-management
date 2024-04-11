@@ -1,4 +1,11 @@
-import { JSXElementConstructor, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
+import {
+  JSXElementConstructor,
+  ReactElement,
+  ReactNode,
+  ReactPortal,
+  useEffect,
+  useState,
+} from "react";
 import { Link } from "react-router-dom";
 import { api } from "../services/api";
 import config from "../utils/config";
@@ -30,26 +37,41 @@ export default function ListQuantityPosto() {
   return (
     <Card className="mb-5">
       <List>
-      {results.data.map((efetivo: { posto: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; qtd: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }) => (
-        <ListItem>
-         {efetivo.posto}
-          <ListItemSuffix>
-            <Chip
-              value={efetivo.qtd}
-              variant="ghost"
-              size="sm"
-              className="rounded-full"
-            />
-          </ListItemSuffix>
-        </ListItem>
-         
-     ))}
+        {results.data.map(
+          (efetivo: {
+            posto:
+              | string
+              | number
+              | boolean
+              | ReactElement<any, string | JSXElementConstructor<any>>
+              | Iterable<ReactNode>
+              | ReactPortal
+              | null
+              | undefined;
+            qtd:
+              | string
+              | number
+              | boolean
+              | ReactElement<any, string | JSXElementConstructor<any>>
+              | Iterable<ReactNode>
+              | ReactPortal
+              | null
+              | undefined;
+          }) => (
+            <ListItem>
+              {efetivo.posto}
+              <ListItemSuffix>
+                <Chip
+                  value={efetivo.qtd}
+                  variant="ghost"
+                  size="sm"
+                  className="rounded-full"
+                />
+              </ListItemSuffix>
+            </ListItem>
+          ),
+        )}
       </List>
     </Card>
-            
-             
-        
   );
 }
-
-

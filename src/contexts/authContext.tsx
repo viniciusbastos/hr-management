@@ -30,7 +30,7 @@ type AuthProviderProps = {
 };
 
 export const AuthContext = createContext<AuthContextData>(
-  {} as AuthContextData
+  {} as AuthContextData,
 );
 
 export function AuthProvider({ children }: AuthProviderProps) {
@@ -58,10 +58,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   async function signIn({ email, password }: SignInCredentials) {
     try {
-      const response = await axios.post("https://hr-manager-backend.onrender.com/signin", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://hr-manager-backend.onrender.com/signin",
+        {
+          email,
+          password,
+        },
+      );
       const { token, useremail } = response.data;
       localStorage.setItem("token", token);
       setUser(useremail);

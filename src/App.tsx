@@ -26,7 +26,7 @@ import NotFound from "./views/Notfound";
 import DashboardTakeCareGuardian from "./views/takingcareofguardian/dashboardTakeCareGuardian";
 import Appointment from "./views/takingcareofguardian/appointment";
 import TakingCareGuardianList from "./views/takingcareofguardian/list";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -58,14 +58,17 @@ function App() {
                     element={<VacationDetails />}
                   ></Route>
                   <Route path="/vacation" element={<Vacation />}></Route>
-                  
+
                   <Route
                     path="/vacation/month/:month"
                     element={<VacationMonth />}
                   ></Route>
                   <Route path="/courses" element={<Courses />}></Route>
-                  
-                  <Route path="/vacation/vacationcheck" element={<VacationCheck />}></Route>
+
+                  <Route
+                    path="/vacation/vacationcheck"
+                    element={<VacationCheck />}
+                  ></Route>
 
                   <Route path="/courses/:name" element={<CourseName />}></Route>
                   <Route
@@ -74,14 +77,19 @@ function App() {
                   ></Route>
                   <Route
                     path="/sicknote/:id"
-                    element={<SicknoteDetails />}
+                       element={<SicknoteDetails />}
                   ></Route>
-                  <Route path='*' element={<NotFound />}/>
+                  <Route path="*" element={<NotFound />} />
                   <Route path="/sicknote" element={<Sicknote />}></Route>
-                  <Route path="/dashboadtakecareguardians" element={<DashboardTakeCareGuardian />}></Route>
+                  <Route
+                    path="/dashboadtakecareguardians"
+                    element={<DashboardTakeCareGuardian />}
+                  ></Route>
                   <Route path="/appointment" element={<Appointment />}></Route>
-                  <Route path="/takingcareguardian/list" element={<TakingCareGuardianList />}></Route>
-
+                  <Route
+                    path="/takingcareguardian/list"
+                    element={<TakingCareGuardianList />}
+                  ></Route>
                 </Route>
               </Route>
             </Routes>

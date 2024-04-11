@@ -10,8 +10,8 @@ const Dashboard = () => {
   const results = useQuery(["vacation"], fetchUsers);
   if (results.isLoading) {
     return (
-      <div className="loading-pane"> 
-         <Spinner />
+      <div className="loading-pane">
+        <Spinner />
       </div>
     );
   }
@@ -56,8 +56,7 @@ const Dashboard = () => {
           </div>
           <TableQuantityPosto />
           <div className="h-full">
-
-          <BarChart />
+            <BarChart />
           </div>
         </div>
       </div>

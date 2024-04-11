@@ -56,17 +56,17 @@ const Courses = () => {
           </ListItem>
         </Link>
         <Link to={"/courses/CVE"}>
-        <ListItem>
-          Curso de Condutores de Veículos
-          <ListItemSuffix>
-            <Chip
-              value="2"
-              variant="ghost"
-              size="sm"
-              className="rounded-full"
-            />
-          </ListItemSuffix>
-        </ListItem>
+          <ListItem>
+            Curso de Condutores de Veículos
+            <ListItemSuffix>
+              <Chip
+                value="2"
+                variant="ghost"
+                size="sm"
+                className="rounded-full"
+              />
+            </ListItemSuffix>
+          </ListItem>
         </Link>
       </List>
       <ButtonBack />

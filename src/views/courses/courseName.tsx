@@ -19,10 +19,7 @@ const CourseName = () => {
 
   return (
     <div className=" bg-white rounded-lg p-10 ">
-      <h2 className="text-center text-2xl font-semibold mt-3">
-        {name}
-        
-      </h2>
+      <h2 className="text-center text-2xl font-semibold mt-3">{name}</h2>
       <p className="text-center text-gray-600 mt-1"></p>
 
       <div className="mt-5 flex-auto">

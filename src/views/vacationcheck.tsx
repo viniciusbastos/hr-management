@@ -29,7 +29,7 @@ const VacationCheck = () => {
       .get(`/user/search/${mat}`, config)
       .then(function (response) {
         setUser(response.data.user[0]);
-        console.log(response)
+        console.log(response);
         console.log(response.data.user[0]);
       })
       .catch(function (error) {
@@ -114,20 +114,24 @@ const VacationCheck = () => {
               </button>
             </form>
           </div>
-          <label className="block">
-            
-          </label>
-         <div>
-          <h2>Consultar Ferias</h2>
-          <p>Mat:{user.mat} {"    "} </p>
-          <p>Nome:{user.posto} {"  "} {user.name}</p>
-          <p>Férias: {"  "} {user.aproved}{user.month} {" / "} {user.year}</p>
-          <p>Período aquisitivo: {user.period}</p>
-          <p>Nome:{user.startAt}</p>
-                  
-             
-          <p>{user.finishAt} </p>
-         </div>
+          <label className="block"></label>
+          <div>
+            <h2>Consultar Ferias</h2>
+            <p>
+              Mat:{user.mat} {"    "}{" "}
+            </p>
+            <p>
+              Nome:{user.posto} {"  "} {user.name}
+            </p>
+            <p>
+              Férias: {"  "} {user.aproved}
+              {user.month} {" / "} {user.year}
+            </p>
+            <p>Período aquisitivo: {user.period}</p>
+            <p>Nome:{user.startAt}</p>
+
+            <p>{user.finishAt} </p>
+          </div>
         </div>
       </div>
     </div>

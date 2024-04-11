@@ -52,7 +52,6 @@ const VacationDetails = () => {
                 <td className="whitespace-nowrap py-3 px-4 border border-slate-200">
                   {vacation.period}
                 </td>
-              
               </tr>
             ))}
           </tbody>

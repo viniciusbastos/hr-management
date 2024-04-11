@@ -22,8 +22,16 @@ import fetchUsers from "../services/fetchUsers";
 import { SetStateAction, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../services/api";
-import { Table, TableBody, TableCell, TableFooter, TableHead, TablePagination, TableRow } from "@mui/material";
- 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TablePagination,
+  TableRow,
+} from "@mui/material";
+
 const TABS = [
   {
     label: "All",
@@ -38,42 +46,40 @@ const TABS = [
     value: "unmonitored",
   },
 ];
- 
+
 const TABLE_HEAD = ["Nome", "Posto/Grad", "Status", "Matrícula", ""];
- 
 
- 
 export function MembersTable() {
-   
-    const navigate = useNavigate();
-    const { data, isLoading, isError, error } = useQuery(["vacation"], fetchUsers);
-    const [filteredUsers, setFilteredUsers] = useState(data)
-    const [searchItem, setSearchItem] = useState('')
-    const [page, setPage] = useState(0)
-    if (isLoading) {
-      return (
-        <div className="loading-pane">
-          <h2 className="loader">🌀</h2>
-        </div>
-      );
-    }
-    if (isError) return <p>Error: {error}</p>;
-    if (!data) return <p>No data available</p>;
-
-
-const handleInputChange = (e) => { 
-  const searchTerm = e.target.value;
-  setSearchItem(searchTerm)
-
-  const filteredItems = data.filter((user) =>
-  user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const navigate = useNavigate();
+  const { data, isLoading, isError, error } = useQuery(
+    ["vacation"],
+    fetchUsers,
   );
+  const [filteredUsers, setFilteredUsers] = useState(data);
+  const [searchItem, setSearchItem] = useState("");
+  const [page, setPage] = useState(0);
+  if (isLoading) {
+    return (
+      <div className="loading-pane">
+        <h2 className="loader">🌀</h2>
+      </div>
+    );
+  }
+  if (isError) return <p>Error: {error}</p>;
+  if (!data) return <p>No data available</p>;
 
-  setFilteredUsers(filteredItems);
-}
+  const handleInputChange = (e) => {
+    const searchTerm = e.target.value;
+    setSearchItem(searchTerm);
 
-const filteredData = filteredUsers ?? data
+    const filteredItems = data.filter((user) =>
+      user.name.toLowerCase().includes(searchTerm.toLowerCase()),
+    );
 
+    setFilteredUsers(filteredItems);
+  };
+
+  const filteredData = filteredUsers ?? data;
 
   return (
     <Card className="h-full w-full">
@@ -91,7 +97,11 @@ const filteredData = filteredUsers ?? data
             <Button variant="outlined" size="sm">
               view all
             </Button>
-            <Button className="flex items-center gap-3" size="sm" onClick={() => navigate('/formUser')}>
+            <Button
+              className="flex items-center gap-3"
+              size="sm"
+              onClick={() => navigate("/formUser")}
+            >
               <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Cadastrar
             </Button>
           </div>
@@ -108,13 +118,12 @@ const filteredData = filteredUsers ?? data
           </Tabs>
           <div className="w-full md:w-72">
             <Input
-            value={searchItem}
-            onChange={handleInputChange}
-
-            
-                          label="Search"
-                          icon={<MagnifyingGlassIcon className="h-5 w-5" />} crossOrigin={undefined}            
-                          />
+              value={searchItem}
+              onChange={handleInputChange}
+              label="Search"
+              icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+              crossOrigin={undefined}
+            />
           </div>
         </div>
       </CardHeader>
@@ -139,7 +148,7 @@ const filteredData = filteredUsers ?? data
             </TableRow>
           </TableHead>
           <TableBody>
-          {filteredData?.map((user) => (
+            {filteredData?.map((user) => (
               <TableRow key={user.id}>
                 <TableCell className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">
@@ -197,8 +206,8 @@ const filteredData = filteredUsers ?? data
                 </td> */}
               </TableRow>
             ))}
-            </TableBody>
-            {/* <TableFooter>
+          </TableBody>
+          {/* <TableFooter>
               <TablePagination 
               count={data.lenght}
               onPageChange={(e, newPage) => setPage(newPage) }
@@ -209,7 +218,6 @@ const filteredData = filteredUsers ?? data
             </TableFooter> */}
         </Table>
       </CardBody>
-     
     </Card>
   );
 }
