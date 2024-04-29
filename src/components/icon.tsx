@@ -3,9 +3,10 @@ import React, { ReactComponentElement } from "react";
 
 export default function Icon(props: {
   id: string;
-  path: string;
+  path?: string;
   color: string;
   children?: React.ReactNode;
+  target?: React.ReactNode;
 }) {
   return (
     <div className={`rounded-full p-4  ${props.color} mr-8 shadow-xl`}>

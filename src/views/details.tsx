@@ -70,10 +70,13 @@ const Details = () => {
           <Icon color="bg-green-300" path="courses/details" id={user.id}>
             <FaBook />
           </Icon>
+          <a target="_blank" 
+            rel="noopener noreferrer"
+            href={`https://api.whatsapp.com/send?phone=${user.profile[0]?.phone}`}>
+            
+        
           <Icon
-            color="bg-green-300"
-            path={`https://api.whatsapp.com/send?phone=${user.profile[0]?.phone}`}
-            id={user.id}
+            color="bg-green-300"            id={user.id}
           >
             <svg
               fill="#000000"
@@ -111,6 +114,7 @@ const Details = () => {
               </g>
             </svg>
           </Icon>
+          </a>
         </div>
         <div className="flex justify-center mt-5"></div>
         <div className="mt-5 inline-block">

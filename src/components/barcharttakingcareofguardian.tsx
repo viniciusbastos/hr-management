@@ -17,7 +17,7 @@ const chartConfig = {
   series: [
     {
       name: '2024',
-      data: [0, 0, 11, 19, 0, 0, 0, 0, 0, 0, 0, 0],
+      data: [0, 0, 11, 38, 0, 0, 0, 0, 0, 0, 0, 0],
     },
   ],
   options: {
