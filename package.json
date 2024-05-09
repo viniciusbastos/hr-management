@@ -5,12 +5,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 0.0.0.0",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "build": "vite build",
-    "preview": "vite preview",
+    "preview": "vite preview --port  9090",
     "tailwind": "npx tailwindcss -i ./src/index.css -o ./src/main.css --watch",
-    "start": "vite start"
+    "start": "vite start --host 0.0.0.0"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",

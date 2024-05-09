@@ -1,15 +1,6 @@
-<<<<<<< HEAD
 # Hr-Manager: Frontend who manage a entire Human Resourse Organization 
-=======
-# Hr-Manager: Frontend who manage a entire Human Resources Organization 
->>>>>>> d8f7f0b1e036a8fca31629956dcef59feb2ebe2e
 
-[![Last commit](https://img.shields.io/github/last-commit/ecosse3/nvim?style=for-the-badge)](https://github.com/ecosse3/nvim/commits/master)
-![Stars](https://img.shields.io/github/stars/ecosse3/nvim?style=for-the-badge)
-![License](https://img.shields.io/github/license/ecosse3/nvim?style=for-the-badge)
-![Neovim Version](https://img.shields.io/badge/For%20Neovim-0.9+-yellowgreen?style=for-the-badge&logo=neovim&logoColor=d8abbb&color=d8abbb)
 
-### A non-minimal Neovim config built to work most efficiently with Frontend Development.
 
 ## Features
 
