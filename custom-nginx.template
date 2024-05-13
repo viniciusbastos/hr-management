@@ -1,19 +1,8 @@
-# frontend/custom-nginx.template
-upstream backend {
-    server ${BACKEND_HOST};
-}
-
 server {
-    listen       80;
-    listen  [::]:80;
-
-    location /api/ {
-      proxy_pass http://g40kscw.74.207.230.181.sslip.io;
-    }
-
-    location / {
-      root   /usr/share/nginx/html;
-      try_files $uri $uri/ /index.html;
-    }
+  listen       80;
+  location / {
+    root   /usr/share/nginx/html;
+    index  index.html index.htm;
+    try_files $uri $uri/ /index.html =404;
+  }
 }
-
