@@ -17,9 +17,7 @@ FROM nginx:alpine
 WORKDIR /usr/local/bin
 
 COPY --from=prod /app/dist /usr/share/nginx/html
-
-
-COPY nginx.conf /etc/nginx/conf.d/
+COPY --from=prod nginx.conf /etc/nginx/conf.d/
 
 EXPOSE 80
 
