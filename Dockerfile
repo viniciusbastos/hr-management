@@ -18,12 +18,9 @@ WORKDIR /usr/local/bin
 
 COPY --from=prod /app/dist /usr/share/nginx/html
 
-COPY generate-config.sh .
 
 COPY nginx.conf /etc/nginx/conf.d/
 
-RUN chmod +x generate-config.sh
-
 EXPOSE 80
 
-ENTRYPOINT [ "/bin/sh", "generate-config.sh"]
+CMD ["nginx", "-g", "daemon off;"]
