@@ -10,7 +10,7 @@
     "build": "vite build",
     "preview": "vite preview --port  9090",
     "tailwind": "npx tailwindcss -i ./src/index.css -o ./src/main.css --watch",
-    "start": "vite start --host 0.0.0.0"
+    "start": "vite start"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
