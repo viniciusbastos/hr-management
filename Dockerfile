@@ -20,7 +20,7 @@ COPY --from=prod /app/dist /usr/share/nginx/html
 
 COPY generate-config.sh .
 
-COPY custom-nginx.template /etc/nginx/conf.d/
+COPY nginx.conf /etc/nginx/conf.d/
 
 RUN chmod +x generate-config.sh
 
