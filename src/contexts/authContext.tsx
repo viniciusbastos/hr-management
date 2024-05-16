@@ -50,7 +50,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       setUser({ email: email });
 
-      navigate(location ?? "/home");
+      navigate(location ?? "/dashboard");
     } else {
       navigate("/signin");
     }
@@ -59,7 +59,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   async function signIn({ email, password }: SignInCredentials) {
     try {
       const response = await axios.post(
-        "https://hr-manager-backend.onrender.com/signin",
+        import.meta.env.VITE_APP_API_URL + "/signin",
         {
           email,
           password,

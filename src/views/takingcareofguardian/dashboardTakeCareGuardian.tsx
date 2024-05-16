@@ -11,7 +11,7 @@ const DashboardTakeCareGuardian = () => {
   const appointments = useQuery(["appointments"], fechAppointments);
 
   const results = useQuery(["vacation"], fetchUsers);
-  if (results.isLoading) {
+  if (appointments.isLoading) {
     return (
       <div className="loading-pane">
         <h2 className="loader">🌀</h2>

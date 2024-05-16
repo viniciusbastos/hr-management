@@ -3,7 +3,7 @@ import axios from "axios";
 const token = localStorage.getItem("token");
 
 export const api = axios.create({
-  baseURL: "http://g40kscw.74.207.230.181.sslip.io/api",
+  baseURL: import.meta.env.VITE_APP_API_URL,
   headers: {
     Authorization: `Bearer ${token}`,
   },

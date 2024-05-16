@@ -31,10 +31,23 @@ const Courses = () => {
       <List>
         <Link to={"/courses/CAS"}>
           <ListItem>
-            Curso de Aperfeiçamento de Sargento
+            Curso de Aperfeiçamento de Sargentos
             <ListItemSuffix>
               <Chip
                 value="4"
+                variant="ghost"
+                size="sm"
+                className="rounded-full"
+              />
+            </ListItemSuffix>
+          </ListItem>
+        </Link>
+        <Link to={"/courses/CEFS"}>
+          <ListItem>
+            Curso Especial de Formação de Sargentos
+            <ListItemSuffix>
+              <Chip
+                value="1"
                 variant="ghost"
                 size="sm"
                 className="rounded-full"
