@@ -40,10 +40,17 @@ export default function SidebarWithContentSeparator() {
   return (
     <div className="hidden sm:block md:block xl:block  h-[calc(100vh)] bg-caqui-900 sticky top-0 w-full max-w-[20rem]  p-4 shadow-xl shadow-blue-gray-900/5 ">
       <div className="mb-2 p-4">
+      <Typography
+                color="blue-gray"
+                className="mr-auto font-bold items-center text-white"
+              >
+                Hr Manager App
+              </Typography>
         <Typography variant="h5" color="blue-gray">
           <img className="mx-auto" src={logo} height={65} width={65} />
         </Typography>
       </div>
+      <hr className="my-2 border-caqui-700" />
       <List>
         <Accordion
           open={open === 1}
@@ -270,7 +277,8 @@ export default function SidebarWithContentSeparator() {
             </Typography>
           </ListItem>
         </Link>
-        <ListItem onClick={handleLogout}>
+        <hr className="my-2 border-caqui-700 " />
+        <ListItem onClick={handleLogout} className="fixed bottom-0">
           <ListItemPrefix>
             <PowerIcon className="h-5 w-5 text-white" />
           </ListItemPrefix>

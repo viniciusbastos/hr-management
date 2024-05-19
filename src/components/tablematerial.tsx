@@ -31,6 +31,7 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
+import Loading from "./loading";
 
 const TABS = [
   {
@@ -60,9 +61,7 @@ export function MembersTable() {
   const [page, setPage] = useState(0);
   if (isLoading) {
     return (
-      <div className="loading-pane">
-        <h2 className="loader">🌀</h2>
-      </div>
+      <Loading />
     );
   }
   if (isError) return <p>Error: {error}</p>;

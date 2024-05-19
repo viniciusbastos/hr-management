@@ -5,16 +5,15 @@ import fetchVacationMonth from "../../services/fetchVacationMonth";
 import ButtonBack from "../../components/buttonBack";
 import { api } from "../../services/api";
 import config from "../../utils/config";
-import { Card, Typography } from "@material-tailwind/react";
+import { Card, CardBody, CardHeader, Typography } from "@material-tailwind/react";
+import Loading from "../../components/loading";
 
 const VacationMonth = () => {
   const { month } = useParams();
   const results = useQuery(["vacation", month], fetchVacationMonth);
   if (results.isLoading) {
     return (
-      <div className="loading-pane">
-        <h2 className="loader">🌀</h2>
-      </div>
+      <Loading />
     );
   }
 
@@ -23,33 +22,40 @@ const VacationMonth = () => {
   }
 
   return (
-    <Card className="h-full w-full overflow-scroll">
-      <div className=" mx-auto my-10 bg-white rounded-lg p-10 shadow-xl">
-        <h2 className="text-center text-2xl font-semibold mt-3">
-          Férias do mês {month}/{results.data.vacation[0].year}
-        </h2>
-        <table className="w-full min-w-max table-auto text-left">
+    <Card className="m-10 p-2  rounded-2xl shadow-xl bg-gray-50">
+    <CardHeader
+      variant="gradient"
+      mt-4
+      floated={true}
+      className="bg-caqui-700 p-2 grid h-12 mb-4  place-items-center"
+    >
+      <Typography variant="h5" color="white" className=" mb-2">
+      Férias do mês {month}/{results.data.vacation[0].year}
+      </Typography>
+    </CardHeader>
+    <CardBody className="p-6">
+        <table className="table-auto">
           <caption className="caption-bottom mt-5">
             Total de {results.data.vacation.length} policiais de Férias no mês
           </caption>
           <thead className="text-sm text-gray-700">
             <tr>
-              <th className="py-3 px-8 text-left border border-slate-200">
+              <th className="py-3 px-4 text-left border border-slate-200">
                 Mat
               </th>
-              <th className="py-3 px-8 text-left border border-slate-200">
+              <th className="py-3 px-4 text-left border border-slate-200">
                 Posto/Grad
               </th>
-              <th className="py-3 px-8 text-left border border-slate-200">
+              <th className="py-3 px-4 text-left border border-slate-200">
                 Nome
               </th>
-              <th className="py-3 px-8 text-left border border-slate-200">
+              <th className="py-3 px-4 text-left border border-slate-200">
                 Início
               </th>
-              <th className="py-3 px-8 text-left border border-slate-200">
+              <th className="py-3 px-4 text-left border border-slate-200">
                 Término
               </th>
-              <th className="py-3 px-8 text-left border border-slate-200">
+              <th className="py-3 px-4 text-left border border-slate-200">
                 Período
               </th>
             </tr>
@@ -76,7 +82,7 @@ const VacationMonth = () => {
                 <td className="whitespace-nowrap py-3 px-4 border border-slate-200">
                   {vacation.period}
                 </td>
-                <td>
+                {/* <td>
                   <button
                     type="button"
                     className="px-2  bg-red-600  py-1 border hover:bg-red-400 rounded-full"
@@ -84,13 +90,13 @@ const VacationMonth = () => {
                   >
                     Delete
                   </button>
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>
         </table>
         <ButtonBack />
-      </div>
+        </CardBody>
     </Card>
   );
 };

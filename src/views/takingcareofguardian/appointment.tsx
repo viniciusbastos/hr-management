@@ -39,6 +39,7 @@ const Appointment = () => {
   } = useController({ name: 'belongsToId', control })
 
   const onSubmit = async (data: FieldValues) => {
+    
     const id = toast.loading('Please wait...')
     try {
       const response = await api.post(`/appointment/`, data)

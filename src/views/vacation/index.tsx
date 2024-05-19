@@ -6,26 +6,29 @@ import fetchVacation from "../../services/fetchVacation";
 import VacationList from "../../components/genericList";
 import ButtonBack from "../../components/buttonBack";
 import GenericList from "../../components/genericList";
+
 import {
+  Button,
   Card,
   CardBody,
   CardHeader,
   List,
   ListItem,
+  Dialog,
+  CardFooter,
   Typography,
+  Input,
+  Checkbox,
 } from "@material-tailwind/react";
+import React from "react";
+import FormUser from "../formUser";
+import Teste from "../teste";
 
 const Vacation = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen((cur) => !cur);
   const navigate = useNavigate();
-  const { id } = useParams();
-  const results = useQuery(["vacation", id], fetchVacation);
-  if (results.isLoading) {
-    return (
-      <div className="loading-pane">
-        <h2 className="loader">🌀</h2>
-      </div>
-    );
-  }
+  
   return (
     <Card className="m-10 p-2  rounded-2xl shadow-xl bg-gray-50">
       <CardHeader
@@ -39,6 +42,21 @@ const Vacation = () => {
         </Typography>
       </CardHeader>
       <CardBody className="p-6">
+      <Button
+           className="flex items-left gap-3"
+           size="xl"
+           onClick={handleOpen}
+            >
+              Lançar Férias
+        </Button>
+        <Dialog
+        size="xs"
+        open={open}
+        handler={handleOpen}
+        className="bg-transparent shadow-none"
+      >
+        <Teste />
+      </Dialog>
         <List className="list-outside divide-y divide-gray-100 mt-6">
           <ListItem className=" justify-between gap-x-6 ">
             <GenericList path="./month/1" name="Janeiro" />

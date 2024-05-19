@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { format, compareAsc, parseISO } from "date-fns";
+import { format, parseISO } from "date-fns";
 import ButtonBack from "../../components/buttonBack";
 import fechAppointments from "../../services/fetchAppointments";
 import {
@@ -16,6 +16,7 @@ import {
   TableCell,
   TableFooter,
 } from '@mui/material'
+import Loading from "../../components/loading";
 
 const TakingCareGuardianList = () => {
   interface Appointment {
@@ -31,13 +32,11 @@ const TakingCareGuardianList = () => {
   const results = useQuery(["appointments"], fechAppointments);
   if (results.isLoading) {
     return (
-      <div className="loading-pane">
-        <h2 className="loader">🌀</h2>
-      </div>
+      <Loading />
     );
   }
   const appointments = results.data;
-  console.log(appointments)
+  
 
   return (
     <Card className="m-10 p-2  rounded-2xl shadow-xl bg-gray-50">

@@ -1,24 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
 import CardDashboard from "../../components/cardDashboard";
-import TableQuantityPosto from "../../components/tableQuantityPosto";
 import fetchUsers from "../../services/fetchUsers";
-import BarChart from "../../components/barchart";
 import BarChartTakeCareGuardian from "../../components/barcharttakingcareofguardian";
 import BarChartTakeCareGuardianCategorie from "../../components/barchartCategories";
 import fechAppointments from "../../services/fetchAppointments";
+import Loading from "../../components/loading";
 
 const DashboardTakeCareGuardian = () => {
   const appointments = useQuery(["appointments"], fechAppointments);
 
   const results = useQuery(["vacation"], fetchUsers);
+  console.log(results)
   if (appointments.isLoading) {
     return (
-      <div className="loading-pane">
-        <h2 className="loader">🌀</h2>
-      </div>
+      <Loading />
     );
   }
-
+  if (appointments.isError) return <p>Error: {error}</p>;
+  if (!appointments.data) return <p>No data available</p>;
   return (
     <>
       <div className="bg-gray-50 dark:bg-slate-700   h-full ">
