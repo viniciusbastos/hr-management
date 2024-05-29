@@ -12,6 +12,7 @@ import {
   ListItem,
   ListItemSuffix,
 } from "@material-tailwind/react";
+import Loading from "../../components/loading";
 
 const Courses = () => {
   const navigate = useNavigate();
@@ -19,13 +20,11 @@ const Courses = () => {
   const results = useQuery(["vacation", id], fetchVacation);
   if (results.isLoading) {
     return (
-      <div className="loading-pane">
-        <h2 className="loader">🌀</h2>
-      </div>
+      <Loading />
     );
   }
   return (
-    <div className="max-w-2xl mx-auto my-10 bg-white rounded-lg p-10 shadow-xl">
+    <div className="max-w-2xl mx-auto my-10 bg-white dark:bg-blue-gray-700 rounded-lg p-10 shadow-xl">
       <h2 className="text-center text-2xl font-semibold mt-3">Cursos</h2>
 
       <List>

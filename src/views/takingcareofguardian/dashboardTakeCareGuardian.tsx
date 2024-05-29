@@ -16,14 +16,14 @@ const DashboardTakeCareGuardian = () => {
       <Loading />
     );
   }
-  if (appointments.isError) return <p>Error: {error}</p>;
+  if (appointments.isError) return <p>Error: {appointments.isError}</p>;
   if (!appointments.data) return <p>No data available</p>;
   return (
     <>
       <div className="bg-gray-50 dark:bg-slate-700   h-full ">
         <div className="p-4 xl:m-auto">
           <div className="mb-12  gap-y-4 gap-x-8 grid-cols-1 grid md:grid-cols-3 xl:grid-cols-3  flex-col ">
-            <div className="bg-white">
+            <div className="bg-white dark:bg-gray-700 rounded-xl shadow-xl">
               <CardDashboard
                 link="/home"
                 title={'Atendimentos Realizados'}
@@ -31,7 +31,7 @@ const DashboardTakeCareGuardian = () => {
                 info={'no Ano'}
               />
             </div>
-            <div className="    bg-white    ">
+            <div className="bg-white dark:bg-gray-700 rounded-xl shadow-xl">
               <CardDashboard
                 link="/vacation/month/1"
                 title={'Especialidades'}
@@ -39,7 +39,7 @@ const DashboardTakeCareGuardian = () => {
                 info={'Ofertadas aos Policias da 6ªCIPM'}
               />
             </div>
-            <div className="    bg-white    ">
+            <div className="bg-white dark:bg-gray-700 rounded-xl shadow-xl">
               <CardDashboard
                 link="/courses"
                 title={'Palestras Realizadas'}
@@ -48,9 +48,8 @@ const DashboardTakeCareGuardian = () => {
               />
             </div>
           </div>
-          <div className="h-full">
+          <div className="h-full bg-white dark:bg-gray-700 rounded-xl shadow-xl">
             <BarChartTakeCareGuardian />
-            <BarChartTakeCareGuardianCategorie />
           </div>
         </div>
       </div>

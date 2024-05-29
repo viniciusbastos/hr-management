@@ -1,4 +1,6 @@
-import logo from "../assets/6 CIPM.png";
+
+import logo from "../assets/pmba.png";
+import logodark from "../assets/pmbadark.png";
 import {
   Card,
   Typography,
@@ -20,13 +22,16 @@ import {
   PowerIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
-import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
+import { ChevronRightIcon, ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import ToggleTheme from "./toggletheme";
+import { useTheme } from "../contexts/themeDark";
 
 export default function SidebarWithContentSeparator() {
   const [open, setOpen] = useState(0)
   const navigate = useNavigate()
+  const { theme } = useTheme();
 
   function handleLogout() {
     localStorage.removeItem('token')
@@ -38,16 +43,23 @@ export default function SidebarWithContentSeparator() {
   }
 
   return (
-    <div className="hidden sm:block md:block xl:block  h-[calc(100vh)] bg-caqui-900 sticky top-0 w-full max-w-[20rem]  p-4 shadow-xl shadow-blue-gray-900/5 ">
+    <>
+    <div className="hidden sm:block md:block xl:block  h-[calc(100vh)] dark:bg-slate-800 bg-caqui-900 sticky top-0 w-full max-w-[17rem]  p-4 shadow-xl shadow-blue-gray-900/5 ">
       <div className="mb-2 p-4">
-      <Typography
-                color="blue-gray"
-                className="mr-auto font-bold items-center text-white"
-              >
-                Hr Manager App
-              </Typography>
+        <div className="mb-2 flex items-center  p-4">
+        {theme === 'light' ? (
+        <img src={logodark} alt="brand" className="mx-auto" height={100} width={100} />
+      ) : (
+        <img src={logo} alt="brand" className="mx-auto" height={100} width={100} />
+      )}
+      </div>
+   
+      
+      <div className="p-2">
+      </div>
+              <ToggleTheme />
+
         <Typography variant="h5" color="blue-gray">
-          <img className="mx-auto" src={logo} height={65} width={65} />
         </Typography>
       </div>
       <hr className="my-2 border-caqui-700" />
@@ -278,7 +290,7 @@ export default function SidebarWithContentSeparator() {
           </ListItem>
         </Link>
         <hr className="my-2 border-caqui-700 " />
-        <ListItem onClick={handleLogout} className="fixed bottom-0">
+        <ListItem onClick={handleLogout} className="">
           <ListItemPrefix>
             <PowerIcon className="h-5 w-5 text-white" />
           </ListItemPrefix>
@@ -291,5 +303,6 @@ export default function SidebarWithContentSeparator() {
         </ListItem>
       </List>
     </div>
+    </>
   )
 }

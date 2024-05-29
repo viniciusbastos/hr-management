@@ -6,12 +6,12 @@ export default function SidebarLayout() {
   return (
     <>
       <NavbarDefault />
-      <div className="flex flex-row dark:bg-slate-800">
+      <div id="test" className="flex flex-row dark:bg-slate-700">
         <Sidebar />
-        <main className="w-full h-full">
+        <main className="w-full h-full dark:bg-slate-700" >
           <Outlet />
         </main>
       </div>
     </>
-  );
+  )
 }

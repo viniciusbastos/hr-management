@@ -3,6 +3,25 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+body {
+  height: 100vh;
+  width: 100vw;
+
+  margin: 0;
+  /* 1 */
+  line-height: inherit;
+  /* 2 */
+}
+
+div#test{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+
 }
 
 .logo {

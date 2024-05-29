@@ -32,6 +32,7 @@ import {
   TableRow,
 } from "@mui/material";
 import Loading from "./loading";
+import DefaultLayout from "../routes/sideBarLayout";
 
 const TABS = [
   {
@@ -50,7 +51,7 @@ const TABS = [
 
 const TABLE_HEAD = ["Nome", "Posto/Grad", "Status", "Matrícula", ""];
 
-export function MembersTable() {
+export  default function MembersTable() {
   const navigate = useNavigate();
   const { data, isLoading, isError, error } = useQuery(
     ["vacation"],
@@ -64,7 +65,7 @@ export function MembersTable() {
       <Loading />
     );
   }
-  if (isError) return <p>Error: {error}</p>;
+  if (isError) return <p>Error: {isError}</p>;
   if (!data) return <p>No data available</p>;
 
   const handleInputChange = (e) => {
@@ -81,6 +82,8 @@ export function MembersTable() {
   const filteredData = filteredUsers ?? data;
 
   return (
+    <>
+    <div className="p-10">
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
         <div className="mb-8 flex items-center justify-between gap-8">
@@ -107,7 +110,7 @@ export function MembersTable() {
         </div>
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <Tabs value="all" className="w-full md:w-max">
-            <TabsHeader>
+            <TabsHeader className="dark:bg-gray-700">
               {TABS.map(({ label, value }) => (
                 <Tab key={value} value={value}>
                   &nbsp;&nbsp;{label}&nbsp;&nbsp;
@@ -127,13 +130,13 @@ export function MembersTable() {
         </div>
       </CardHeader>
       <CardBody className="overflow-scroll px-0">
-        <Table className="mt-4 w-full min-w-max table-auto text-left">
+        <Table className="mt-4 w-full min-w-max table-auto text-left font-mono">
           <TableHead>
             <TableRow>
               {TABLE_HEAD.map((head) => (
                 <TableCell
                   key={head}
-                  className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
+                  className="border-y border-blue-gray-100 bg-blue-gray-50/50 dark:bg-gray-700 dark:text-gray-300 p-4"
                 >
                   <Typography
                     variant="small"
@@ -148,8 +151,8 @@ export function MembersTable() {
           </TableHead>
           <TableBody>
             {filteredData?.map((user) => (
-              <TableRow key={user.id}>
-                <TableCell className="px-6 py-4 whitespace-nowrap">
+              <TableRow key={user.id} className="dark:bg-gray-700">
+                <TableCell className="px-6 py-4 whitespace-nowrap dark:bg-gray-700">
                   <div className="flex items-center">
                     <div
                       className="flex-shrink-0 h-10 w-10"
@@ -169,7 +172,7 @@ export function MembersTable() {
                         navigate(`./details/${user.id}`);
                       }}
                     >
-                      <div className="text-sm font-medium text-gray-900 dark:text-white">
+                      <div className="text-sm font-medium text-gray-900 dark:text-white" >
                         {user.name}
                       </div>
                       <div className="text-sm text-gray-500 dark:text-gray-200">
@@ -178,12 +181,12 @@ export function MembersTable() {
                     </div>
                   </div>
                 </TableCell>
-                <TableCell className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900 dark:text-white">
+                <TableCell className="px-6 py-4 whitespace-nowrap dark:bg-gray-700">
+                  <div className="text-sm text-gray-900 dark:text-white dark:bg-gray-700">
                     {user.posto}
                   </div>
                 </TableCell>
-                <TableCell className="px-6 py-4 whitespace-nowrap">
+                <TableCell className="px-6 py-4 whitespace-nowrap dark:bg-gray-700">
                   <span
                     className="px-2 inline-flex text-xs leading-5
                           font-semibold rounded-full bg-green-100 text-green-800"
@@ -191,7 +194,7 @@ export function MembersTable() {
                     Active
                   </span>
                 </TableCell>
-                <TableCell className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-white">
+                <TableCell className="px-6 py-4 dark:bg-gray-700 whitespace-nowrap text-sm text-gray-500 dark:text-white">
                   {user.mat}
                 </TableCell>
                 {/* <td>
@@ -218,5 +221,7 @@ export function MembersTable() {
         </Table>
       </CardBody>
     </Card>
+    </div>
+    </>
   );
 }

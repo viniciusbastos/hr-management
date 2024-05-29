@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 const withMT = require("@material-tailwind/react/utils/withMT");
+const colors = require('tailwindcss/colors')
 
 module.exports = withMT({
   content: ["./src/**/*.{js,jsx,ts,tsx, html}"],
@@ -8,6 +9,7 @@ module.exports = withMT({
   theme: {
     extend: {
       colors: {
+        ...colors,
         caqui: {
           50: "#fdf8f6",
           100: "#dcd8cc",

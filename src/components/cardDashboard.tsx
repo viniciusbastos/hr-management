@@ -19,14 +19,14 @@ const CardDashboard = (props: {
   }
   return (
     <div
-      className="p-10 bg-white rounded-2xl shadow-xl border-spacing-1"
+      className="p-10 bg-white dark:bg-gray-700 rounded-xl shadow-xl border-spacing-1"
       onClick={handleClick}
     >
       <div className="shrink-0">
-        <div className="text-2xl font-medium text-gray-800 font-sans">
+        <div className="text-2xl font-medium text-gray-800 dark:text-gray-200 font-sans">
           {props.title}
         </div>
-        <h2 className="text-lg text-gray-600  font-sans">{props.quant}</h2>
+        <h2 className="text-lg text-gray-600 dark:text-gray-400  font-sans">{props.quant}</h2>
         <p className="text-gray-400 font-sans ">{props.info}</p>
       </div>
     </div>

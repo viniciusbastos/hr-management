@@ -18,6 +18,7 @@ import {
   Chip,
   Card,
 } from "@material-tailwind/react";
+import Loading from "./loading";
 
 export default function ListQuantityPosto() {
   interface efetivo {
@@ -29,14 +30,12 @@ export default function ListQuantityPosto() {
   const results = useQuery(["efetivo"], fetchEfetivo);
   if (results.isLoading) {
     return (
-      <div className="loading-pane">
-        <h2 className="loader">🌀</h2>
-      </div>
+      <Loading />
     );
   }
   return (
-    <Card className="mb-5">
-      <List>
+    <Card className="mb-5 bg-white dark:bg-gray-700 rounded-xl shadow-xl">
+      <List className="dark:text-gray-400">
         {results.data.map(
           (efetivo: {
             posto:
@@ -65,7 +64,7 @@ export default function ListQuantityPosto() {
                   value={efetivo.qtd}
                   variant="ghost"
                   size="sm"
-                  className="rounded-full"
+                  className="rounded-full dark:bg-coolGray-300"
                 />
               </ListItemSuffix>
             </ListItem>

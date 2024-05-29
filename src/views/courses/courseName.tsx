@@ -3,15 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 import { format, compareAsc, parseISO } from "date-fns";
 import ButtonBack from "../../components/buttonBack";
 import fetchCourse from "../../services/fetchCourse";
+import Loading from "../../components/loading";
 
 const CourseName = () => {
   const { name } = useParams();
   const results = useQuery(["course", name], fetchCourse);
   if (results.isLoading) {
     return (
-      <div className="loading-pane">
-        <h2 className="loader">🌀</h2>
-      </div>
+      <Loading />
     );
   }
 

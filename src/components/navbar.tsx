@@ -4,7 +4,7 @@ export default function NavBar() {
   return (
     <>
       <header className="sm:px-2 px-1 py-1  w-full bg-caqui-200">
-        <nav className="md:hidden sm:hidden lg:hidden  flex  max-container px-1 py-1 ">
+        <nav className="md:hidden sm:hidden lg:hidden  flex  max-container  ">
           <div className="text-gray-200">
             <Link className="text-sm text-stone-200	 font-bold" to="/home">
               {/* <img src={logo} height={30} width={30} /> */}

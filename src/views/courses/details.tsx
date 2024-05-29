@@ -3,6 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { format, compareAsc, parseISO } from "date-fns";
 import ButtonBack from "../../components/buttonBack";
 import fetchCourseId from "../../services/fetchCourseId";
+import Loading from "../../components/loading";
+import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
 
 const CourseDetails = () => {
   const navigate = useNavigate();
@@ -10,14 +12,11 @@ const CourseDetails = () => {
   const results = useQuery(["course", id], fetchCourseId);
   if (results.isLoading) {
     return (
-      <div className="loading-pane">
-        <h2 className="loader">🌀</h2>
-      </div>
+      <Loading />
     );
   }
   const course = results.data.courses[0];
 
-  console.log(course);
   return (
     <div className="max-w-xl mx-auto my-10 bg-white rounded-lg p-10 shadow-xl">
       <h2 className="text-center text-2xl font-semibold mt-3">Cursos</h2>
@@ -44,7 +43,7 @@ const CourseDetails = () => {
           </thead>
 
           <tbody className="text-sm text-gray-600">
-            {results.data.courses.map((course) => (
+            {results.data.courses.map((course: { id: Key | null | undefined; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; InitialDate: string; FinalDate: string; }) => (
               <tr key={course.id}>
                 <td className="whitespace-nowrap py-3 px-4 border border-slate-200">
                   {course.name}

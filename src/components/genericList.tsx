@@ -6,7 +6,7 @@ export default function GenericList(props: { path: string; name: string }) {
       <div className="flex flex-row">
         <div className="basis-11/12">
           <Link to={props.path}>
-            <p className="text-sm font-semibold leading-6 text-gray-900">
+            <p className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300">
               {props.name}{" "}
             </p>
           </Link>

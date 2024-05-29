@@ -17,7 +17,7 @@ const chartConfig = {
   series: [
     {
       name: "2024",
-      data: [15, 6, 14, 8, 7, 10, 13, 7, 8, 12, 18, 22],
+      data: [15, 6, 14, 8, 7, 12, 13, 7, 8, 12, 18, 22],
     },
     {
       name: "2023",
@@ -84,12 +84,12 @@ const chartConfig = {
       },
     },
     grid: {
-      show: true,
+      show: false,
       borderColor: "#dddddd",
       strokeDashArray: 5,
       xaxis: {
         lines: {
-          show: true,
+          show: false,
         },
       },
       padding: {
@@ -108,7 +108,7 @@ const chartConfig = {
 
 export default function BarChart() {
   return (
-    <Card>
+    <Card className="dark:bg-slate-700">
       <CardHeader
         floated={false}
         shadow={false}
@@ -119,13 +119,13 @@ export default function BarChart() {
           <GlobeAmericasIcon className="h-6 w-6" />
         </div>
         <div>
-          <Typography variant="h6" color="blue-gray">
+          <Typography variant="h6" color="blue-gray" className="dark:text-slate-300 ">
             Policiais Militares de Férias por mês no ano de 2024
           </Typography>
         </div>
       </CardHeader>
-      <CardBody className="px-2 pb-0">
-        <Chart {...chartConfig} />
+      <CardBody className="px-2 pb-0 dark:text-slate-200">
+        <Chart  {...chartConfig} />
       </CardBody>
     </Card>
   );

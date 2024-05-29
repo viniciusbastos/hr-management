@@ -17,7 +17,7 @@ const chartConfig = {
   series: [
     {
       name: '2024',
-      data: [0, 0, 11, 38, 4, 0, 0, 0, 0, 0, 0, 0],
+      data: [0, 0, 11, 38, 16, 0, 0, 0, 0, 0, 0, 0],
     },
   ],
   options: {
@@ -109,7 +109,7 @@ export default function BarChartTakeCareGuardian() {
         floated={false}
         shadow={false}
         color="transparent"
-        className="flex flex-col gap-4 rounded-none md:flex-row md:items-center"
+        className="flex flex-col gap-4 rounded-none md:flex-row md:items-center dark:bg-blue-gray-600"
       >
         <div className="w-max rounded-lg p-5 text-white bg-green-400">
           <GlobeAmericasIcon className="h-6 w-6 bg-green-400" />
@@ -120,7 +120,7 @@ export default function BarChartTakeCareGuardian() {
           </Typography>
         </div>
       </CardHeader>
-      <CardBody className="px-2 pb-0">
+      <CardBody className="px-2 pb-0 dark:bg-blue-gray-600">
         <Chart {...chartConfig} />
       </CardBody>
     </Card>

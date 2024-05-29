@@ -16,10 +16,10 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="bg-gray-50 dark:bg-slate-700   h-full ">
+      <div className="bg-gray-50 dark:bg-slate-600   h-full ">
         <div className="p-4 xl:m-auto">
           <div className="mb-12  gap-y-4 gap-x-8 grid-cols-1 grid md:grid-cols-2 xl:grid-cols-4  flex-col ">
-            <div className="bg-white">
+            <div className="bg-white dark:bg-gray-700 rounded-xl shadow-xl">
               <CardDashboard
                 link="/home"
                 title={"Efetivo"}
@@ -27,7 +27,7 @@ const Dashboard = () => {
                 info={"Policiais Militares"}
               />
             </div>
-            <div className="    bg-white    ">
+            <div className="bg-white  dark:bg-gray-700 rounded-xl shadow-xl">
               <CardDashboard
                 link="/vacation/month/1"
                 title={"Férias"}
@@ -35,7 +35,7 @@ const Dashboard = () => {
                 info={"Policiais Militares"}
               />
             </div>
-            <div className="    bg-white    ">
+            <div className="bg-white dark:bg-gray-700 rounded-xl shadow-xl">
               <CardDashboard
                 link="/courses"
                 title={"Cursos"}
@@ -43,7 +43,7 @@ const Dashboard = () => {
                 info={"Policiais Militares"}
               />
             </div>
-            <div className="    bg-white    ">
+            <div className="bg-white dark:bg-gray-700 rounded-xl shadow-xl">
               <CardDashboard
                 link="/courses"
                 title={"Licenças"}

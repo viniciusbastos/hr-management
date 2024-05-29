@@ -7,6 +7,6 @@ import OtherRoutes from "./OtherRoutes";
 const RouteTest: React.FC = () => {
   const { isAutenticated } = useContext(AuthContext)
   return isAutenticated ? <OtherRoutes /> : <SignRoutes />;
-};
+}
 
 export default RouteTest;

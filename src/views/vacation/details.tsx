@@ -6,6 +6,7 @@ import fetchVacation from "../../services/fetchVacation";
 import ButtonBack from "../../components/buttonBack";
 import { api } from "../../services/api";
 import config from "../../utils/config";
+import Loading from "../../components/loading";
 
 const VacationDetails = () => {
   const navigate = useNavigate();
@@ -13,9 +14,7 @@ const VacationDetails = () => {
   const results = useQuery(["vacation", id], fetchVacation);
   if (results.isLoading) {
     return (
-      <div className="loading-pane">
-        <h2 className="loader">🌀</h2>
-      </div>
+      <Loading />
     );
   }
   const vacation = results.data.vacation[0];

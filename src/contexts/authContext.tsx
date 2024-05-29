@@ -16,7 +16,11 @@ type SignInCredentials = {
   password: string;
 };
 type User = {
-  email: string;
+  id: string;
+  useremail: string;
+  name: string;
+  posto: string;
+  role: string;
 };
 
 type AuthContextData = {
@@ -46,9 +50,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     const token: string = localStorage?.getItem("token");
     if (token) {
-      const { email } = jwtDecode(token);
+      const {id, useremail, role, name, posto } = jwtDecode(token);
 
-      setUser({ email: email });
+      setUser({ 
+        id: id,
+        useremail: useremail,
+        role: role,
+        name: name,
+        posto: posto,   
+       });
 
       navigate(location ?? "/dashboard");
     } else {
@@ -59,15 +69,23 @@ export function AuthProvider({ children }: AuthProviderProps) {
   async function signIn({ email, password }: SignInCredentials) {
     try {
       const response = await axios.post(
-        import.meta.env.VITE_APP_API_URL + "/signin",
+        import.meta.env.VITE_APP_API_URL + "/api/signin",
         {
           email,
           password,
         },
       );
-      const { token, useremail } = response.data;
+      const { token } = response.data;
       localStorage.setItem("token", token);
-      setUser(useremail);
+      const { id, useremail, role, name, posto } = jwtDecode(token);
+
+      setUser({ 
+        id: id,
+        useremail: useremail,
+        role: role,
+        name: name,
+        posto: posto,   
+       });
       navigate("/dashboard");
     } catch (err) {
       console.log(err);

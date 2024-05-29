@@ -22,34 +22,34 @@ const VacationMonth = () => {
   }
 
   return (
-    <Card className="m-10 p-2  rounded-2xl shadow-xl bg-gray-50">
+    <Card className="m-10 p-2  rounded-2xl shadow-xl bg-gray-50 dark:bg-gray-700">
     <CardHeader
       variant="gradient"
       mt-4
       floated={true}
-      className="bg-caqui-700 p-2 grid h-12 mb-4  place-items-center"
+      className="bg-caqui-700 dark:bg-gray-600 p-2 grid h-12 mb-4  place-items-center"
     >
-      <Typography variant="h5" color="white" className=" mb-2">
+      <Typography variant="h5" color="white" className=" mb-2 dark:text-gray-300">
       Férias do mês {month}/{results.data.vacation[0].year}
       </Typography>
     </CardHeader>
     <CardBody className="p-6">
-        <table className="table-auto">
+        <table className="table-auto dark:text-gray-300">
           <caption className="caption-bottom mt-5">
             Total de {results.data.vacation.length} policiais de Férias no mês
           </caption>
-          <thead className="text-sm text-gray-700">
+          <thead className="text-sm text-gray-700 dark:text-gray-300">
             <tr>
-              <th className="py-3 px-4 text-left border border-slate-200">
+              <th className="py-3 px-4 text-left border border-slate-200 dark:text-gray-300">
                 Mat
               </th>
-              <th className="py-3 px-4 text-left border border-slate-200">
+              <th className="py-3 px-4 text-left border border-slate-200 dark:text-gray-300">
                 Posto/Grad
               </th>
-              <th className="py-3 px-4 text-left border border-slate-200">
+              <th className="py-3 px-4 text-left border border-slate-200 dark:text-gray-300">
                 Nome
               </th>
-              <th className="py-3 px-4 text-left border border-slate-200">
+              <th className="py-3 px-4 text-left border border-slate-200 dark:text-gray-300">
                 Início
               </th>
               <th className="py-3 px-4 text-left border border-slate-200">
@@ -61,7 +61,7 @@ const VacationMonth = () => {
             </tr>
           </thead>
 
-          <tbody className="text-sm text-gray-600">
+          <tbody className="text-sm text-gray-600 dark:text-gray-300">
             {results.data.vacation.map((vacation: any) => (
               <tr key={vacation.id}>
                 <td className="whitespace-nowrap py-3 px-4 border border-slate-200">

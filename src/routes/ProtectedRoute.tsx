@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { AuthContext } from "../contexts/authContext";
-import { useContext } from "react";
+import { Suspense, useContext } from "react";
+import Loading from "../components/loading";
 
 export const ProtectedRoute = () => {
   const { isAutenticated } = useContext(AuthContext);
@@ -12,5 +13,12 @@ export const ProtectedRoute = () => {
   }
 
   // If authenticated, render the child routes
-  return <Outlet />;
+  return (
+    <>
+    <Suspense fallback={<Loading />}>
+      <Outlet />
+    </Suspense>
+    </>
+
+  ) 
 };

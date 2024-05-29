@@ -30,20 +30,20 @@ const Vacation = () => {
   const navigate = useNavigate();
   
   return (
-    <Card className="m-10 p-2  rounded-2xl shadow-xl bg-gray-50">
+    <Card className="m-10 p-2  rounded-2xl shadow-xl dark:bg-gray-700 bg-gray-50">
       <CardHeader
         variant="gradient"
         mt-4
         floated={true}
-        className="bg-caqui-700 p-2 grid h-12 mb-4  place-items-center"
+        className="bg-caqui-700 dark:bg-gray-600 p-2 grid h-12 mb-4  place-items-center"
       >
-        <Typography variant="h5" color="white" className=" mb-2">
+        <Typography variant="h5" color="white"  className=" mb-2">
           Plano de Férias
         </Typography>
       </CardHeader>
       <CardBody className="p-6">
       <Button
-           className="flex items-left gap-3"
+           className="flex items-left gap-3 dark:bg-blue-gray-700"
            size="xl"
            onClick={handleOpen}
             >
@@ -57,8 +57,8 @@ const Vacation = () => {
       >
         <Teste />
       </Dialog>
-        <List className="list-outside divide-y divide-gray-100 mt-6">
-          <ListItem className=" justify-between gap-x-6 ">
+        <List className="list-outside divide-y divide-gray-100 dark:divide-gray-600 dark:text-gray-300 mt-6">
+          <ListItem className=" justify-between gap-x-6  dark:text-gray-300">
             <GenericList path="./month/1" name="Janeiro" />
           </ListItem>
           <ListItem className=" justify-between gap-x-6">

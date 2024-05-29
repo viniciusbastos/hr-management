@@ -1,29 +1,20 @@
-FROM node:21-alpine as prod
+# Stage 1: Build
+FROM node:18-alpine AS build
 
 WORKDIR /app
 
-COPY package*.json .
-
+COPY package.json package-lock.json ./
 RUN npm install
 
 COPY . .
 
 RUN npm run build
 
-# Production stage
-
+# Stage 2: Serve
 FROM nginx:alpine
 
-WORKDIR /usr/local/bin
-
-COPY --from=prod /app/dist /usr/share/nginx/html
-
-COPY generate-config.sh .
-
-COPY custom-nginx.template /etc/nginx/conf.d/
-
-RUN chmod +x generate-config.sh
+COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 
-ENTRYPOINT [ "/bin/sh", "generate-config.sh"]
+CMD ["nginx", "-g", "daemon off;"]
