@@ -9,8 +9,12 @@ FROM nginx:alpine
 WORKDIR /usr/local/bin
 
 COPY --from=prod /app/dist /usr/share/nginx/html
-COPY --from=prod  /.nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY generate-config.sh .
+
+COPY custom-nginx.template /etc/nginx/conf.d/
+
+RUN chmod +x generate-config.sh
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT [ "/bin/sh", "generate-config.sh"]
