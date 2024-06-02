@@ -12,9 +12,9 @@ function ToggleTheme() {
       className="p-2 rounded-full focus:outline-none bg-gray-200 dark:bg-gray-700"
     >
       {theme === 'light' ? (
-        <MoonIcon className="w-6 h-6 text-gray-800 dark:text-gray-200" />
+        <MoonIcon className="w-4 h-4 text-gray-800 dark:text-gray-200" />
       ) : (
-        <SunIcon className="w-6 h-6 text-gray-800 dark:text-gray-200" />
+        <SunIcon className="w-4 h-4 text-gray-800 dark:text-gray-200" />
       )}
     </button>
   );

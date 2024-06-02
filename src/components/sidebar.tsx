@@ -57,7 +57,7 @@ export default function SidebarWithContentSeparator() {
       
       <div className="p-2">
       </div>
-              <ToggleTheme />
+        <ToggleTheme />
 
         <Typography variant="h5" color="blue-gray">
         </Typography>

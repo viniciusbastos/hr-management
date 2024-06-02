@@ -1,19 +1,15 @@
-# Stage 1: Build
-FROM node:18-alpine AS build
-
+FROM node:21-alpine as prod
 WORKDIR /app
-
-COPY package.json package-lock.json ./
+COPY package*.json .
 RUN npm install
-
 COPY . .
-
 RUN npm run build
-
-# Stage 2: Serve
+# Production stage
 FROM nginx:alpine
+WORKDIR /usr/local/bin
 
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=prod /app/dist /usr/share/nginx/html
+COPY --from=prod ./nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
