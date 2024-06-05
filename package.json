@@ -2,15 +2,15 @@
   "name": "react-app",
   "homepage": "https://viniciusbastos.github.io/hr-management",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite --host 0.0.0.0",
+    "dev": "vite",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "build": "vite build",
     "preview": "vite preview --port  9090",
     "tailwind": "npx tailwindcss -i ./src/index.css -o ./src/main.css --watch",
-    "start": "vite start --host 0.0.0.0"
+    "start": "vite start"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
