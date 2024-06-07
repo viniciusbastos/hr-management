@@ -11,9 +11,9 @@ module.exports = withMT({
       colors: {
         ...colors,
         caqui: {
-          50: "#fdf8f6",
+          50: "#535552",
           100: "#dcd8cc",
-          200: "#d4c9c0",
+          200: "#b5ae9b",
           300: "#c0b4aa",
           400: "#ad9f96",
           500: "#CDC5B7",

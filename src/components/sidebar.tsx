@@ -44,13 +44,13 @@ export default function SidebarWithContentSeparator() {
 
   return (
     <>
-    <div className="hidden sm:block md:block xl:block  h-[calc(100vh)] dark:bg-slate-800 bg-caqui-900 sticky top-0 w-full max-w-[17rem]  p-4 shadow-xl shadow-blue-gray-900/5 ">
+    <div className="hidden sm:block md:block xl:block  h-[calc(100vh)] dark:bg-slate-800 bg-caqui-200 sticky top-0 w-full max-w-[17rem]  p-4 shadow-xl shadow-blue-gray-900/5 ">
       <div className="mb-2 p-4">
         <div className="mb-2 flex items-center  p-4">
         {theme === 'light' ? (
-        <img src={logodark} alt="brand" className="mx-auto" height={100} width={100} />
+        <img src={logodark} alt="brand" className="mx-auto" height={120} width={120} />
       ) : (
-        <img src={logo} alt="brand" className="mx-auto" height={100} width={100} />
+        <img src={logo} alt="brand" className="mx-auto" height={120} width={120} />
       )}
       </div>
    
