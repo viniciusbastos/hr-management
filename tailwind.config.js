@@ -13,7 +13,7 @@ module.exports = withMT({
         caqui: {
           50: "#535552",
           100: "#dcd8cc",
-          200: "#b5ae9b",
+          200: "#a0977d",
           300: "#c0b4aa",
           400: "#ad9f96",
           500: "#CDC5B7",
