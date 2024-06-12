@@ -25,7 +25,7 @@ const ProcessTable: React.FC = () => {
         <thead className="bg-gray-50 dark:bg-gray-800">
           <tr className='dark:bg-gray-800'>
             <th className="py-2 px-4 border">Nome do Processo</th>
-            <th className="py-2 px-4 border">Description</th>
+            <th className="py-2 px-4 border">Descrição</th>
             <th className="py-2 px-4 border">Frequência</th>
             <th className="py-2 px-4 border">Responsável</th>
             <th className="py-2 px-4 border">Setor Responsável</th>
@@ -107,6 +107,20 @@ const ProcessTable: React.FC = () => {
               <td className="py-2 px-4 border">Produzir lista mensal com aniversariantes do mês</td>
               <td className="py-2 px-4 border">Mensal</td>
               <td className="py-2 px-4 border">ST PM RR JULIO CESAR - Func. Civil Janne</td>
+              <td className="py-2 px-4 border">SSO</td>
+            </tr>
+            <tr key="5">
+              <td className="py-2 px-4 border">Verificar Email</td>
+              <td className="py-2 px-4 border">Verificação de email</td>
+              <td className="py-2 px-4 border">Diário</td>
+              <td className="py-2 px-4 border">ST PM RR JULIO CESAR - Func. Civil Janne - SGT PM ELISANGELA E SD PM MANOEL</td>
+              <td className="py-2 px-4 border">SSO</td>
+            </tr>
+            <tr key="5">
+              <td className="py-2 px-4 border">Verificar SEI</td>
+              <td className="py-2 px-4 border">Verificação de Sei</td>
+              <td className="py-2 px-4 border">Diário</td>
+              <td className="py-2 px-4 border">ST PM RR JULIO CESAR - Func. Civil Janne - SGT PM ELISANGELA E SD PM MANOEL</td>
               <td className="py-2 px-4 border">SSO</td>
             </tr>
         </tbody>
