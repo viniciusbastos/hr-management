@@ -94,7 +94,8 @@ function App() {
                   <Dashboard />
                 </Suspense>
                   }>
-                    <Route 
+                  </Route>
+                  <Route 
                   path="/process" 
                   element={
                     <Suspense 
@@ -104,9 +105,6 @@ function App() {
                   <ProcessTable />
                 </Suspense>
                   }></Route>
-                    
-
-                  </Route>
                   <Route path="/formUser" element={<FormUser />}></Route> 
                   <Route
                     path="/vacation/:id"
