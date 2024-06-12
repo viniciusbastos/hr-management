@@ -188,7 +188,7 @@ export default function SidebarWithContentSeparator() {
             >
               <ListItemPrefix>
                 <svg
-                  className="bg-black"
+                  className=""
                   xmlns="http://www.w3.org/2000/svg"
                   height="24"
                   viewBox="0 -960 960 960"
@@ -199,7 +199,7 @@ export default function SidebarWithContentSeparator() {
               </ListItemPrefix>
               <Typography
                 color="blue-gray"
-                className="mr-auto font-normal text-black"
+                className="mr-auto font-normal text-white"
               >
                 Cuidando do Cuidador
               </Typography>
@@ -207,7 +207,7 @@ export default function SidebarWithContentSeparator() {
           </ListItem>
 
           <AccordionBody className="py-1">
-            <List className="p-0 text-black">
+            <List className="p-0 text-white">
               <Link to="/dashboadtakecareguardians">
                 <ListItem>
                   <ListItemPrefix>
@@ -218,22 +218,22 @@ export default function SidebarWithContentSeparator() {
               </Link>
 
               <Link to="/takingcareguardian/list">
-                <ListItem className="text-black">
+                <ListItem className="text-white">
                   <ListItemPrefix>
                     <ChevronRightIcon
                       strokeWidth={3}
-                      className="h-3 w-5 text-black"
+                      className="h-3 w-5 text-white"
                     />
                   </ListItemPrefix>
                   Policiais Atendidos
                 </ListItem>
               </Link>
               <Link to="/appointment">
-                <ListItem className="text-black">
+                <ListItem className="text-white">
                   <ListItemPrefix>
                     <ChevronRightIcon
                       strokeWidth={3}
-                      className="h-3 w-5 text-black"
+                      className="h-3 w-5 text-white"
                     />
                   </ListItemPrefix>
                   Cadastrar Atendimentos
@@ -247,11 +247,11 @@ export default function SidebarWithContentSeparator() {
         <Link to="/users">
           <ListItem>
             <ListItemPrefix>
-              <UserGroupIcon className="h-5 w-5 text-black" />
+              <UserGroupIcon className="h-5 w-5 text-white" />
             </ListItemPrefix>
             <Typography
               color="blue-gray"
-              className="mr-auto font-normal text-black"
+              className="mr-auto font-normal text-white"
             >
               Efetivo
             </Typography>
@@ -270,11 +270,11 @@ export default function SidebarWithContentSeparator() {
         <Link to="vacation">
           <ListItem>
             <ListItemPrefix>
-              <GlobeAmericasIcon className="h-5 w-5 text-black" />
+              <GlobeAmericasIcon className="h-5 w-5 text-white" />
             </ListItemPrefix>
             <Typography
               color="blue-gray"
-              className="mr-auto font-normal text-black"
+              className="mr-auto font-normal text-white"
             >
               Férias
             </Typography>
@@ -283,11 +283,11 @@ export default function SidebarWithContentSeparator() {
         <Link to={'/courses'}>
           <ListItem>
             <ListItemPrefix>
-              <AcademicCapIcon className="h-5 w-5 text-black" />
+              <AcademicCapIcon className="h-5 w-5 text-white" />
             </ListItemPrefix>
             <Typography
               color="blue-gray"
-              className="mr-auto font-normal text-black"
+              className="mr-auto font-normal text-white"
             >
               Cursos
             </Typography>
@@ -296,11 +296,11 @@ export default function SidebarWithContentSeparator() {
         <hr className="my-2 border-caqui-700 " />
         <ListItem onClick={handleLogout} className="">
           <ListItemPrefix>
-            <PowerIcon className="h-5 w-5 text-black" />
+            <PowerIcon className="h-5 w-5 text-white" />
           </ListItemPrefix>
           <Typography
             color="blue-gray"
-            className="mr-auto font-normal text-black"
+            className="mr-auto font-normal text-white"
           >
             Log Out
           </Typography>
