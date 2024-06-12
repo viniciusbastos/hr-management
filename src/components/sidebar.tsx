@@ -104,6 +104,7 @@ export default function SidebarWithContentSeparator() {
                   Efetivo
                 </ListItem>
               </Link>
+              <Link to="/process">
               <ListItem>
                 <ListItemPrefix>
                   <ChevronRightIcon
@@ -111,9 +112,12 @@ export default function SidebarWithContentSeparator() {
                     className="h-3 w-5 text-black"
                   />
                 </ListItemPrefix>
-                ...
+                Inventário de Processos
               </ListItem>
+              </Link>
+
               <ListItem>
+             
                 <ListItemPrefix>
                   <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
                 </ListItemPrefix>

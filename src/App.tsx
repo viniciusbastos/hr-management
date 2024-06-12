@@ -28,6 +28,7 @@ import TakingCareGuardianList from "./views/takingcareofguardian/list";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "./components/loading";
 import AI from "./testeArtificialIteligence";
+import ProcessTable from "./components/processTable";
 
 
 
@@ -93,6 +94,17 @@ function App() {
                   <Dashboard />
                 </Suspense>
                   }>
+                    <Route 
+                  path="/process" 
+                  element={
+                    <Suspense 
+                    fallback={ <Loading />
+
+                    }>
+                  <ProcessTable />
+                </Suspense>
+                  }></Route>
+                    
 
                   </Route>
                   <Route path="/formUser" element={<FormUser />}></Route> 
