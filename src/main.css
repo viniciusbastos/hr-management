@@ -6898,6 +6898,10 @@ select {
     align-items: center;
   }
 
+  .md\:rounded-lg {
+    border-radius: 0.5rem;
+  }
+
   .md\:p-52 {
     padding: 13rem;
   }
