@@ -1,5 +1,5 @@
 
-import logo from "../assets/pmba.png";
+import logo from "../assets/pmbawhite.png";
 import logodark from "../assets/pmbadark.png";
 import {
   Card,
