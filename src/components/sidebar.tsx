@@ -81,11 +81,11 @@ export default function SidebarWithContentSeparator() {
               className="border-b-0 p-3"
             >
               <ListItemPrefix>
-                <PresentationChartBarIcon className="h-5 w-5 text-black" />
+                <PresentationChartBarIcon className="h-5 w-5 text-white" />
               </ListItemPrefix>
               <Typography
                 color="blue-gray"
-                className="mr-auto font-normal text-black"
+                className="mr-auto font-normal text-white"
               >
                 Dashboard
               </Typography>
@@ -98,7 +98,7 @@ export default function SidebarWithContentSeparator() {
                   <ListItemPrefix>
                     <ChevronRightIcon
                       strokeWidth={3}
-                      className="h-3 w-5 text-black"
+                      className="h-3 w-5 text-white"
                     />
                   </ListItemPrefix>
                   Efetivo
@@ -109,7 +109,7 @@ export default function SidebarWithContentSeparator() {
                 <ListItemPrefix>
                   <ChevronRightIcon
                     strokeWidth={3}
-                    className="h-3 w-5 text-black"
+                    className="h-3 w-5 text-white"
                   />
                 </ListItemPrefix>
                 Inventário de Processos
@@ -143,11 +143,11 @@ export default function SidebarWithContentSeparator() {
               className="border-b-0 p-3"
             >
               <ListItemPrefix>
-                <ShoppingBagIcon className="h-5 w-5 text-black" />
+                <ShoppingBagIcon className="h-5 w-5 text-white" />
               </ListItemPrefix>
               <Typography
                 color="blue-gray"
-                className="mr-auto font-normal text-black"
+                className="mr-auto font-normal text-white"
               >
                 Teste
               </Typography>

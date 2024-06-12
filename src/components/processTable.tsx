@@ -19,11 +19,11 @@ const ProcessTable: React.FC = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Inventário de Processos</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center">Inventário de Processos da Seção de Suporte Operacional</h1>
       <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg"></div>
       <table className="min-w-full bg-white border  divide-y divide-gray-200 dark:divide-gray-700">
         <thead className="bg-gray-50 dark:bg-gray-800">
-          <tr>
+          <tr className='dark:bg-gray-800'>
             <th className="py-2 px-4 border">Nome do Processo</th>
             <th className="py-2 px-4 border">Description</th>
             <th className="py-2 px-4 border">Frequência</th>
@@ -31,7 +31,7 @@ const ProcessTable: React.FC = () => {
             <th className="py-2 px-4 border">Setor Responsável</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className='dark:bg-gray-700'>
             <tr key="1">
               <td className="py-2 px-4 border">Boletim Interno Ostensivo</td>
               <td className="py-2 px-4 border"></td>
@@ -55,7 +55,7 @@ const ProcessTable: React.FC = () => {
             </tr>
             <tr key="4">
               <td className="py-2 px-4 border">Plano de Férias</td>
-              <td className="py-2 px-4 border"></td>
+              <td className="py-2 px-4 border">Coletar através de formulário duas opções de férias dos policiais lotados na 6ªCIPM</td>
               <td className="py-2 px-4 border">Anual</td>
               <td className="py-2 px-4 border">Cap PM VINICIUS / SGT PM ELISANGELA</td>
               <td className="py-2 px-4 border">SRHSP</td>
@@ -100,6 +100,13 @@ const ProcessTable: React.FC = () => {
               <td className="py-2 px-4 border">Produzir documentos pertinentes ao pagamento de diárias e transporte</td>
               <td className="py-2 px-4 border">Mensal</td>
               <td className="py-2 px-4 border">SD PM TAMIRES</td>
+              <td className="py-2 px-4 border">SSO</td>
+            </tr>
+            <tr key="5">
+              <td className="py-2 px-4 border">Aniversariantes do Mês</td>
+              <td className="py-2 px-4 border">Produzir lista mensal com aniversariantes do mês</td>
+              <td className="py-2 px-4 border">Mensal</td>
+              <td className="py-2 px-4 border">ST PM RR JULIO CESAR - Func. Civil Janne</td>
               <td className="py-2 px-4 border">SSO</td>
             </tr>
         </tbody>
