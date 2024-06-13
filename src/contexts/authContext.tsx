@@ -5,11 +5,9 @@ import {
   useEffect,
   useState,
 } from "react";
-import Cookies from "js-cookie";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import { useCookies } from "react-cookie";
 
 type SignInCredentials = {
   email: string;
@@ -39,16 +37,17 @@ export const AuthContext = createContext<AuthContextData>(
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>();
-  const isAutenticated = !!user;
+  const [isAutenticated, setIsauthenticated] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   function Logout() {
+    localStorage.removeItem('token');
     const isAutenticated = false;
     navigate("/signin");
   }
 
   useEffect(() => {
-    const token: string = localStorage?.getItem("token");
+    const token = localStorage?.getItem("token");
     if (token) {
       const {id, useremail, role, name, posto } = jwtDecode(token);
 
@@ -59,7 +58,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         name: name,
         posto: posto,   
        });
-
+      setIsauthenticated(true)
       navigate(location ?? "/dashboard");
     } else {
       navigate("/signin");
@@ -75,10 +74,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
           password,
         },
       );
-      const { token } = response.data;
+      const  token  = response.data.token;
       localStorage.setItem("token", token);
       const { id, useremail, role, name, posto } = jwtDecode(token);
-
       setUser({ 
         id: id,
         useremail: useremail,
@@ -86,6 +84,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         name: name,
         posto: posto,   
        });
+       setIsauthenticated(true)
       navigate("/dashboard");
     } catch (err) {
       console.log(err);

@@ -111,7 +111,7 @@ const ProcessTable: React.FC = () => {
             </tr>
             <tr key="5">
               <td className="py-2 px-4 border">Verificar Email</td>
-              <td className="py-2 px-4 border">Verificação de email</td>
+              <td className="py-2 px-4 border">Verificação de email e adotar as medidas pertinentes caso haja necessidade</td>
               <td className="py-2 px-4 border">Diário</td>
               <td className="py-2 px-4 border">ST PM RR JULIO CESAR - Func. Civil Janne - SGT PM ELISANGELA E SD PM MANOEL</td>
               <td className="py-2 px-4 border">SSO</td>
@@ -119,6 +119,20 @@ const ProcessTable: React.FC = () => {
             <tr key="5">
               <td className="py-2 px-4 border">Verificar SEI</td>
               <td className="py-2 px-4 border">Verificação de Sei</td>
+              <td className="py-2 px-4 border">Diário</td>
+              <td className="py-2 px-4 border">ST PM RR JULIO CESAR - Func. Civil Janne - SGT PM ELISANGELA E SD PM MANOEL</td>
+              <td className="py-2 px-4 border">SSO</td>
+            </tr>
+            <tr key="5">
+              <td className="py-2 px-4 border">Verificar das Publicações de BGO</td>
+              <td className="py-2 px-4 border">Verificação das Publicações de BGO, registrar as informações pertinentes em BIO e preencher lista de controle de BGO lidos</td>
+              <td className="py-2 px-4 border">Diário</td>
+              <td className="py-2 px-4 border">ST PM RR JULIO CESAR - Func. Civil Janne - SGT PM ELISANGELA E SD PM MANOEL</td>
+              <td className="py-2 px-4 border">SSO</td>
+            </tr>
+            <tr key="5">
+              <td className="py-2 px-4 border">Solicitações de aquisição de arma de fogo/renovação do Craf</td>
+              <td className="py-2 px-4 border">Verificação das Publicações de BGO, registrar as informações pertinentes em BIO e preencher lista de controle de BGO lidos</td>
               <td className="py-2 px-4 border">Diário</td>
               <td className="py-2 px-4 border">ST PM RR JULIO CESAR - Func. Civil Janne - SGT PM ELISANGELA E SD PM MANOEL</td>
               <td className="py-2 px-4 border">SSO</td>

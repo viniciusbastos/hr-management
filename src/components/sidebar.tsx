@@ -68,6 +68,7 @@ export default function SidebarWithContentSeparator() {
           open={open === 1}
           icon={
             <ChevronDownIcon
+              stroke="#FFFFFF"
               strokeWidth={2.5}
               className={`mx-auto h-4 w-4 transition-transform ${
                 open === 1 ? 'rotate-180' : ''
@@ -84,7 +85,7 @@ export default function SidebarWithContentSeparator() {
                 <PresentationChartBarIcon className="h-5 w-5 text-white" />
               </ListItemPrefix>
               <Typography
-                color="blue-gray"
+                color="white"
                 className="mr-auto font-normal text-white"
               >
                 Dashboard
@@ -94,9 +95,10 @@ export default function SidebarWithContentSeparator() {
           <AccordionBody className="py-1">
             <List className="p-0">
               <Link to="/dashboard">
-                <ListItem>
+                <ListItem className="mr-auto font-normal text-white">
                   <ListItemPrefix>
                     <ChevronRightIcon
+                      stroke="#FFFFFF"
                       strokeWidth={3}
                       className="h-3 w-5 text-white"
                     />
@@ -105,9 +107,10 @@ export default function SidebarWithContentSeparator() {
                 </ListItem>
               </Link>
               <Link to="/process">
-              <ListItem>
+              <ListItem className="mr-auto font-normal text-white">
                 <ListItemPrefix>
                   <ChevronRightIcon
+                    stroke="#FFFFFF"
                     strokeWidth={3}
                     className="h-3 w-5 text-white"
                   />
@@ -130,6 +133,7 @@ export default function SidebarWithContentSeparator() {
           open={open === 2}
           icon={
             <ChevronDownIcon
+              stroke="#FFFFFF"
               strokeWidth={2.5}
               className={`mx-auto h-4 w-4 transition-transform ${
                 open === 2 ? 'rotate-180' : ''
@@ -146,7 +150,7 @@ export default function SidebarWithContentSeparator() {
                 <ShoppingBagIcon className="h-5 w-5 text-white" />
               </ListItemPrefix>
               <Typography
-                color="blue-gray"
+                color="white"
                 className="mr-auto font-normal text-white"
               >
                 Teste
@@ -174,6 +178,7 @@ export default function SidebarWithContentSeparator() {
           open={open === 3}
           icon={
             <ChevronDownIcon
+              stroke="#FFFFFF"
               strokeWidth={2.5}
               className={`mx-auto h-4 w-4 transition-transform ${
                 open === 2 ? 'rotate-180' : ''
@@ -188,7 +193,7 @@ export default function SidebarWithContentSeparator() {
             >
               <ListItemPrefix>
                 <svg
-                  className=""
+                  fill="#FFFFFF"
                   xmlns="http://www.w3.org/2000/svg"
                   height="24"
                   viewBox="0 -960 960 960"
@@ -198,7 +203,7 @@ export default function SidebarWithContentSeparator() {
                 </svg>{' '}
               </ListItemPrefix>
               <Typography
-                color="blue-gray"
+                color="white"
                 className="mr-auto font-normal text-white"
               >
                 Cuidando do Cuidador
@@ -250,7 +255,7 @@ export default function SidebarWithContentSeparator() {
               <UserGroupIcon className="h-5 w-5 text-white" />
             </ListItemPrefix>
             <Typography
-              color="blue-gray"
+              color="white"
               className="mr-auto font-normal text-white"
             >
               Efetivo
@@ -273,7 +278,7 @@ export default function SidebarWithContentSeparator() {
               <GlobeAmericasIcon className="h-5 w-5 text-white" />
             </ListItemPrefix>
             <Typography
-              color="blue-gray"
+              color="white"
               className="mr-auto font-normal text-white"
             >
               Férias
@@ -286,7 +291,7 @@ export default function SidebarWithContentSeparator() {
               <AcademicCapIcon className="h-5 w-5 text-white" />
             </ListItemPrefix>
             <Typography
-              color="blue-gray"
+              color="white"
               className="mr-auto font-normal text-white"
             >
               Cursos
@@ -299,7 +304,7 @@ export default function SidebarWithContentSeparator() {
             <PowerIcon className="h-5 w-5 text-white" />
           </ListItemPrefix>
           <Typography
-            color="blue-gray"
+            color="white"
             className="mr-auto font-normal text-white"
           >
             Log Out

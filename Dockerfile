@@ -6,7 +6,6 @@ COPY package.json ./
 
 RUN yarn install
 
-ENV PATH /app/node_modules/.bin:$PATH
 
 COPY . .
 
@@ -15,7 +14,7 @@ RUN npm run build
 FROM nginx:1.25.4-alpine3.18
 
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/dist /var/www/html/
+COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 3000
 

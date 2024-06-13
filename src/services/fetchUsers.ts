@@ -9,7 +9,7 @@ const fetchUser = async ({ queryKey }) => {
       return response.data;
     })
     .catch(function (error) {
-      throw new Error(`user fetch not ok`);
+      throw new Error(`user fetch not ok`+ error);
       console.error(error);
     });
 
