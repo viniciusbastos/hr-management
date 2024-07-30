@@ -27,12 +27,12 @@ const VacationCheck = () => {
   const postData = () => {
     api
       .get(`/user/search/${mat}`, config)
-      .then(function (response) {
+      .then((response) => {
         setUser(response.data.user[0]);
         console.log(response);
         console.log(response.data.user[0]);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   };

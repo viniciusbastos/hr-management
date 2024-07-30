@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import React, { ReactComponentElement } from "react";
+import type React from "react";
+import { ReactComponentElement } from "react";
 
 export default function Icon(props: {
   id: string;

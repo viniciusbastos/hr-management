@@ -4,7 +4,7 @@ import { format, compareAsc, parseISO } from "date-fns";
 import ButtonBack from "../../components/buttonBack";
 import fetchCourseId from "../../services/fetchCourseId";
 import Loading from "../../components/loading";
-import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
+import type { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
 
 const CourseDetails = () => {
   const navigate = useNavigate();

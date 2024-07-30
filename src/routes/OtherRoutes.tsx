@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "../views/dashboard";
 import { Details, Home } from "@mui/icons-material";

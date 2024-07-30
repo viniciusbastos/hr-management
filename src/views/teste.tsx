@@ -20,7 +20,7 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import {
   Controller,
-  FieldValues,
+  type FieldValues,
   useController,
   useForm,
 } from "react-hook-form";

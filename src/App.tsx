@@ -1,5 +1,12 @@
 import { Suspense, useContext, lazy, useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link, useLocation, BrowserRouter } from "react-router-dom";
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Link,
+	useLocation,
+	BrowserRouter,
+} from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Home from "./views/home";
 import Details from "./views/details";
@@ -29,139 +36,135 @@ import "react-toastify/dist/ReactToastify.css";
 import Loading from "./components/loading";
 import AI from "./testeArtificialIteligence";
 import ProcessTable from "./components/processTable";
-
-
+import SickNotes from "./views/sicknote";
+import SicknoteForm from "./views/sicknote/newSicknote";
 
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: Infinity,
-      cacheTime: Infinity,
-    },
-  },
+	defaultOptions: {
+		queries: {
+			staleTime: Number.POSITIVE_INFINITY,
+			cacheTime: Number.POSITIVE_INFINITY,
+		},
+	},
 });
 function App() {
-  const Users = lazy(() => import("./components/tablematerial"));
-  const Dashboard = lazy(() => import("./views/dashboard"));
-  const Vacation = lazy(() => import("./views/vacation/index"));
-  const Courses = lazy(() => import("./views/courses/index"));
-  const [loading, setLoading] = useState<boolean>(true);
-//  const { pathname } = useLocation();
+	const Users = lazy(() => import("./components/tablematerial"));
+	const Dashboard = lazy(() => import("./views/dashboard"));
+	const Vacation = lazy(() => import("./views/vacation/index"));
+	const Courses = lazy(() => import("./views/courses/index"));
+	const [loading, setLoading] = useState<boolean>(true);
+	//  const { pathname } = useLocation();
 
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, [pathname]);
+	// useEffect(() => {
+	//   window.scrollTo(0, 0);
+	// }, [pathname]);
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 1000);
-  }, []);
-  
-  return loading ? (
-    <Loading />
-  ) : (
-    <>
-    <BrowserRouter>
-        <AuthProvider>
-          <QueryClientProvider client={queryClient}>
-            <Routes>
-              <Route path="/signin" element={<SignIn />}></Route>
-              <Route path="/" element={<ProtectedRoute />}>
-                  <Route path="/" element={<SidebarLayout />}>
-                  <Route path="users/details/:id" element={<Details />}></Route>
-                  <Route path="/home" element={<Home />}></Route>
-                  <Route path="/vacation/submit" element={<Teste />}></Route>
-                  <Route path="/ai" element={<AI />}></Route>
-                  {/* <Route path="users/" element={<Users />}></Route> */}
-                  <Route 
-                  path="/users" 
-                  element={
-                    <Suspense 
-                    fallback={ <Loading />
+	useEffect(() => {
+		setTimeout(() => setLoading(false), 1000);
+	}, []);
 
-                    }>
-                  <Users />
-                </Suspense>
-                  }>
+	return loading ? (
+		<Loading />
+	) : (
+		<>
+			<BrowserRouter>
+				<AuthProvider>
+					<QueryClientProvider client={queryClient}>
+						<Routes>
+							<Route path="/signin" element={<SignIn />} />
+							<Route path="/" element={<ProtectedRoute />}>
+								<Route path="/" element={<SidebarLayout />}>
+									<Route path="users/details/:id" element={<Details />} />
+									<Route path="/home" element={<Home />} />
+									<Route path="/vacation/submit" element={<Teste />} />
+									<Route path="/ai" element={<AI />} />
+									{/* <Route path="users/" element={<Users />}/> */}
+									<Route
+										path="/users"
+										element={
+											<Suspense fallback={<Loading />}>
+												<Users />
+											</Suspense>
+										}
+									/>
+									<Route
+										path="/dashboard"
+										element={
+											<Suspense fallback={<Loading />}>
+												<Dashboard />
+											</Suspense>
+										}
+									/>
+									<Route
+										path="/process"
+										element={
+											<Suspense fallback={<Loading />}>
+												<ProcessTable />
+											</Suspense>
+										}
+									/>
+									<Route path="/formUser" element={<FormUser />} />
+									<Route path="/vacation/:id" element={<VacationDetails />} />
+									<Route
+										path="/vacation"
+										element={
+											<Suspense fallback={<Loading />}>
+												<Vacation />
+											</Suspense>
+										}
+									/>
+									<Route
+										path="/sicknote"
+										element={
+											<Suspense fallback={<Loading />}>
+												<SickNotes />
+											</Suspense>
+										}
+									/>
+									<Route
+										path="/sicknoteform"
+										element={
+											<Suspense fallback={<Loading />}>
+												<SicknoteForm />
+											</Suspense>
+										}
+									/>
 
-                  </Route>
-                  <Route 
-                  path="/dashboard" 
-                  element={
-                    <Suspense 
-                    fallback={ <Loading />
+									<Route
+										path="/vacation/month/:month"
+										element={<VacationMonth />}
+									/>
+									<Route path="/courses" element={<Courses />} />
 
-                    }>
-                  <Dashboard />
-                </Suspense>
-                  }>
-                  </Route>
-                  <Route 
-                  path="/process" 
-                  element={
-                    <Suspense 
-                    fallback={ <Loading />
+									<Route
+										path="/vacation/vacationcheck"
+										element={<VacationCheck />}
+									/>
 
-                    }>
-                  <ProcessTable />
-                </Suspense>
-                  }></Route>
-                  <Route path="/formUser" element={<FormUser />}></Route> 
-                  <Route
-                    path="/vacation/:id"
-                    element={<VacationDetails />}
-                  ></Route>
-                  <Route 
-                  path="/vacation" 
-                  element={
-                    <Suspense 
-                    fallback={ <Loading />
-
-                    }>
-                  <Vacation />
-                </Suspense>
-                  }>
-
-                  </Route>
-                  <Route
-                    path="/vacation/month/:month"
-                    element={<VacationMonth />}
-                  ></Route>
-                  <Route path="/courses" element={<Courses />}></Route>
-
-                  <Route
-                    path="/vacation/vacationcheck"
-                    element={<VacationCheck />}
-                  ></Route>
-
-                  <Route path="/courses/:name" element={<CourseName />}></Route>
-                  <Route
-                    path="/courses/details/:id"
-                    element={<CourseDetails />}
-                  ></Route>
-                  <Route
-                    path="/sicknote/:id"
-                       element={<SicknoteDetails />}
-                  ></Route>
-                  <Route path="*" element={<NotFound />} />
-                  <Route path="/sicknote" element={<Sicknote />}></Route>
-                  <Route
-                    path="/dashboadtakecareguardians"
-                    element={<DashboardTakeCareGuardian />}
-                  ></Route>
-                  <Route path="/appointment" element={<Appointment />}></Route>
-                  <Route
-                    path="/takingcareguardian/list"
-                    element={<TakingCareGuardianList />}
-                  ></Route>
-                  </Route>
-              </Route>
-
-            </Routes>
-          </QueryClientProvider>
-        </AuthProvider>
-        </BrowserRouter>
-    </>
-  )
+									<Route path="/courses/:name" element={<CourseName />} />
+									<Route
+										path="/courses/details/:id"
+										element={<CourseDetails />}
+									/>
+									<Route path="/sicknote/:id" element={<SicknoteDetails />} />
+									<Route path="*" element={<NotFound />} />
+									<Route
+										path="/dashboadtakecareguardians"
+										element={<DashboardTakeCareGuardian />}
+									/>
+									<Route path="/appointment" element={<Appointment />} />
+									<Route
+										path="/takingcareguardian/list"
+										element={<TakingCareGuardianList />}
+									/>
+								</Route>
+							</Route>
+						</Routes>
+					</QueryClientProvider>
+				</AuthProvider>
+			</BrowserRouter>
+		</>
+	);
 }
 
 export default App;

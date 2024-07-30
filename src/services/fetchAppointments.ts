@@ -7,7 +7,7 @@ const fechAppointments = async ({ queryKey }) => {
     .then((response) => {
       return response.data;
     })
-    .catch(function (error) {
+    .catch((error) => {
       throw new Error(`details/${id} fetch not ok`);
       console.error(error);
     });

@@ -1,8 +1,8 @@
 import {
-  JSXElementConstructor,
-  ReactElement,
-  ReactNode,
-  ReactPortal,
+  type JSXElementConstructor,
+  type ReactElement,
+  type ReactNode,
+  type ReactPortal,
   useEffect,
   useState,
 } from "react";

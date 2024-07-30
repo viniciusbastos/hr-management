@@ -7,7 +7,7 @@ const fetchCourse = async ({ queryKey }) => {
     .then((response) => {
       return response.data;
     })
-    .catch(function (error) {
+    .catch((error) => {
       throw new Error(`courses/tipo/${name} fetch not ok`);
       console.error(error);
     });

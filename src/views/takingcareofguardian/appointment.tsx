@@ -18,7 +18,7 @@ import {
   Typography,
 } from '@material-tailwind/react'
 import { ToastContainer, toast } from 'react-toastify'
-import { useForm, useController, FieldValues } from 'react-hook-form'
+import { useForm, useController, type FieldValues } from 'react-hook-form'
 import fetchUsersSelect from '../../services/fetchUsersSelect'
 
 const Appointment = () => {

@@ -3,7 +3,7 @@ import '../main.css'
 import { useNavigate } from 'react-router-dom'
 import { api } from '../services/api'
 import { ToastContainer, toast } from 'react-toastify'
-import { useForm, useController, FieldValues } from 'react-hook-form'
+import { useForm, useController, type FieldValues } from 'react-hook-form'
 import {
   Card,
   CardHeader,

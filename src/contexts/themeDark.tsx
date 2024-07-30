@@ -1,5 +1,6 @@
 // src/context/ThemeContext.tsx
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import type React from 'react';
+import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
 
 type Theme = 'light' | 'dark';
 

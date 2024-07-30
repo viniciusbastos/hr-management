@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 
 
 interface Process {
@@ -135,6 +136,13 @@ const ProcessTable: React.FC = () => {
               <td className="py-2 px-4 border">Verificação das Publicações de BGO, registrar as informações pertinentes em BIO e preencher lista de controle de BGO lidos</td>
               <td className="py-2 px-4 border">Diário</td>
               <td className="py-2 px-4 border">ST PM RR JULIO CESAR - Func. Civil Janne - SGT PM ELISANGELA E SD PM MANOEL</td>
+              <td className="py-2 px-4 border">SSO</td>
+            </tr>
+            <tr key="5">
+              <td className="py-2 px-4 border">Auxilio Natalidade/Fardamento</td>
+              <td className="py-2 px-4 border"></td>
+              <td className="py-2 px-4 border">Por demanda</td>
+              <td className="py-2 px-4 border">Func. Civil Janne - SGT PM ELISANGELA E SD PM MANOEL</td>
               <td className="py-2 px-4 border">SSO</td>
             </tr>
         </tbody>

@@ -1,4 +1,5 @@
-import React, { useState, ReactNode } from 'react';
+import type React from 'react';
+import { useState, type ReactNode } from 'react'
 import Header from '../components/Sidebar/index';
 import Sidebar from '../components/Header/index';
 
