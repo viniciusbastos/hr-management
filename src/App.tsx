@@ -30,7 +30,7 @@ import VacationCheck from "./views/vacationcheck";
 //import { MembersTable } from "./components/tablematerial";
 import NotFound from "./views/Notfound";
 import DashboardTakeCareGuardian from "./views/takingcareofguardian/dashboardTakeCareGuardian";
-import Appointment from "./views/takingcareofguardian/appointment";
+import Appointment from "./views/vacation/appointment_vacation";
 import TakingCareGuardianList from "./views/takingcareofguardian/list";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "./components/loading";
