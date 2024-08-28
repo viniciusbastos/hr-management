@@ -8,12 +8,14 @@ import Loading from "../components/loading";
 
 const Dashboard = () => {
   const results = useQuery(["vacation"], fetchUsers);
+
   if (results.isLoading) {
+    const token = localStorage.getItem("token");
+
     return (
       <Loading />
     );
   }
-
   return (
     <>
       <div className="bg-gray-50 dark:bg-slate-600   h-full ">
