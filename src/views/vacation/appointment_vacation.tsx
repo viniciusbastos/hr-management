@@ -70,7 +70,7 @@ const AppointmentVacation = () => {
         className="bg-caqui-700 p-2 grid h-12 mb-4  place-items-center"
       >
         <Typography variant="h5" color="white" className=" mb-2">
-          Atendimento Cuidando do Cuidador
+          Plano de Férias 2025/26
         </Typography>
       </CardHeader>
       <ToastContainer autoClose={3000} hideProgressBar />
