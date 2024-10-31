@@ -1,7 +1,12 @@
 import { api } from "./api";
 import { token } from "./token";
 
+<<<<<<< HEAD
 const fetchUser = async ({ queryKey }) => {
+=======
+const fetchUser = async ({ queryKey }: { queryKey: [string, number] }) => {
+  // Your code here
+>>>>>>> 94c74ac (new macbook test)
   const id = queryKey[1];
   const apiRes = api
     .get(`/user`)
