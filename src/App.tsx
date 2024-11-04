@@ -30,7 +30,7 @@ import VacationCheck from "./views/vacationcheck";
 //import { MembersTable } from "./components/tablematerial";
 import NotFound from "./views/Notfound";
 import DashboardTakeCareGuardian from "./views/takingcareofguardian/dashboardTakeCareGuardian";
-import Appointment from "./views/vacation/appointment_vacation";
+import Appointment from "./views/vacation/appointmentVacation";
 import TakingCareGuardianList from "./views/takingcareofguardian/list";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "./components/loading";
@@ -38,6 +38,7 @@ import AI from "./testeArtificialIteligence";
 import ProcessTable from "./components/processTable";
 import SickNotes from "./views/sicknote";
 import SicknoteForm from "./views/sicknote/newSicknote";
+import AppointmentVacation from "./views/vacation/appointmentVacation";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -72,6 +73,7 @@ function App() {
 					<QueryClientProvider client={queryClient}>
 						<Routes>
 							<Route path="/signin" element={<SignIn />} />
+							<Route path="/programacaoferias" element={<AppointmentVacation />} />
 							<Route path="/" element={<ProtectedRoute />}>
 								<Route path="/" element={<SidebarLayout />}>
 									<Route path="users/details/:id" element={<Details />} />

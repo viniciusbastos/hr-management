@@ -7,13 +7,9 @@ import {
 } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-import { jwtDecode } from "jwt-decode";
-=======
 import { jwtDecode, JwtPayload } from "jwt-decode";
 
 
->>>>>>> 94c74ac (new macbook test)
 
 type SignInCredentials = {
   email: string;
@@ -26,9 +22,6 @@ type User = {
   posto: string;
   role: string;
 };
-<<<<<<< HEAD
-
-=======
 interface CustomJwtPayload {
   id: string;
   useremail: string;
@@ -36,7 +29,6 @@ interface CustomJwtPayload {
   name: string;
   posto: string;
 }
->>>>>>> 94c74ac (new macbook test)
 type AuthContextData = {
   signIn(credetials: SignInCredentials): Promise<void>;
   isAutenticated: boolean;
@@ -65,18 +57,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     const token = localStorage?.getItem("token");
     if (token) {
-<<<<<<< HEAD
-      const {id, useremail, role, name, posto } = jwtDecode(token);
-
-      setUser({ 
-        id: id,
-        useremail: useremail,
-        role: role,
-        name: name,
-        posto: posto,   
-       });
-      setIsauthenticated(true)
-=======
       const decodedToken: CustomJwtPayload = jwtDecode(token); // Use custom interface here
       setUser({ 
         id: decodedToken.id,
@@ -86,7 +66,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
         posto: decodedToken.posto,   
       });
       setIsauthenticated(true);
->>>>>>> 94c74ac (new macbook test)
       navigate(location ?? "/dashboard");
     } else {
       navigate("/signin");
