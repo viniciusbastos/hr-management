@@ -25,11 +25,7 @@ const Dashboard = () => {
               <CardDashboard
                 link="/home"
                 title={"Efetivo"}
-<<<<<<< HEAD
-                quant={results.data.length}
-=======
                 quant={154}
->>>>>>> 94c74ac (new macbook test)
                 info={"Policiais Militares"}
               />
             </div>
