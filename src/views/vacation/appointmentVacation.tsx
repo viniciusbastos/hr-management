@@ -137,4 +137,4 @@ const AppointmentVacation = () => {
   )
 }
 
-export default Appointment;
+export default AppointmentVacation;
