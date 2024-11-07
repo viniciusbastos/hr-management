@@ -80,7 +80,7 @@ const Courses = () => {
             </ListItemSuffix>
           </ListItem>
         </Link>
-        <Link to={"/courses/CQT"}>
+        <Link to={"/courses/CGQ"}>
           <ListItem>
             Curso de Gestão da Qualidade
             <ListItemSuffix>
