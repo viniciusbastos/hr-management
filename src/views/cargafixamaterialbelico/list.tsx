@@ -79,27 +79,15 @@ const WeaponsList = () => {
           </TableHead>
 
           <TableBody className="text-sm text-gray-600">
-          {weapons.map((weapon: Weapon) => (
+            {weapons.map((weapon: Weapon) => (
               <tr key={weapon.mat} className="even:bg-blue-gray-100/50">
-                <TableCell className="whitespace-nowrap py-3 px-4 border border-slate-200">
-                  {weapon.mat}
-                </TableCell>
-                <TableCell className="whitespace-nowrap py-3 px-4 border border-slate-200">
-                  {weapon.posto}
-                </TableCell>
-                <TableCell className="whitespace-nowrap py-3 px-4 border border-slate-200">
-                  {weapon.name}
-                </TableCell>
-                <TableCell className="whitespace-nowrap py-3 px-4 border border-slate-200">
-                  {weapon.model}
-                </TableCell>
-                <TableCell className="whitespace-nowrap py-3 px-4 border border-slate-200">
-                  {weapon.serialNumber}
-                </TableCell>
-                <TableCell className="whitespace-nowrap py-3 px-4 border border-slate-200">
-                  {format(parseISO(weapon.InitialDate), 'dd/MM/yyyy')}
-                </TableCell>
-              </tr>             
+                <TableCell>{weapon.mat}</TableCell>
+                <TableCell>{weapon.posto}</TableCell>
+                <TableCell>{weapon.name}</TableCell>
+                <TableCell>{weapon.model}</TableCell>
+                <TableCell>{weapon.serialNumber}</TableCell>
+                <TableCell>{weapon.InitialDate ? format(parseISO(weapon.InitialDate), 'dd/MM/yyyy') : ''}</TableCell>
+              </tr>
             ))}
           </TableBody>
           <TableFooter></TableFooter>
