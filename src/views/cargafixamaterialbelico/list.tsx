@@ -37,9 +37,9 @@ const WeaponsList = () => {
   }
   
   
-  console.log(results.data)
+  console.log(results.data.weapons)
   // Set weapons to an empty array if results.data is not an array
-  const weapons = Array.isArray(results.data) ? results.data : [];
+  const weapons = Array.isArray(results.data.weapons) ? results.data.weapons : [];
   console.log(weapons)
   return (
     <Card className="m-10 p-2  rounded-2xl shadow-xl bg-gray-50">
