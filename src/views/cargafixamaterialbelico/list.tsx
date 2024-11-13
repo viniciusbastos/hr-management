@@ -79,25 +79,25 @@ const WeaponsList = () => {
           </TableHead>
 
           <TableBody className="text-sm text-gray-600">
-            {weapons.map((weapons: Weapons) => (
+            {weapons.map((weapon: Weapons) => (
               <tr  className="even:bg-blue-gray-100/50">
                 <TableCell className="whitespace-nowrap py-3 px-4 border border-slate-200">
-                  {weapons.mat}
+                  {weapon.mat}
                 </TableCell>
                 <TableCell className="whitespace-nowrap py-3 px-4 border border-slate-200">
-                  {weapons.posto}
+                  {weapon.posto}
                 </TableCell>
                 <TableCell className="whitespace-nowrap py-3 px-4 border border-slate-200">
-                  {weapons.name}
+                  {weapon.name}
                 </TableCell>
                 <TableCell className="whitespace-nowrap py-3 px-4 border border-slate-200">
-                  {weapons.model}
+                  {weapon.model}
                 </TableCell>
                 <TableCell className="whitespace-nowrap py-3 px-4 border border-slate-200">
-                  {weapons.serialNumber}
+                  {weapon.serialNumber}
                 </TableCell>
                 <TableCell className="whitespace-nowrap py-3 px-4 border border-slate-200">
-                  {format(parseISO(weapons.InitialDate), 'dd/MM/yyyy')}
+                  {format(parseISO(weapon.InitialDate), 'dd/MM/yyyy')}
                 </TableCell>
               </tr>
             ))}
