@@ -69,13 +69,13 @@ const WeaponsList = () => {
                 Nome
               </th>
               <th className="py-3 px-8 text-left border border-slate-200">
-                Serviço
+                Tipo
               </th>
               <th className="py-3 px-8 text-left border border-slate-200">
-                Especialidade
+                Número de Serie
               </th>
               <th className="py-3 px-8 text-left border border-slate-200">
-                Data
+                Data da Carga
               </th>
             </tr>
           </TableHead>
