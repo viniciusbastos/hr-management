@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { addDays, format, parseISO } from "date-fns";
+import { addDays, format, isAfter, parseISO } from "date-fns";
 import ButtonBack from "../../components/buttonBack";
 import fetchWeapons from "../../services/fetchWeapons";
 import {
@@ -80,6 +80,9 @@ const WeaponsList = () => {
               <th className="py-3 px-8 text-left border border-slate-200">
                 Data do Vencimento da Carga
               </th>
+              <th className="py-3 px-8 text-left border border-slate-200">
+                Situação
+              </th>
             </tr>
           </TableHead>
 
@@ -94,6 +97,9 @@ const WeaponsList = () => {
                 <TableCell>{weapon.InitialDate ? format(parseISO(weapon.InitialDate), 'dd/MM/yyyy') : ''}</TableCell>
                 <TableCell>{format(addDays(parseISO(weapon.InitialDate), 365), 'dd/MM/yyyy')}
                 </TableCell>
+                <TableCell>
+                {isAfter(addDays(parseISO(weapon.InitialDate), 365), new Date()) ? 'Valid' : 'Not Valid'}
+              </TableCell>
               </tr>
             ))}
           </TableBody>
