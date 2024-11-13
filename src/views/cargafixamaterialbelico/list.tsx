@@ -98,17 +98,20 @@ const WeaponsList = () => {
                 <TableCell>{format(addDays(parseISO(weapon.InitialDate), 365), 'dd/MM/yyyy')}
                 </TableCell>
                 <TableCell>
-                {isAfter(addDays(parseISO(weapon.InitialDate), 365), new Date()) ? <span
+                {isAfter(addDays(parseISO(weapon.InitialDate), 365), new Date()) ? 
+                <span
                     className="px-2 inline-flex text-xs leading-5
-                          font-semibold rounded-full bg-green-100 text-green-800"
+                          font-semibold rounded-full bg-green-300 text-green-800"
                   >
                     Valid
-                  </span> : <span
+                  </span> : 
+                  <span
                     className="px-2 inline-flex text-xs leading-5
-                          font-semibold rounded-full bg-red-100 text-red-800"
+                          font-semibold rounded-full bg-red-400 text-red-800"
                   >
                     Not Valid
-                  </span>}
+                  </span>
+                  }
               </TableCell>
               </tr>
             ))}
