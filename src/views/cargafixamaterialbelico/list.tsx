@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { format, parseISO } from "date-fns";
 import ButtonBack from "../../components/buttonBack";
-import fechAppointments from "../../services/fetchAppointments";
+import fetchWeapons from "../../services/fetchWeapons";
 import {
   Card,
   CardBody,
@@ -18,24 +18,25 @@ import {
 } from '@mui/material'
 import Loading from "../../components/loading";
 
-const TakingCareGuardianList = () => {
-  interface Appointment {
+const WeaponsList = () => {
+  interface Weapons {
     id: number
     name: string
-    Date: string
-    progress: boolean
+    InitialDate: string
+    valid: boolean
     posto: string
     mat: string
-    Service: string
+    serialNumber: string
+    model: string
   }
   const navigate = useNavigate();
-  const results = useQuery(["appointments"], fechAppointments);
+  const results = useQuery(["weapons"], fetchWeapons);
   if (results.isLoading) {
     return (
       <Loading />
     );
   }
-  const appointments = results.data;
+  const weapons = results.data;
   
 
   return (
@@ -48,7 +49,7 @@ const TakingCareGuardianList = () => {
         className="bg-caqui-700 p-2 grid h-12 mb-4  place-items-center"
       >
         <Typography variant="h5" color="white" className=" mb-2">
-          Atendimentos Cuidando do Cuidador
+          Policiais com Carga Fixa
         </Typography>
       </CardHeader>
       <CardBody className="overflow-scroll px-0">
@@ -78,25 +79,25 @@ const TakingCareGuardianList = () => {
           </TableHead>
 
           <TableBody className="text-sm text-gray-600">
-            {appointments.map((appointment: Appointment) => (
-              <tr key={appointment.id} className="even:bg-blue-gray-100/50">
+            {weapons.map((weapons: Weapons) => (
+              <tr  className="even:bg-blue-gray-100/50">
                 <TableCell className="whitespace-nowrap py-3 px-4 border border-slate-200">
-                  {appointment.mat}
+                  {weapons.mat}
                 </TableCell>
                 <TableCell className="whitespace-nowrap py-3 px-4 border border-slate-200">
-                  {appointment.posto}
+                  {weapons.posto}
                 </TableCell>
                 <TableCell className="whitespace-nowrap py-3 px-4 border border-slate-200">
-                  {appointment.name}
+                  {weapons.name}
                 </TableCell>
                 <TableCell className="whitespace-nowrap py-3 px-4 border border-slate-200">
-                  {appointment.Service}
+                  {weapons.model}
                 </TableCell>
                 <TableCell className="whitespace-nowrap py-3 px-4 border border-slate-200">
-                  {appointment.Specialities}
+                  {weapons.serialNumber}
                 </TableCell>
                 <TableCell className="whitespace-nowrap py-3 px-4 border border-slate-200">
-                  {format(parseISO(appointment.Date), 'dd/MM/yyyy')}
+                  {format(parseISO(weapons.InitialDate), 'dd/MM/yyyy')}
                 </TableCell>
               </tr>
             ))}
@@ -112,4 +113,4 @@ const TakingCareGuardianList = () => {
   )
 };
 
-export default TakingCareGuardianList;
+export default WeaponsList;

@@ -39,6 +39,7 @@ import ProcessTable from "./components/processTable";
 import SickNotes from "./views/sicknote";
 import SicknoteForm from "./views/sicknote/newSicknote";
 import AppointmentVacation from "./views/vacation/appointmentVacation";
+import WeaponsList from "./views/cargafixamaterialbelico/list";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -123,6 +124,15 @@ function App() {
 											</Suspense>
 										}
 									/>
+									<Route
+										path="/weapons"
+										element={
+											<Suspense fallback={<Loading />}>
+												<WeaponsList />
+											</Suspense>
+										}
+									/>
+									
 									<Route
 										path="/sicknoteform"
 										element={
