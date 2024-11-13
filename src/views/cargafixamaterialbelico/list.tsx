@@ -37,7 +37,7 @@ const WeaponsList = () => {
   }
   
   
-
+  console.log(results.data)
   // Set weapons to an empty array if results.data is not an array
   const weapons = Array.isArray(results.data) ? results.data : [];
   console.log(weapons)
