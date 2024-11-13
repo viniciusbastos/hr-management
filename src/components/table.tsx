@@ -65,6 +65,12 @@ function Table() {
               >
                 Matrícula
               </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-black  dark:text-white uppercase tracking-wider"
+              >
+                id
+              </th>
               {/* <th
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider"
@@ -120,6 +126,9 @@ function Table() {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-white">
                   {user.mat}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-white">
+                  {user.id}
                 </td>
                 {/* <td>
                   <button
