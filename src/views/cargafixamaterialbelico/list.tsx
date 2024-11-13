@@ -37,6 +37,7 @@ const WeaponsList = () => {
     );
   }
   const weapons = results.data;
+  console.log(weapons)
   
 
   return (
