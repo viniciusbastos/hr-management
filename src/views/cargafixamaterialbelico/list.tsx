@@ -19,8 +19,7 @@ import {
 import Loading from "../../components/loading";
 
 const WeaponsList = () => {
-  interface Weapons {
-    id: number
+  interface Weapon {
     name: string
     InitialDate: string
     valid: boolean
@@ -80,7 +79,7 @@ const WeaponsList = () => {
           </TableHead>
 
           <TableBody className="text-sm text-gray-600">
-            {weapons.map((weapon: Weapons) => (
+            {weapons.map((weapon: Weapon) => (
               <tr  className="even:bg-blue-gray-100/50">
                 <TableCell className="whitespace-nowrap py-3 px-4 border border-slate-200">
                   {weapon.mat}
