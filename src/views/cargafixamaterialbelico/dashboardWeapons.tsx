@@ -6,7 +6,7 @@ import BarChartTakeCareGuardianCategorie from "../../components/barchartCategori
 import fechAppointments from "../../services/fetchAppointments";
 import Loading from "../../components/loading";
 
-const DashboardTakeCareGuardian = () => {
+const DashboardWeapons = () => {
   const appointments = useQuery(["appointments"], fechAppointments);
 
   const results = useQuery(["vacation"], fetchUsers);
@@ -57,4 +57,4 @@ const DashboardTakeCareGuardian = () => {
   )
 };
 
-export default DashboardTakeCareGuardian;
+export default DashboardWeapons;

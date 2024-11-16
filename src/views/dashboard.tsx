@@ -5,12 +5,16 @@ import TableQuantityPosto from "../components/tableQuantityPosto";
 import fetchUsers from "../services/fetchUsers";
 import BarChart from "../components/barchart";
 import Loading from "../components/loading";
+import { useEffect, useState } from "react";
 
 const Dashboard = () => {
   const results = useQuery(["vacation"], fetchUsers);
 
   if (results.isLoading) {
-    const token = localStorage.getItem("token");
+
+      const token = localStorage.getItem("token");
+    
+    
 
     return (
       <Loading />

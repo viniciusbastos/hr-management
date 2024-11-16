@@ -8,6 +8,7 @@ import {
 	ListItemPrefix,
 	ListItemSuffix,
 	Chip,
+	
 	Accordion,
 	AccordionHeader,
 	AccordionBody,
@@ -72,7 +73,6 @@ export default function SidebarWithContentSeparator() {
 					<div className="p-2" />
 					<ToggleTheme />
 
-					<Typography variant="h5" color="blue-gray"></Typography>
 				</div>
 				<hr className="my-2 border-caqui-700" />
 				<List>
@@ -260,7 +260,79 @@ export default function SidebarWithContentSeparator() {
 							</List>
 						</AccordionBody>
 					</Accordion>
+					<Accordion
+						open={open === 4}
+						icon={
+							<ChevronDownIcon
+								stroke="#FFFFFF"
+								strokeWidth={2.5}
+								className={`mx-auto h-4 w-4 transition-transform ${
+									open === 2 ? "rotate-180" : ""
+								}`}
+							/>
+						}
+					>
+						<ListItem className="p-0" selected={open === 4}>
+							<AccordionHeader
+								onClick={() => handleOpen(4)}
+								className="border-b-0 p-3"
+							>
+								<ListItemPrefix>
+									<svg
+										fill="#FFFFFF"
+										xmlns="http://www.w3.org/2000/svg"
+										height="24"
+										viewBox="0 -960 960 960"
+										width="24"
+									>
+										<path d="M160-80q-33 0-56.5-23.5T80-160v-480q0-33 23.5-56.5T160-720h160v-80q0-33 23.5-56.5T400-880h160q33 0 56.5 23.5T640-800v80h160q33 0 56.5 23.5T880-640v480q0 33-23.5 56.5T800-80H160Zm0-80h640v-480H160v480Zm240-560h160v-80H400v80ZM160-160v-480 480Zm280-200v120h80v-120h120v-80H520v-120h-80v120H320v80h120Z" />
+									</svg>{" "}
+								</ListItemPrefix>
+								<Typography
+									color="white"
+									className="mr-auto font-normal text-white"
+								>
+									Gestão de Material Bélico
+								</Typography>
+							</AccordionHeader>
+						</ListItem>
 
+						<AccordionBody className="py-1">
+							<List className="p-0 text-white">
+								<Link to="/weapons">
+									<ListItem>
+										<ListItemPrefix>
+											<ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+										</ListItemPrefix>
+										Carga Fixa
+									</ListItem>
+								</Link>
+
+								<Link to="/takingcareguardian/list">
+									<ListItem className="text-white">
+										<ListItemPrefix>
+											<ChevronRightIcon
+												strokeWidth={3}
+												className="h-3 w-5 text-white"
+											/>
+										</ListItemPrefix>
+										Policiais Atendidos
+									</ListItem>
+								</Link>
+								<Link to="/appointment">
+									<ListItem className="text-white">
+										<ListItemPrefix>
+											<ChevronRightIcon
+												strokeWidth={3}
+												className="h-3 w-5 text-white"
+											/>
+										</ListItemPrefix>
+										Cadastrar Atendimentos
+									</ListItem>
+								</Link>
+							</List>
+						</AccordionBody>
+					</Accordion>
 					<hr className="my-2 border-caqui-700" />
 					<Link to="/users">
 						<ListItem>

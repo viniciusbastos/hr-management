@@ -31,7 +31,7 @@ interface CustomJwtPayload {
 }
 type AuthContextData = {
   signIn(credetials: SignInCredentials): Promise<void>;
-  isAutenticated: boolean;
+  isAuthenticated: boolean;
   Logout(): void;
 };
 
@@ -45,7 +45,7 @@ export const AuthContext = createContext<AuthContextData>(
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>();
-  const [isAutenticated, setIsauthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   function Logout() {
@@ -65,7 +65,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         name: decodedToken.name,
         posto: decodedToken.posto,   
       });
-      setIsauthenticated(true);
+      setIsAuthenticated(true);
       navigate(location ?? "/dashboard");
     } else {
       navigate("/signin");
@@ -91,7 +91,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         name: name,
         posto: posto,   
        });
-       setIsauthenticated(true)
+       setIsAuthenticated(true)
       navigate("/dashboard");
     } catch (err) {
       console.log(err);
@@ -99,7 +99,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   return (
-    <AuthContext.Provider value={{ isAutenticated, Logout, signIn }}>
+    <AuthContext.Provider value={{ isAuthenticated, Logout, signIn }}>
       {children}
     </AuthContext.Provider>
   );
