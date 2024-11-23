@@ -20,12 +20,12 @@ import {
   Input,
   Checkbox,
 } from "@material-tailwind/react";
-import React from "react";
+import React, { useState } from "react";
 import FormUser from "../formUser";
 import Teste from "../teste";
 
 const Vacation = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
   const navigate = useNavigate();
   

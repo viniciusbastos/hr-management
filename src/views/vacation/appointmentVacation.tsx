@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import config from "../../utils/config";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import fetchUsers from "../../services/fetchUsers";
 import fetchHealthProfessional from "../../services/fetchHealthProfessional";
 import Select from 'react-select'
@@ -22,6 +22,7 @@ import { useForm, useController, type FieldValues } from 'react-hook-form'
 import fetchUsersSelect from '../../services/fetchUsersSelect'
 
 const AppointmentVacation = () => {
+  const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
@@ -49,6 +50,7 @@ const AppointmentVacation = () => {
         isLoading: false,
         autoClose: 5000,
       })
+      queryClient.invalidateQueries(["vacation"]); // Invalidate the query
       reset()
     } catch (error) {
       console.error(error)

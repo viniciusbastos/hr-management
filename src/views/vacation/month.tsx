@@ -10,7 +10,11 @@ import Loading from "../../components/loading";
 
 const VacationMonth = () => {
   const { month } = useParams();
-  const results = useQuery(["vacation", month], fetchVacationMonth);
+  const results = useQuery(["vacation", month], fetchVacationMonth, {
+    onSuccess: (data) => {
+      console.log("Data refetched:", data);
+    },
+  });
   if (results.isLoading) {
     return (
       <Loading />

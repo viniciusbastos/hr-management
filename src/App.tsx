@@ -40,6 +40,7 @@ import SickNotes from "./views/sicknote";
 import SicknoteForm from "./views/sicknote/newSicknote";
 import AppointmentVacation from "./views/vacation/appointmentVacation";
 import WeaponsList from "./views/cargafixamaterialbelico/list";
+import TermoResponsabilidade from "./views/cargafixamaterialbelico/termoderesponsabilidade";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -146,6 +147,11 @@ function App() {
 										path="/vacation/month/:month"
 										element={<VacationMonth />}
 									/>
+									<Route
+										path="/weapons/termo/:id"
+										element={<TermoResponsabilidade />}
+									/>
+									
 									<Route path="/courses" element={<Courses />} />
 
 									<Route

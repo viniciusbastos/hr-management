@@ -42,7 +42,7 @@ const SicknoteForm: React.FC  = () => {
     
     const id = toast.loading('Please wait...')
     try {
-      const response = await api.post(`/appointment/`, data)
+      const response = await api.post(`/sicknote/`, data)
       toast.update(id, {
         render: 'All is good',
         type: 'success',
@@ -113,10 +113,19 @@ const SicknoteForm: React.FC  = () => {
           <div className="mb-6 mt-3">
             <Input
               crossOrigin
-              label="Cid"
+              label="Nome do Médico/Dentista"
               className="mb-6"
               type="text"
-              {...register('Cid', { required: true })}
+              {...register('DoctorName', { required: true })}
+            />
+          </div>
+          <div className="mb-6 mt-3">
+            <Input
+              crossOrigin
+              label="CRM/CRO"
+              className="mb-6"
+              type="text"
+              {...register('crm', { required: true })}
             />
           </div>
           <input  hidden/>
@@ -129,17 +138,8 @@ const SicknoteForm: React.FC  = () => {
               {...register('InitialDate', { required: true })}
             />
           </div>
+          
           <input  hidden/>
-
-          <div className="mb-6 mt-3">
-            <label>Data do Término</label>
-            <Input
-              crossOrigin
-              className="block"
-              type="datetime-local"
-              {...register('FinalDate', { required: true })}
-            />
-          </div>
 
           <div className="mt-3 mb-6 relative bottom-0 right-0 ">
             <Button disabled={!isValid} type="submit" color="green">
