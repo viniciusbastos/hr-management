@@ -15,6 +15,7 @@ const VacationMonth = () => {
       console.log("Data refetched:", data);
     },
   });
+  console.log("Results:", results);
   if (results.isLoading) {
     return (
       <Loading />
@@ -34,7 +35,7 @@ const VacationMonth = () => {
       className="bg-caqui-700 dark:bg-gray-600 p-2 grid h-12 mb-4  place-items-center"
     >
       <Typography variant="h5" color="white" className=" mb-2 dark:text-gray-300">
-      Férias do mês {month}/{results.data.vacation[0].year}
+      Férias do mês {month}/{}
       </Typography>
     </CardHeader>
     <CardBody className="p-6">

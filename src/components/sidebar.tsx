@@ -319,7 +319,7 @@ export default function SidebarWithContentSeparator() {
 									</ListItem>
 								</Link>
 
-								<Link to="/takingcareguardian/list">
+								<Link to="/weaponscontrol">
 									<ListItem className="text-white">
 										<ListItemPrefix>
 											<ChevronRightIcon
@@ -327,7 +327,7 @@ export default function SidebarWithContentSeparator() {
 												className="h-3 w-5 text-white"
 											/>
 										</ListItemPrefix>
-										Policiais Atendidos
+										Controle de Armas
 									</ListItem>
 								</Link>
 								<Link to="/appointment">

@@ -1,5 +1,4 @@
 import { api } from "./api";
-import { token } from "./token";
 
 const fetchUser = async ({ queryKey }: { queryKey: [string, number] }) => {
   // Your code here
