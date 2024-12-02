@@ -41,17 +41,13 @@ const WeaponsList = () => {
   const [deleteId, setDeleteId] = useState(null);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const {data: weapons, isLoading} = useQuery(["weapons"], fetchWeapons,  {
+  const {data: weapons, isLoading, isError} = useQuery(["weapons"], fetchWeapons,  {
     onSuccess: (data) => {
       // Handle the updated data if needed
       console.log("Data refetched:", weapons);
     },
   });
-  if (isLoading) {
-    return (
-      <Loading />
-    );
-  }
+ 
   const openDeleteModal = (id: any) => {
     console.log(id)
     setDeleteId(id);
@@ -75,7 +71,22 @@ const WeaponsList = () => {
   }; 
   
   // Set weapons to an empty array if results.data is not an array
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
 
+  if (isError) {
+    return (
+      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <strong className="font-bold">Error!</strong>
+        <span className="block sm:inline">Unable to fetch weapons data.</span>
+      </div>
+    );
+  }
   return (
     <Card className="m-10 p-2  rounded-2xl shadow-xl bg-gray-50">
       <CardHeader
@@ -147,7 +158,7 @@ const WeaponsList = () => {
                 <TableCell>{weapon.name}</TableCell>
                 <TableCell>{weapon.model}</TableCell>
                 <TableCell>{weapon.serialNumber}</TableCell>
-                <TableCell>{weapon.InitialDate ? format(parseISO(weapon.InitialDate), 'dd/MM/yyyy') : ''}</TableCell>
+                {/* <TableCell>{weapon.InitialDate ? format(parseISO(weapon.InitialDate), 'dd/MM/yyyy') : ''}</TableCell> */}
                 <TableCell>{format(addDays(parseISO(weapon.InitialDate), 365), 'dd/MM/yyyy')}
                 </TableCell>
                 <TableCell>

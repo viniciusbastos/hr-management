@@ -1,6 +1,6 @@
 import { api } from "./api";
 
-const fetchWeaponsInfo = async ({ queryKey }) => {
+const fetchWeaponsInfo = async () => {
   
   const apiRes = api
     .get(`/weapons/info`)

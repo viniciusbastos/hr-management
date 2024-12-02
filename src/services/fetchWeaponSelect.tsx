@@ -16,3 +16,5 @@ const fetchWeaponSelect = async ({ queryKey }) => {
 };
 
 export default fetchWeaponSelect;
+
+

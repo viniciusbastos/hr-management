@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
-import { api } from '../../services/api';
+import  { useState } from 'react';
 import fetchWeaponsInfo from '../../services/fetchWeaponInfo';
 
 interface Weapon {
@@ -28,22 +27,33 @@ interface Weapon {
   
 const WeaponControlDashboard = () => {
     const [selectedCategory, setSelectedCategory] = useState<'Revolver' | 'Pistola' | 'Carabina' | 'Metralhadora' | 'Fuzil' >('Revolver');
-
     // Tanstack Query to fetch weapons
   const { 
-    data: weapons = [], 
+    data: weapons, 
     isLoading, 
     isError 
-  } = useQuery<Weapon[]>({
-    queryKey: ['weapons'],
-    queryFn: fetchWeaponsInfo,
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    refetchInterval: 10 * 60 * 1000 // 10 minutes
-  });
+  } = useQuery<Weapon[]>(['weaponsinfo'],fetchWeaponsInfo  );
+  console.log(weapons, "esta funci")
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <strong className="font-bold">Error!</strong>
+        <span className="block sm:inline">Unable to fetch weapons data.</span>
+      </div>
+    );
+  }
      // Calculate category-specific statistics
   const calculateCategoryStatistics = (weaponData: Weapon[]): OverviewStatistics => {
     const categories: Array<'Revolver' | 'Pistola' | 'Carabina' | 'Metralhadora' | 'Fuzil'> = ['Revolver', 'Pistola', 'Carabina', 'Metralhadora', 'Fuzil'];
-
+    const totalWeaponsall = weaponData.length;
     return categories.reduce((acc, category) => {
       const categoryWeapons = weaponData.filter(w => w.type === category);
       const totalWeapons = categoryWeapons.length;
@@ -55,7 +65,8 @@ const WeaponControlDashboard = () => {
       acc[category] = {
         totalWeapons,
         operationalWeapons,
-        operationalPercentage
+        operationalPercentage,
+        
         
       };
 
@@ -65,26 +76,8 @@ const WeaponControlDashboard = () => {
 
   const overviewStats = calculateCategoryStatistics(weapons);
 
-  const filteredWeapons = weapons.filter(weapon => weapon.type === selectedCategory);
-
-      
-    
-      if (isLoading) {
-        return (
-          <div className="flex justify-center items-center min-h-screen">
-            <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
-          </div>
-        );
-      }
-    
-      if (isError) {
-        return (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-            <strong className="font-bold">Error!</strong>
-            <span className="block sm:inline">Unable to fetch weapons data.</span>
-          </div>
-        );
-      }
+  const filteredWeapons =   weapons.filter((weapon) => weapon.type === selectedCategory) ;    
+  console.log(filteredWeapons, "este es el filteredWeapons")
 
  
   
@@ -136,7 +129,7 @@ const WeaponControlDashboard = () => {
               {['Revolver', 'Pistola', 'Carabina', 'Metralhadora', 'Fuzil'].map((category) => (
                 <button
                   key={category}
-                  onClick={() => setSelectedCategory(category as any)}
+                  onClick={() => setSelectedCategory(category as 'Revolver' | 'Pistola' | 'Carabina' | 'Metralhadora' | 'Fuzil')}
                   className={`
                     px-4 py-2 rounded-lg transition-all uppercase text-sm font-semibold
                     ${selectedCategory === category 
@@ -192,14 +185,7 @@ const WeaponControlDashboard = () => {
               </table>
             </div>
     
-            {/* Low Inventory Warning */}
-            {overviewStats[selectedCategory].lowInventoryCount > 0 && (
-              <div className="mt-6 bg-yellow-50 border-l-4 border-yellow-400 p-4">
-                <p className="text-yellow-700 font-semibold">
-                  ⚠️ Warning: {overviewStats[selectedCategory].lowInventoryCount} {selectedCategory} weapon systems have low inventory. Immediate restocking recommended.
-                </p>
-              </div>
-            )}
+           
           </div>
         </div>
       );
