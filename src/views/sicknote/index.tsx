@@ -136,7 +136,7 @@ const SickNotes = () => {
   }
 
   return (
-    <div className="max-w-full mx-auto my-8 bg-white rounded-lg shadow-xl overflow-hidden">
+    <div className="max-w-full mx-auto my-8 dark:bg-slate-600  bg-white rounded-lg shadow-xl overflow-hidden">
     <div className="px-4 py-5 sm:px-6">
       <h2 className="text-2xl font-bold text-gray-900 text-center">Atestados Médicos</h2>
       <p className="mt-1 text-sm text-gray-600"></p>
@@ -158,9 +158,9 @@ const SickNotes = () => {
         <SicknoteForm />
       </Dialog>
   
-    <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-50">
+    <div className="overflow-x-auto dark:bg-slate-600 ">
+      <table className="min-w-full divide-y divide-gray-200 dark:bg-slate-600 ">
+        <thead className="bg-gray-50 dark:bg-slate-600 darrk:text-white">
           {table.getHeaderGroups().map(headerGroup => (
             <>
               <tr>

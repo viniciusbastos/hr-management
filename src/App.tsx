@@ -42,6 +42,7 @@ import AppointmentVacation from "./views/vacation/appointmentVacation";
 import WeaponsList from "./views/cargafixamaterialbelico/list";
 import TermoResponsabilidade from "./views/cargafixamaterialbelico/termoderesponsabilidade";
 import WeaponControlDashboard from "./views/cargafixamaterialbelico/weaponsStatus";
+import WeaponsDashboard from "./views/cargafixamaterialbelico/dashboard";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -151,6 +152,15 @@ function App() {
 											</Suspense>
 										}
 									/>
+									<Route
+										path="/weaponsdashboard"
+										element={
+											<Suspense fallback={<Loading />}>
+												<WeaponsDashboard />
+											</Suspense>
+										}
+									/>
+									
 									
 
 									<Route
