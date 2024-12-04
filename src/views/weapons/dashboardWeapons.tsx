@@ -1,23 +1,21 @@
-import { useQuery } from "@tanstack/react-query";
-import CardDashboard from "../../components/cardDashboard";
-import fetchUsers from "../../services/fetchUsers";
-import BarChartTakeCareGuardian from "../../components/barcharttakingcareofguardian";
-import BarChartTakeCareGuardianCategorie from "../../components/barchartCategories";
-import fechAppointments from "../../services/fetchAppointments";
-import Loading from "../../components/loading";
+import { useQuery } from '@tanstack/react-query'
+import CardDashboard from '../../components/cardDashboard'
+import fetchUsers from '../../services/fetchUsers'
+import BarChartTakeCareGuardian from '../../components/barcharttakingcareofguardian'
+import BarChartTakeCareGuardianCategorie from '../../components/barchartCategories'
+import fechAppointments from '../../services/fetchAppointments'
+import Loading from '../../components/loading'
 
 const DashboardWeapons = () => {
-  const appointments = useQuery(["appointments"], fechAppointments);
+  const appointments = useQuery(['appointments'], fechAppointments)
 
-  const results = useQuery(["vacation"], fetchUsers);
+  const results = useQuery(['vacation'], fetchUsers)
   console.log(results)
   if (appointments.isLoading) {
-    return (
-      <Loading />
-    );
+    return <Loading />
   }
-  if (appointments.isError) return <p>Error: {appointments.isError}</p>;
-  if (!appointments.data) return <p>No data available</p>;
+  if (appointments.isError) return <p>Error: {appointments.isError}</p>
+  if (!appointments.data) return <p>No data available</p>
   return (
     <>
       <div className="bg-gray-50 dark:bg-slate-700   h-full ">
@@ -55,6 +53,6 @@ const DashboardWeapons = () => {
       </div>
     </>
   )
-};
+}
 
-export default DashboardWeapons;
+export default DashboardWeapons

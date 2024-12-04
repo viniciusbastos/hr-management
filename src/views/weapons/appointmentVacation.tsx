@@ -1,11 +1,11 @@
-import { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { api } from "../../services/api";
-import config from "../../utils/config";
-import { useQuery } from "@tanstack/react-query";
-import fetchUsers from "../../services/fetchUsers";
-import fetchHealthProfessional from "../../services/fetchHealthProfessional";
+import { useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { api } from '../../services/api'
+import config from '../../utils/config'
+import { useQuery } from '@tanstack/react-query'
+import fetchUsers from '../../services/fetchUsers'
+import fetchHealthProfessional from '../../services/fetchHealthProfessional'
 import Select from 'react-select'
 
 import {
@@ -39,7 +39,6 @@ const AppointmentCargaFixa = () => {
   } = useController({ name: 'belongsToId', control })
 
   const onSubmit = async (data: FieldValues) => {
-    
     const id = toast.loading('Please wait...')
     try {
       const response = await api.post(`/appointmentCargafixa/`, data)
@@ -137,4 +136,4 @@ const AppointmentCargaFixa = () => {
   )
 }
 
-export default AppointmentVacation;
+export default AppointmentVacation

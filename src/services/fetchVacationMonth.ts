@@ -3,7 +3,7 @@ import { api } from "./api";
 const fetchUser = async ({ queryKey }) => {
   const month = queryKey[1];
   const apiRes = api
-    .get(`/vacation/month/${month}`)
+    .get(`/vacations/month/${month}`)
     .then((response) => {
       return response.data;
     })

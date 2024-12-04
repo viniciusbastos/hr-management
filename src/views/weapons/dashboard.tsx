@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Weapon } from '../../interfaces/Weapon';
 import useDebounce from '../../hooks/useDebounce';
-import { exportToCSV, exportToExcel } from '../../utils/exportUtils';
+import { exportToCSV, exportWeaponsToExcel } from '../../utils/exportUtils';
 import fetchWeaponsInfo from '../../services/fetchWeaponInfo';
+import { FaEye } from 'react-icons/fa6';
 
 const WeaponsDashboard: React.FC = () => {
   const { data: weapons, isLoading, error } = useQuery<Weapon[], Error>({
@@ -45,6 +46,9 @@ const WeaponsDashboard: React.FC = () => {
   const totalWeapons = weapons?.length || 0;
   const inUseWeapons = weapons?.filter(weapon => weapon.Status === 'EM_CONDICOES_DE_USO').length || 0;
   const inStorageWeapons = weapons?.filter(weapon => weapon.Status === 'DEFEITO').length || 0;
+  const operationalPercentage = totalWeapons > 0 
+        ? Math.round((inUseWeapons / totalWeapons) * 100) 
+        : 0;
   const damagedWeapons = weapons?.filter(weapon => weapon.location === 'CARGA PESSOAL').length || 0;
 
   const handleSort = (column: 'id' | 'model' | 'serialNumber' | 'type' | 'Status' | 'Caliber' | 'location') => {
@@ -56,28 +60,32 @@ const WeaponsDashboard: React.FC = () => {
     }
   };
 
+ 
+
   return (
     <div className={`${isDarkMode ? 'dark' : ''}`}>
-      <header className="bg-gray-800 dark:bg-gray-900 text-white py-4 text-center">
-        <h1 className="text-3xl font-bold">Weapons Dashboard</h1>
-        <button
-          onClick={() => setIsDarkMode(!isDarkMode)}
-          className="ml-4 px-4 py-2 bg-blue-500 dark:bg-blue-600 text-white rounded-lg"
-        >
-          {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-        </button>
-      </header>
+      
       <div className="p-4">
         <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 mb-4">
           <h2 className="text-2xl font-bold mb-4">General Information</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-blue-500 dark:bg-blue-600 text-white p-4 rounded-lg text-center">
-              <h3 className="text-xl font-semibold">Total Weapons</h3>
-              <p className="text-3xl">{totalWeapons}</p>
-            </div>
+          <div className="bg-white p-6 shadow-md rounded-lg flex items-center justify-between">
+      <div className="bg-white rounded-lg p-6 shadow-sm">
+      <div className="flex items-center justify-between">
+        <div className="text-blue-600 text-2xl">{inUseWeapons}</div>
+        <div className={`text-sm ${inUseWeapons > 100 ? 'text-green-500' : 'text-red-500'}`}>
+          {inUseWeapons}
+        </div>
+      </div>
+      <div className="mt-4">
+        <h3 className="text-2xl font-semibold">{inUseWeapons}</h3>
+        <p className="text-gray-500 text-sm">{inUseWeapons}</p>
+      </div>
+    </div>
+    </div>
             <div className="bg-green-500 dark:bg-green-600 text-white p-4 rounded-lg text-center">
               <h3 className="text-xl font-semibold">In Use</h3>
-              <p className="text-3xl">{inUseWeapons}</p>
+              <p className="text-3xl">{inUseWeapons}{'  '}{operationalPercentage}{'%'}</p>
             </div>
             <div className="bg-yellow-500 dark:bg-yellow-600 text-white p-4 rounded-lg text-center">
               <h3 className="text-xl font-semibold">In Storage</h3>
@@ -117,7 +125,7 @@ const WeaponsDashboard: React.FC = () => {
             <select
               value={sortOrder}
               onChange={(e) => setSortOrder(e.target.value as 'asc' | 'desc')}
-              className="ml-2 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600"
+              className="ml-2 p-2 border rounded-lg mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600"
             >
               <option value="asc">Ascending</option>
               <option value="desc">Descending</option>
@@ -131,8 +139,8 @@ const WeaponsDashboard: React.FC = () => {
               Export to CSV
             </button>
             <button
-              onClick={() => exportToExcel(filteredWeapons, 'weapons.xlsx')}
-              className="px-4 py-2 bg-green-500 dark:bg-green-600 text-white rounded-lg"
+              onClick={() => exportWeaponsToExcel(filteredWeapons, 'weapons.xlsx')}
+              className="px-4 py-2 mt-2 bg-green-500 dark:bg-green-600 text-white rounded-lg"
             >
               Export to Excel
             </button>

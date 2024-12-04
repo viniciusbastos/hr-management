@@ -1,6 +1,6 @@
 import type React from 'react';
 import { useState, type ReactNode } from 'react'
-import Header from '../components/Sidebar/index';
+import Header from '../components/sidebar/index';
 import Sidebar from '../components/Header/index';
 
 const DefaultLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -21,7 +21,7 @@ const DefaultLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
           {/* <!-- ===== Header End ===== --> */}
 
           {/* <!-- ===== Main Content Start ===== --> */}
-          <main>
+          <main> 
             <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
               {children}
             </div>

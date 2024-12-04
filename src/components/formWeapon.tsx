@@ -1,13 +1,9 @@
-import { useState } from "react";
-import "../main.css";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { api } from "../services/api";
-import config from "../utils/config";
-import { useQuery } from "@tanstack/react-query";
-import fetchUsers from "../services/fetchUsers";
-import Select from "react-select";
-import fetchUsersSelect from "../services/fetchUsersSelect";
+import '../main.css'
+import { useNavigate } from 'react-router-dom'
+import { api } from '../services/api'
+import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
+import Select from 'react-select'
+import fetchUsersSelect from '../services/fetchUsersSelect'
 import {
   Alert,
   Button,
@@ -16,38 +12,36 @@ import {
   CardHeader,
   Input,
   Typography,
-} from "@material-tailwind/react";
-import { ToastContainer, toast } from "react-toastify";
+} from '@material-tailwind/react'
+import { ToastContainer, toast } from 'react-toastify'
 import {
   Controller,
   type FieldValues,
   useController,
   useForm,
-} from "react-hook-form";
-import fetchWeaponSelect from "../services/fetchWeaponSelect";
+} from 'react-hook-form'
+import fetchWeaponSelect from '../services/fetchWeaponSelect'
 
-const FormWeapon = () => {
-  interface serialNumber {
-    value: string;
-    label: string;
-  }
-  interface belongsToId {
-    value: string;
-    label: string;
-  }
+interface serialNumber {
+  value: string
+  label: string
+}
+interface belongsToId {
+  value: string
+  label: string
+}
 
+const FormWeapon = ({ refetch }) => {
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
     reset,
-  } = useForm();
-  console.log(errors);
-  const navigate = useNavigate();
-  const result = useQuery(["users"], fetchUsersSelect);
-  const {data: weapon} = useQuery(["weapon"], fetchWeaponSelect);
- console.log(weapon)
+  } = useForm()
+  const navigate = useNavigate()
+  const result = useQuery(['users'], fetchUsersSelect)
+  const { data: weapon } = useQuery(['weapon'], fetchWeaponSelect)
 
   const {
     field: {
@@ -55,38 +49,40 @@ const FormWeapon = () => {
       onChange: belongsToIdOnChange,
       ...restbelongsToId
     },
-  } = useController({ name: "belongsToId", control });
+  } = useController({ name: 'belongsToId', control })
   const {
     field: {
       value: serialNumber,
       onChange: serialNumberOnChange,
       ...restserialNumber
     },
-  } = useController({ name: "serialNumber", control });
+  } = useController({ name: 'serialNumber', control })
 
   const onSubmit = async (data: FieldValues) => {
-    const id = toast.loading("Please wait...");
+    const id = toast.loading('Please wait...')
     try {
-      const response = await api.post(`/weapons/fixed`, data);
-      console.log(response);
+      const response = await api.post(`/weapons/fixed`, data)
+
       toast.update(id, {
-        render: "All is good",
-        type: "success",
+        render: 'All is good',
+        type: 'success',
         isLoading: false,
         autoClose: 5000,
-      });
-      reset();
+      })
+      refetch()
+      reset()
     } catch (error) {
-      console.error(error);
-      console.log("erro");
+      console.error(error)
+      console.log('erro')
       toast.update(id, {
-        render: "Error",
-        type: "error",
+        render: 'Error',
+        type: 'error',
         isLoading: false,
         autoClose: 5000,
-      });
+      })
     }
-  };
+  }
+
   return (
     <Card className="m-10 p-2  rounded-2xl shadow-xl">
       <CardHeader
@@ -99,7 +95,7 @@ const FormWeapon = () => {
           Cadastrar Carga Fixa
         </Typography>
       </CardHeader>
-     <ToastContainer autoClose={3000} hideProgressBar />
+      <ToastContainer autoClose={3000} hideProgressBar />
       <CardBody className="p-6">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
@@ -117,7 +113,7 @@ const FormWeapon = () => {
               {...restbelongsToId}
             />
           </div>
-          
+
           <div className="mb-3">
             <label>Selecionar Arma</label>
             <Select
@@ -133,17 +129,16 @@ const FormWeapon = () => {
               {...restserialNumber}
             />
           </div>
-             
+
           <div className="mb-6 mt-3">
             <label>Data de Inicio</label>
             <Input
               crossOrigin
               className="block"
               type="datetime-local"
-              {...register("InitialDate")}
+              {...register('InitialDate')}
             />
           </div>
-          
 
           <Button type="submit" color="green">
             Enviar
@@ -151,7 +146,7 @@ const FormWeapon = () => {
         </form>
       </CardBody>
     </Card>
-  );
-};
+  )
+}
 
-export default FormWeapon;
+export default FormWeapon

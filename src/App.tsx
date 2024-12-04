@@ -25,9 +25,8 @@ import { ProtectedRoute } from "./routes/ProtectedRoute";
 import { AirOutlined, Login } from "@mui/icons-material";
 import SidebarLayout from "./routes/sideBarLayout";
 import Sicknote from "./views/sicknote";
-import SicknoteDetails from "./views/sicknote/details";
+const SicknoteDetails = lazy(() => import('./views/sicknote/details'));
 import VacationCheck from "./views/vacationcheck";
-//import { MembersTable } from "./components/tablematerial";
 import NotFound from "./views/Notfound";
 import DashboardTakeCareGuardian from "./views/takingcareofguardian/dashboardTakeCareGuardian";
 import Appointment from "./views/vacation/appointmentVacation";
@@ -39,10 +38,12 @@ import ProcessTable from "./components/processTable";
 import SickNotes from "./views/sicknote";
 import SicknoteForm from "./views/sicknote/newSicknote";
 import AppointmentVacation from "./views/vacation/appointmentVacation";
-import WeaponsList from "./views/cargafixamaterialbelico/list";
-import TermoResponsabilidade from "./views/cargafixamaterialbelico/termoderesponsabilidade";
-import WeaponControlDashboard from "./views/cargafixamaterialbelico/weaponsStatus";
-import WeaponsDashboard from "./views/cargafixamaterialbelico/dashboard";
+import WeaponsList from "./views/weapons/list";
+import TermoResponsabilidade from "./views/weapons/termoderesponsabilidade";
+import WeaponControlDashboard from "./views/weapons/weaponsStatus";
+import WeaponsDashboard from "./views/weapons/dashboard";
+import DashboardTeste from "./views/dashtest";
+import React from "react";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -161,7 +162,14 @@ function App() {
 										}
 									/>
 									
-									
+									<Route
+										path="/dashteste"
+										element={
+											<Suspense fallback={<Loading />}>
+												<DashboardTeste />
+											</Suspense>
+										}
+									/>
 
 									<Route
 										path="/vacation/month/:month"
