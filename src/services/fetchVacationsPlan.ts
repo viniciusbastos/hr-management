@@ -1,19 +1,17 @@
 import { api } from './api'
 
-const fetchUser = async () => {
-  // Your code here
-
+const fetchVacationsPlan = async ({ queryKey }) => {
   const apiRes = api
-    .get(`/user`)
+    .get(`/vacationsplan/`)
     .then((response) => {
       return response.data
     })
     .catch((error) => {
-      throw new Error(`user fetch not ok` + error)
+      throw new Error(`vacationsplan fetch not ok`)
       console.error(error)
     })
 
   return apiRes
 }
 
-export default fetchUser
+export default fetchVacationsPlan

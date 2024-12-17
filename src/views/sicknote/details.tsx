@@ -8,7 +8,10 @@ import fetchSickNoteId from "../../services/fetchSickNoteId";
 const CourseDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const results = useQuery(["sicknote", id], fetchSickNoteId);
+  const results = useQuery({
+    queryKey: ["sicknote", id],
+    ...fetchSickNoteId
+  });
   if (results.isLoading) {
     return (
       <div className="loading-pane">

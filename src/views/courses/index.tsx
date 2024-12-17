@@ -17,7 +17,10 @@ import Loading from "../../components/loading";
 const Courses = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const results = useQuery(["vacation", id], fetchVacation);
+  const results = useQuery({
+    queryKey: ["vacation", id],
+    ...fetchVacation
+  });
   if (results.isLoading) {
     return (
       <Loading />

@@ -122,27 +122,6 @@ const FormUser = () => {
           </div>
         </form>
       </CardBody>
-      <div className="flex justify-center items-center min-h-screen bg-gray-100">
-        <div className="space-x-4">
-          {/* Update Button */}
-          <button className="relative px-6 py-2 text-sm font-medium text-blue-700 bg-white border border-blue-500 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 group flex items-center">
-            <FaEdit className="mr-2" />
-            <span className="invisible group-hover:visible">Update</span>
-          </button>
-
-          {/* Delete Button */}
-          <button className="relative px-6 py-2 text-sm font-medium text-red-700 bg-white border border-red-500 rounded hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-300 group flex items-center">
-            <FaTrashAlt className="mr-2" />
-            <span className="invisible group-hover:visible">Delete</span>
-          </button>
-
-          {/* Copy Button */}
-          <button className="relative px-6 py-2 text-sm font-medium text-green-700 bg-white border border-green-500 rounded hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-300 group flex items-center">
-            <FaCopy className="mr-2" />
-            <span className="invisible group-hover:visible">Copy</span>
-          </button>
-        </div>
-      </div>
     </Card>
   )
 }
