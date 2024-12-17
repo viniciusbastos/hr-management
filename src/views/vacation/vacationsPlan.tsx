@@ -135,14 +135,12 @@ const VacationsPlan = () => {
                 Nome
               </th>
               <th className="py-3 px-4 text-left border border-slate-200 dark:text-gray-300">
-                Início
+                Opcao 1
               </th>
               <th className="py-3 px-4 text-left border border-slate-200">
-                Término
+                Opcao 2
               </th>
-              <th className="py-3 px-4 text-left border border-slate-200">
-                Período
-              </th>
+
               <th className="py-3 px-8 text-left border dark:text-gray-300">
                 Ações
               </th>
@@ -162,10 +160,10 @@ const VacationsPlan = () => {
                   {vacation.name}
                 </td>
                 <td className="py-3 px-4 border border-slate-200">
-                  {vacation.optionOne}
+                  {vacation.opcaoone}
                 </td>
                 <td className="py-3 px-4 border border-slate-200">
-                  {vacation.optionTwo}
+                  {vacation.opcaotwo}
                 </td>
 
                 <td className="py-3 px-8 border dark:text-gray-300">
