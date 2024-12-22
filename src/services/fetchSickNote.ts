@@ -1,18 +1,17 @@
-import { api } from "./api";
+import { api } from './api'
 
 const fetchSickNote = async ({ queryKey }) => {
   const apiRes = api
     .get(`/sicknote`)
     .then((response) => {
-      return response.data;
+      return response.data
     })
     .catch((error) => {
-      throw new Error(`sicknote/ fetch not ok`);
-      console.error(error);
-    });
+      throw new Error(`sicknote/ fetch not ok`)
+      console.error(error)
+    })
 
-  return apiRes;
-};
+  return apiRes
+}
 
-
-export default fetchSickNote;
+export default fetchSickNote

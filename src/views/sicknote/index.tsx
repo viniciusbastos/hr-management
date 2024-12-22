@@ -29,11 +29,11 @@ const SickNotes = () => {
     data: sickNotes,
     isLoading,
     refetch,
-  } = useQuery({
-    queryKey: ['sicknote'],
-    ...fetchSickNote
-  }, {
-    onSuccess: (data) => {},
+  } = useQuery(['sicknote'], fetchSickNote, {
+    staleTime: 1500000, // Data is considered fresh for 5 seconds
+    onSuccess: (data) => {
+      console.log('Sick notes loaded:', data)
+    },
   })
 
   const openDeleteModal = (id: any) => {
@@ -51,7 +51,7 @@ const SickNotes = () => {
     try {
       await api.delete(`/sicknote/${deleteId}`)
       queryClient.invalidateQueries({
-        queryKey: ['sicknote']
+        queryKey: ['sicknote'],
       })
       closeDeleteModal()
     } catch (error) {

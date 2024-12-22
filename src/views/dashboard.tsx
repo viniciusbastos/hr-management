@@ -1,24 +1,19 @@
-import { useQuery } from "@tanstack/react-query";
-import "../main.css";
-import CardDashboard from "../components/cardDashboard";
-import TableQuantityPosto from "../components/tableQuantityPosto";
-import fetchUsers from "../services/fetchUsers";
-import BarChart from "../components/barchart";
-import Loading from "../components/loading";
-import { useEffect, useState } from "react";
+import { useQuery } from '@tanstack/react-query'
+import '../main.css'
+import CardDashboard from '../components/cardDashboard'
+import TableQuantityPosto from '../components/tableQuantityPosto'
+import fetchUsers from '../services/fetchUsers'
+import BarChart from '../components/barchart'
+import Loading from '../components/loading'
+import { useEffect, useState } from 'react'
 
 const Dashboard = () => {
-  const results = useQuery(["vacation"], fetchUsers);
+  const results = useQuery(['vacation'], fetchUsers)
 
   if (results.isLoading) {
+    const token = localStorage.getItem('token')
 
-      const token = localStorage.getItem("token");
-    
-    
-
-    return (
-      <Loading />
-    );
+    return <Loading />
   }
   return (
     <>
@@ -28,33 +23,33 @@ const Dashboard = () => {
             <div className="bg-white dark:bg-gray-700 rounded-xl shadow-xl">
               <CardDashboard
                 link="/home"
-                title={"Efetivo"}
-                quant={154}
-                info={"Policiais Militares"}
+                title={'Efetivo'}
+                quant={157}
+                info={'Policiais Militares'}
               />
             </div>
             <div className="bg-white  dark:bg-gray-700 rounded-xl shadow-xl">
               <CardDashboard
                 link="/vacation/month/1"
-                title={"Férias"}
+                title={'Férias'}
                 quant={10}
-                info={"Policiais Militares"}
+                info={'Policiais Militares'}
               />
             </div>
             <div className="bg-white dark:bg-gray-700 rounded-xl shadow-xl">
               <CardDashboard
                 link="/courses"
-                title={"Cursos"}
-                quant={1}
-                info={"Policiais Militares"}
-              />
-            </div>
-            <div className="bg-white dark:bg-gray-700 rounded-xl shadow-xl">
-              <CardDashboard
-                link="/courses"
-                title={"Licenças"}
+                title={'Cursos'}
                 quant={2}
-                info={"Policiais Militares"}
+                info={'Policiais Militares'}
+              />
+            </div>
+            <div className="bg-white dark:bg-gray-700 rounded-xl shadow-xl">
+              <CardDashboard
+                link="/courses"
+                title={'Licenças'}
+                quant={2}
+                info={'Policiais Militares'}
               />
             </div>
           </div>
@@ -65,7 +60,7 @@ const Dashboard = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard
