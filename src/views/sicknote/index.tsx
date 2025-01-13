@@ -73,7 +73,7 @@ const SickNotes = () => {
     const imageUrl = note.url
     const link = document.createElement('a')
     link.href = imageUrl
-    link.download = `${note.id}.jpg`
+    link.download = `sicknote.jpg`
     link.click()
   }
 
