@@ -22,7 +22,7 @@ const SickNotes = () => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen((cur) => !cur)
 
-  const [deleteId, setDeleteId] = useState(null)
+  const [deleteId, setDeleteId] = useState<string | null>(null)
 
   const queryClient = useQueryClient()
   const {
@@ -36,7 +36,7 @@ const SickNotes = () => {
     },
   })
 
-  const openDeleteModal = (id: any) => {
+  const openDeleteModal = (id: string) => {
     console.log(id)
     setDeleteId(id)
     setIsModalOpen(true)
@@ -57,6 +57,24 @@ const SickNotes = () => {
     } catch (error) {
       console.error('Error deleting sicknote:', error)
     }
+  }
+  const handleCopyToClipboard = (note: any) => {
+    const textToCopy = `O ${note.posto} ${note.name}​, mat, ${note.mat} , apresentou atestado de ${note.Days} dias, a contar de ${format(parseISO(note.InitialDate), 'dd/MM/yyyy')}, emitido pelo Dr. ${note.DoctorName} , CRM-SE ${note.crm}, do Hospital São José, em Aracaju-SE. CID ${note.Cid}.`
+    navigator.clipboard
+      .writeText(textToCopy)
+      .then(() => {
+        alert('Sick note data copied to clipboard!')
+      })
+      .catch((error) => {
+        console.error('Failed to copy text: ', error)
+      })
+  }
+  const handleDownloadImage = (note: any) => {
+    const imageUrl = note.url
+    const link = document.createElement('a')
+    link.href = imageUrl
+    link.download = `${note.id}.jpg`
+    link.click()
   }
 
   const columnHelper = createColumnHelper()
@@ -100,17 +118,32 @@ const SickNotes = () => {
       columnHelper.accessor('id', {
         header: 'Actions',
         cell: (info) => (
-          <button
-            onClick={() => openDeleteModal(info.getValue())}
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
-          >
-            Delete
-          </button>
+          <div>
+            <button
+              onClick={() => openDeleteModal(info.getValue())}
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+            >
+              Delete
+            </button>
+            <button
+              onClick={() => handleCopyToClipboard(info.row.original)}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ml-2"
+            >
+              Copy
+            </button>
+            <button
+              onClick={() => handleDownloadImage(info.row.original)}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Download Image
+            </button>
+          </div>
         ),
       }),
     ],
     []
   )
+
   const [sorting, setSorting] = useState([])
   const [columnFilters, setColumnFilters] = useState([])
   const [pagination, setPagination] = useState({
@@ -158,6 +191,13 @@ const SickNotes = () => {
           onClick={handleOpen}
         >
           Registrar Atestado
+        </Button>
+        <Button
+          className="flex items-left gap-3 dark:bg-blue-gray-700 mb-5 ml-5"
+          size="xl"
+          onClick={handleCopyToClipboard}
+        >
+          Copy Sick Notes to Clipboard
         </Button>
         <Dialog
           size="xs"
