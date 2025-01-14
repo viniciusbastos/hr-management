@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import {
   Navbar,
   MobileNav,
@@ -6,9 +6,9 @@ import {
   Button,
   IconButton,
   Collapse,
-} from "@material-tailwind/react";
-import logo from "../assets/6 CIPM.png";
-import { Link } from "react-router-dom";
+} from '@material-tailwind/react'
+import logo from '../assets/6 CIPM.png'
+import { Link } from 'react-router-dom'
 
 export function NavbarDefault() {
   const [openNav, setOpenNav] = React.useState(false)

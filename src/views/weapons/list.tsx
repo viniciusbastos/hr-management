@@ -9,6 +9,7 @@ import {
   CardBody,
   CardHeader,
   Dialog,
+  Input,
   Typography,
 } from '@material-tailwind/react'
 import { Table, TableHead, TableBody, TableFooter } from '@mui/material'
@@ -16,6 +17,7 @@ import DeleteModal from '../../components/modalDelete'
 import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
 import FormWeapon from '../../components/formWeapon'
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 const WeaponsList = () => {
   const [open, setOpen] = useState(false)
@@ -30,9 +32,6 @@ const WeaponsList = () => {
     serialNumber: string
     model: string
   }
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [deleteId, setDeleteId] = useState(null)
-  const [showLoading, setShowLoading] = useState(false)
 
   const queryClient = useQueryClient()
   const {
@@ -48,7 +47,11 @@ const WeaponsList = () => {
       console.log('Data refetched:', weapons)
     },
   })
-
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [deleteId, setDeleteId] = useState(null)
+  const [showLoading, setShowLoading] = useState(false)
+  const [searchItem, setSearchItem] = useState('')
+  const [filteredUsers, setFilteredUsers] = useState(weapons)
   const openDeleteModal = (id: any) => {
     console.log(id)
     setDeleteId(id)
@@ -69,6 +72,23 @@ const WeaponsList = () => {
       // Handle error (e.g., show an error message to the user)
     }
   }
+  const handleInputChange = (e) => {
+    const searchTerm = e.target.value
+    setSearchItem(searchTerm)
+
+    const filteredItems = weapons.filter(
+      (weapons: Weapon) =>
+        weapons.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        weapons.posto.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        weapons.mat.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        weapons.serialNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        weapons.InitialDate.includes(searchTerm.toLowerCase())
+    )
+
+    setFilteredUsers(filteredItems)
+  }
+
+  const filteredData = filteredUsers ?? weapons
 
   // Set weapons to an empty array if results.data is not an array
   if (isLoading) {
@@ -104,7 +124,7 @@ const WeaponsList = () => {
   }
 
   return (
-    <Card className="m-10 p-2  rounded-2xl shadow-xl bg-gray-50">
+    <Card className="m-10 p-2  rounded-2xl shadow-xl bg-gray-50 dark:bg-gray-700">
       <CardHeader
         variant="gradient"
         mt-4
@@ -133,10 +153,19 @@ const WeaponsList = () => {
           <FormWeapon refetch={refetch} />
         </Dialog>
         {isFetching && <div className="refresh-indicator">Refreshing...</div>}
+        <div className="w-full md:w-72 mb-3 flex justify-end">
+          <Input
+            value={searchItem}
+            onChange={handleInputChange}
+            label="Search"
+            icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+            crossOrigin={undefined}
+          />
+        </div>
 
         <table className="w-full">
-          <thead className="bg-gray-200">
-            <tr>
+          <thead className="border bg-gray-200 dark:bg-gray-700 dark:text-gray-200">
+            <tr className="border">
               <th className="px-4 py-3 text-left">#</th>
               <th className="px-4 py-3 text-left">Mat</th>
               <th className="px-4 py-3 text-left">Posto</th>
@@ -148,13 +177,17 @@ const WeaponsList = () => {
                 Data do Vencimento da Carga
               </th>
               <th className="px-4 py-3 text-left">Situação</th>
-              <th className="px-4 py-3 text-left">Ação</th>
+              <th className="px-4 py-3 text-left">Renovar</th>
+              <th className="px-4 py-3 text-left">Excluir</th>
             </tr>
           </thead>
 
           <tbody>
-            {weapons.map((weapon: Weapon) => (
-              <tr key={weapon.id} className="border-b hover:bg-gray-50">
+            {filteredData?.map((weapon: Weapon) => (
+              <tr
+                key={weapon.id}
+                className="border hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-200"
+              >
                 <td className="px-4 py-3 font-medium">{weapon.id}</td>
                 <td className="px-4 py-3 font-medium">{weapon.mat}</td>
                 <td className="px-4 py-3 font-medium">{weapon.posto}</td>
@@ -163,7 +196,9 @@ const WeaponsList = () => {
                 </td>
                 <td className="px-4 py-3 font-medium">{weapon.model}</td>
                 <td className="px-4 py-3 font-medium">{weapon.serialNumber}</td>
-                {/* <TableCell>{weapon.InitialDate ? format(parseISO(weapon.InitialDate), 'dd/MM/yyyy') : ''}</TableCell> */}
+                <td className="py-3 px-8 text-left border">
+                  {format(parseISO(weapon.InitialDate), 'dd/MM/yyyy')}
+                </td>
                 <td className="py-3 px-8 text-left border">
                   {format(
                     addDays(parseISO(weapon.InitialDate), 365),
