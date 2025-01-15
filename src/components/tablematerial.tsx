@@ -65,6 +65,11 @@ export default function MembersTable() {
   const [filteredUsers, setFilteredUsers] = useState(data)
   const [searchItem, setSearchItem] = useState('')
   const [page, setPage] = useState(0)
+
+  const handleCopyToClipboard = (user: User) => {
+    const userInfo = user.mat
+    navigator.clipboard.writeText(userInfo)
+  }
   if (isLoading) {
     return <Loading />
   }
@@ -199,9 +204,17 @@ export default function MembersTable() {
                       >
                         Active
                       </span>
-                    </TableCell>
+                      <button
+                        onClick={() => handleCopyToClipboard(user)}
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ml-2"
+                      >
                     <TableCell className="px-6 py-4 dark:bg-gray-700 whitespace-nowrap text-sm text-gray-500 dark:text-white">
-                      {user.mat}
+                      <button
+                        onClick={() => handleCopyToClipboard(info.row.original)}
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ml-2"
+                      >
+                        Copy
+                      </button>
                     </TableCell>
                     {/* <td>
                   <button

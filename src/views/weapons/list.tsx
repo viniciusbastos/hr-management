@@ -177,7 +177,7 @@ const WeaponsList = () => {
                 Data do Vencimento da Carga
               </th>
               <th className="px-4 py-3 text-left">Situação</th>
-              <th className="px-4 py-3 text-left">Renovar</th>
+              <th className="px-4 py-3 text-left">Descarguear</th>
               <th className="px-4 py-3 text-left">Excluir</th>
             </tr>
           </thead>
