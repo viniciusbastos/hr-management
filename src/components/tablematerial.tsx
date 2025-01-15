@@ -198,19 +198,18 @@ export default function MembersTable() {
                       </div>
                     </TableCell>
                     <TableCell className="px-6 py-4 whitespace-nowrap dark:bg-gray-700">
-                      <span
-                        className="px-2 inline-flex text-xs leading-5
-                          font-semibold rounded-full bg-green-100 text-green-800"
-                      >
-                        Active
-                      </span>
+                      <div className="text-sm text-gray-900 dark:text-white dark:bg-gray-700">
+                        {user.mat}
+                      </div>
+                    </TableCell>
+                    <TableCell className="px-6 py-4 whitespace-nowrap dark:bg-gray-700">
+                      <div className="text-sm text-gray-900 dark:text-white dark:bg-gray-700">
+                        {user.id}
+                      </div>
+                    </TableCell>
+                    <TableCell className="px-6 py-4 whitespace-nowrap dark:bg-gray-700">
                       <button
                         onClick={() => handleCopyToClipboard(user)}
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ml-2"
-                      >
-                    <TableCell className="px-6 py-4 dark:bg-gray-700 whitespace-nowrap text-sm text-gray-500 dark:text-white">
-                      <button
-                        onClick={() => handleCopyToClipboard(info.row.original)}
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ml-2"
                       >
                         Copy
