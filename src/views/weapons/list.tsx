@@ -142,7 +142,7 @@ const WeaponsList = () => {
           size="xl"
           onClick={handleOpen}
         >
-          Adicionar Carga
+          Carga Fixa
         </Button>
         <Dialog
           size="xs"

@@ -74,7 +74,7 @@ export default function MembersTable() {
   const handleInputChange = (e) => {
     const searchTerm = e.target.value
     setSearchItem(searchTerm)
-
+    const qtdpm = data.length
     const filteredItems = data.filter(
       (user: User) =>
         user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -95,7 +95,7 @@ export default function MembersTable() {
             <div className="mb-8 flex items-center justify-between gap-8">
               <div>
                 <Typography variant="h5" color="blue-gray">
-                  Members list
+                  Quantidade de Policiais: {data.length}
                 </Typography>
                 <Typography color="gray" className="mt-1 font-normal">
                   See information about all members
