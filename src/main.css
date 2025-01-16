@@ -1835,10 +1835,6 @@ select {
   align-items: center;
 }
 
-.justify-start {
-  justify-content: flex-start;
-}
-
 .justify-end {
   justify-content: flex-end;
 }
@@ -6918,11 +6914,6 @@ select {
 .dark\:bg-yellow-600:is(.dark *) {
   --tw-bg-opacity: 1;
   background-color: rgb(202 138 4 / var(--tw-bg-opacity));
-}
-
-.dark\:bg-blue-gray-800:is(.dark *) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(55 71 79 / var(--tw-bg-opacity));
 }
 
 .dark\:text-gray-200:is(.dark *) {

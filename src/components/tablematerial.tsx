@@ -41,6 +41,7 @@ import {
 } from '@mui/material'
 import Loading from './loading'
 import DefaultLayout from '../routes/sideBarLayout'
+import { FaCheck, FaCopy } from 'react-icons/fa6'
 
 const TABS = [
   {
@@ -66,9 +67,19 @@ export default function MembersTable() {
   const [searchItem, setSearchItem] = useState('')
   const [page, setPage] = useState(0)
 
-  const handleCopyToClipboard = (user: User) => {
-    const userInfo = user.mat
-    navigator.clipboard.writeText(userInfo)
+  const [copiedUserId, setCopiedUserId] = useState<string | null>(null)
+
+  const handleCopyToClipboard = (user: any) => {
+    const textToCopy = user.mat
+    navigator.clipboard
+      .writeText(textToCopy)
+      .then(() => {
+        setCopiedUserId(user.id)
+        setTimeout(() => setCopiedUserId(null), 2000) // Reset after 2 seconds
+      })
+      .catch((error) => {
+        console.error('Failed to copy text: ', error)
+      })
   }
   if (isLoading) {
     return <Loading />
@@ -121,7 +132,7 @@ export default function MembersTable() {
             </div>
             <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
               <Tabs value="all" className="w-full md:w-max">
-                <TabsHeader className="dark:bg-gray-700">
+                <TabsHeader className="dark:bg-gray-700 text-color-white">
                   {TABS.map(({ label, value }) => (
                     <Tab key={value} value={value}>
                       &nbsp;&nbsp;{label}&nbsp;&nbsp;
@@ -210,9 +221,17 @@ export default function MembersTable() {
                     <TableCell className="px-6 py-4 whitespace-nowrap dark:bg-gray-700">
                       <button
                         onClick={() => handleCopyToClipboard(user)}
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ml-2"
+                        className={`flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ml-2 ${
+                          copiedUserId === user.id
+                            ? 'bg-green-500'
+                            : 'bg-blue-500'
+                        }`}
                       >
-                        Copy
+                        {copiedUserId === user.id ? (
+                          <FaCheck className="text-white" />
+                        ) : (
+                          <FaCopy className="text-white" />
+                        )}
                       </button>
                     </TableCell>
                     {/* <td>

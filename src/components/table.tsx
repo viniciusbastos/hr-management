@@ -18,12 +18,7 @@ function Table() {
     );
   }
 
-  // useEffect(() => {
-  //   api.get("/user", config).then((response) => {
-  //     setUsers(response.data);
-  //     console.log(users);
-  //   });
-  // }, []);
+  
   const getData = () => {
     api.get(`/user`).then((getData) => {
       setUsers(getData.data);

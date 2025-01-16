@@ -45,6 +45,7 @@ import WeaponsDashboard from './views/weapons/dashboard'
 import DashboardTeste from './views/dashtest'
 import React from 'react'
 import VacationsPlan from './views/vacation/vacationsPlan'
+import Map from './views/map'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -186,6 +187,7 @@ function App() {
                     path="/vacation/month/:month/:year"
                     element={<VacationMonth />}
                   />
+                  <Route path="/map" element={<Map />} />
                   <Route
                     path="/weapons/termo/:id"
                     element={<TermoResponsabilidade />}
