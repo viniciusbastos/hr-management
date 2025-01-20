@@ -110,7 +110,7 @@ const WeaponControlDashboard = () => {
     }
   }
   return (
-    <div className="bg-gray-50 min-h-screen p-6">
+    <div className="bg-gray-50 dark:bg-inherit min-h-screen p-6">
       <div className="container mx-auto">
         {/* Category-Specific Overview Statistics */}
         <div className="grid grid-cols-3 gap-4 mb-6">
@@ -121,35 +121,39 @@ const WeaponControlDashboard = () => {
                 <div
                   key={category}
                   className={`
-                      bg-white shadow rounded-lg p-4 hover:shadow-md transition-shadow
+                      bg-white dark:bg-slate-600 dark:text-slate-200 shadow rounded-lg p-4 hover:shadow-md transition-shadow
                       ${selectedCategory === category ? 'border-2 border-blue-500' : ''}
                     `}
                 >
-                  <h3 className="text-gray-500 text-sm mb-2 uppercase">
-                    {category} Overview
+                  <h3 className="text-gray-500 dark:text-slate-200 text-sm mb-2 uppercase">
+                    Visão Geral - {category}S
                   </h3>
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <p className="text-xs text-gray-600">Total</p>
-                      <p className="text-xl font-bold text-blue-600">
+                      <p className="text-xs text-gray-600 dark:text-slate-200 ">
+                        Total
+                      </p>
+                      <p className="text-xl font-bold text-blue-600 dark:text-blue-400">
                         {stats.totalWeapons}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-600">Carga Fixa</p>
-                      <p className="text-xl font-bold text-blue-600">
+                      <p className="text-xs text-gray-600 dark:text-slate-200 ">
+                        Carga Fixa
+                      </p>
+                      <p className="text-xl font-bold text-blue-600 dark:text-blue-400">
                         {stats.emcargaWeapons}
                         {' - '}
-                        <span className="text-sm">
+                        <span className="text-sm dark:text-slate-200 ">
                           {stats.emcargaPercentage}%
                         </span>
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-600">
+                      <p className="text-xs text-gray-600 dark:text-slate-200 ">
                         Disp. Sala de Meios
                       </p>
-                      <p className="text-xl font-bold text-blue-600">
+                      <p className="text-xl font-bold text-blue-600 dark:text-blue-400">
                         {stats.disponibleWeapons}
                       </p>
                       <p
@@ -158,7 +162,7 @@ const WeaponControlDashboard = () => {
                           ${
                             stats.operationalPercentage > 50
                               ? ' text-green-600'
-                              : ' text-red-600'
+                              : ' text-red-600 dark:text-red-400'
                           }
                         `}
                       >
@@ -167,8 +171,10 @@ const WeaponControlDashboard = () => {
                     </div>
 
                     <div>
-                      <p className="text-xs text-gray-600">Operational Count</p>
-                      <p className="text-xl font-bold text-blue-600">
+                      <p className="text-xs text-gray-600 dark:text-slate-200 ">
+                        Operational Count
+                      </p>
+                      <p className="text-xl font-bold text-blue-600 dark:text-blue-400">
                         {stats.operationalWeapons}
                       </p>
                     </div>
@@ -179,7 +185,7 @@ const WeaponControlDashboard = () => {
           )}
         </div>
         {/* Category Selection */}
-        <div className="flex space-x-4 mb-6">
+        <div className="flex space-x-4 mb-6 ">
           {['Revolver', 'Pistola', 'Carabina', 'Metralhadora', 'Fuzil'].map(
             (category) => (
               <button
@@ -195,10 +201,10 @@ const WeaponControlDashboard = () => {
                   )
                 }
                 className={`
-                    px-4 py-2 rounded-lg transition-all uppercase text-sm font-semibold
+                    px-4 py-2 rounded-lg dark:bg-slate-600 dark:text-slate-200 transition-all uppercase text-sm font-semibold
                     ${
                       selectedCategory === category
-                        ? 'bg-blue-600 text-white'
+                        ? 'bg-blue-600 text-white dark:text-blue-400'
                         : 'bg-white text-gray-700 hover:bg-blue-100 border'
                     }
                   `}
@@ -217,10 +223,10 @@ const WeaponControlDashboard = () => {
                 key={location}
                 onClick={() => handleLocationClick(location)}
                 className={`
-                    px-2 py-2 rounded-lg transition-all uppercase text-xs font-semibold
+                    px-2 py-2 rounded-lg dark:bg-slate-600 dark:text-slate-200 transition-all uppercase text-xs font-semibold
                     ${
                       selectedLocation === location
-                        ? 'bg-blue-600 text-white'
+                        ? 'bg-blue-600 text-white dark:text-blue-400'
                         : 'bg-white text-gray-700 hover:bg-blue-100 border'
                     }
                   `}
@@ -232,9 +238,9 @@ const WeaponControlDashboard = () => {
         </div>
 
         {/* Weapons Table */}
-        <div className="bg-white shadow-md rounded-lg overflow-hidden">
+        <div className="bg-white dark:bg-slate-600 dark:text-slate-200 shadow-md rounded-lg overflow-hidden">
           <table className="w-full">
-            <thead className="bg-gray-200">
+            <thead className="bg-gray-200 dark:bg-slate-700 dark:text-slate-200">
               <tr>
                 <th className="px-4 py-3 text-left">#</th>
                 <th className="px-4 py-3 text-left">Tipo</th>

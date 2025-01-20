@@ -20,7 +20,7 @@ import foto from '../assets/profile.png'
 import { useNavigate } from 'react-router-dom'
 import fetchUsers from '../services/fetchUsers'
 import { SetStateAction, useEffect, useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, UseQueryResult } from '@tanstack/react-query'
 import { api } from '../services/api'
 
 interface User {
@@ -43,6 +43,19 @@ import Loading from './loading'
 import DefaultLayout from '../routes/sideBarLayout'
 import { FaCheck, FaCopy } from 'react-icons/fa6'
 
+interface User {
+  id: string
+  name: string
+  mat: string
+  email: string
+  status: string
+  role: string
+  posto: string
+}
+
+export function useUsers(): UseQueryResult<User[], Error> {
+  return useQuery<User[], Error>(['users'], fetchUsers)
+}
 const TABS = [
   {
     label: 'All',
@@ -61,9 +74,10 @@ const TABS = [
 const TABLE_HEAD = ['Nome', 'Posto/Grad', 'Status', 'Matrícula', '']
 
 export default function MembersTable() {
+  const { data: users, isLoading, isError, error } = useUsers()
   const navigate = useNavigate()
-  const { data, isLoading, isError, error } = useQuery(['vacation'], fetchUsers)
-  const [filteredUsers, setFilteredUsers] = useState(data)
+
+  const [filteredUsers, setFilteredUsers] = useState(users)
   const [searchItem, setSearchItem] = useState('')
   const [page, setPage] = useState(0)
 
@@ -85,23 +99,55 @@ export default function MembersTable() {
     return <Loading />
   }
   if (isError) return <p>Error: {isError}</p>
-  if (!data) return <p>No data available</p>
+  if (!users) return <p>No data available</p>
 
   const handleInputChange = (e) => {
     const searchTerm = e.target.value
     setSearchItem(searchTerm)
-    const qtdpm = data.length
-    const filteredItems = data.filter(
-      (user: User) =>
-        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.posto.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.mat.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+    try {
+      // Normalize and escape special characters
+      const normalizedTerm = searchTerm
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
+        .replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // Escape regex special chars
 
-    setFilteredUsers(filteredItems)
+      const pattern = new RegExp(normalizedTerm, 'i')
+
+      const filteredItems = users.filter((user) => {
+        // Normalize user data for comparison
+        const normalizedName = user.name
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+        const normalizedPosto = user.posto
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+        const normalizedMat = user.mat
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+
+        return (
+          pattern.test(normalizedName) ||
+          pattern.test(normalizedPosto) ||
+          pattern.test(normalizedMat)
+        )
+      })
+
+      setFilteredUsers(filteredItems)
+    } catch (error) {
+      console.error('Invalid regex pattern:', error)
+      // Fallback to normal string matching if regex fails
+      const filteredItems = users.filter((user) => {
+        const term = searchTerm.toLowerCase()
+        return (
+          user.name.toLowerCase().includes(term) ||
+          user.posto.toLowerCase().includes(term) ||
+          user.mat.toLowerCase().includes(term)
+        )
+      })
+      setFilteredUsers(filteredItems)
+    }
   }
-
-  const filteredData = filteredUsers ?? data
+  const filteredData = filteredUsers ?? users
 
   return (
     <>
@@ -111,7 +157,7 @@ export default function MembersTable() {
             <div className="mb-8 flex items-center justify-between gap-8">
               <div>
                 <Typography variant="h5" color="blue-gray">
-                  Quantidade de Policiais: {data.length}
+                  Quantidade de Policiais: {users.length}
                 </Typography>
                 <Typography color="gray" className="mt-1 font-normal">
                   See information about all members

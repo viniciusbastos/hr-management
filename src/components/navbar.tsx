@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
-import logo from "../assets/6 CIPM.png";
+import { Link } from 'react-router-dom'
+import logo from '../assets/6 CIPM.png'
 export default function NavBar() {
   return (
     <>
       <header className="sm:px-2 px-1 py-1  w-full bg-caqui-200">
-        <nav className="md:hidden sm:hidden lg:hidden  flex  max-container  ">
+        <nav className="  flex  max-container  ">
           <div className="text-gray-200">
             <Link className="text-sm text-stone-200	 font-bold" to="/home">
               {/* <img src={logo} height={30} width={30} /> */}
@@ -15,7 +15,7 @@ export default function NavBar() {
             <ul className="flex">
               <li className="mr-6">
                 <Link className="text-sm text-stone-200	 font-bold" to="">
-                  User{" "}
+                  User{' '}
                 </Link>
               </li>
             </ul>
@@ -23,5 +23,5 @@ export default function NavBar() {
         </nav>
       </header>
     </>
-  );
+  )
 }

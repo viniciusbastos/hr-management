@@ -6,49 +6,58 @@ import fetchUsers from '../services/fetchUsers'
 import BarChart from '../components/barchart'
 import Loading from '../components/loading'
 import { useEffect, useState } from 'react'
+import { useUsers } from '../components/tablematerial'
 
 const Dashboard = () => {
-  const results = useQuery(['vacation'], fetchUsers)
+  const { data: users, isLoading, isError, error } = useUsers()
 
-  if (results.isLoading) {
+  if (isLoading) {
     const token = localStorage.getItem('token')
 
     return <Loading />
   }
   return (
     <>
-      <div className="bg-gray-50 dark:bg-slate-600   h-full ">
+      <div className="bg-gray-50 dark:bg-slate-700   h-full ">
         <div className="p-4 xl:m-auto">
           <div className="mb-12  gap-y-4 gap-x-8 grid-cols-1 grid md:grid-cols-2 xl:grid-cols-4  flex-col ">
-            <div className="bg-white dark:bg-gray-700 rounded-xl shadow-xl">
+            <div className=" rounded-xl shadow-xl">
               <CardDashboard
-                link="/home"
+                link="/users"
                 title={'Efetivo'}
-                quant={157}
+                quant={users?.length}
+                color="bg-white"
+                darkColor="bg-slate-600"
                 info={'Policiais Militares'}
               />
             </div>
-            <div className="bg-white  dark:bg-gray-700 rounded-xl shadow-xl">
+            <div className=" rounded-xl shadow-xl">
               <CardDashboard
-                link="/vacation/month/1"
+                link="/vacation/month/1/2025"
                 title={'Férias'}
                 quant={10}
+                color="bg-white"
+                darkColor="bg-slate-600"
                 info={'Policiais Militares'}
               />
             </div>
-            <div className="bg-white dark:bg-gray-700 rounded-xl shadow-xl">
+            <div className=" rounded-xl shadow-xl">
               <CardDashboard
                 link="/courses"
                 title={'Cursos'}
                 quant={2}
+                color="bg-white"
+                darkColor="bg-slate-600"
                 info={'Policiais Militares'}
               />
             </div>
-            <div className="bg-white dark:bg-gray-700 rounded-xl shadow-xl">
+            <div className=" rounded-xl shadow-xl">
               <CardDashboard
                 link="/courses"
                 title={'Licenças'}
                 quant={2}
+                color="bg-white"
+                darkColor="bg-slate-600"
                 info={'Policiais Militares'}
               />
             </div>

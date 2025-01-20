@@ -1,13 +1,13 @@
-import type React from "react";
-import { useContext } from "react";
-import { AuthContext } from "../contexts/authContext";
+import type React from 'react'
+import { useContext } from 'react'
+import { AuthContext } from '../contexts/authContext'
 
-import SignRoutes from "./SignRoutes";
-import OtherRoutes from "./OtherRoutes";
+import SignRoutes from './SignRoutes'
+import OtherRoutes from './OtherRoutes'
 
 const RouteTest: React.FC = () => {
-  const { isAutenticated } = useContext(AuthContext)
-  return isAutenticated ? <OtherRoutes /> : <SignRoutes />;
+  const { isAuthenticated } = useContext(AuthContext)
+  return isAuthenticated ? <OtherRoutes /> : <SignRoutes />
 }
 
-export default RouteTest;
+export default RouteTest

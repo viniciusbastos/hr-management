@@ -3,24 +3,24 @@ import {
   CardBody,
   CardHeader,
   Typography,
-} from "@material-tailwind/react";
-import Chart from "react-apexcharts";
-import { GlobeAmericasIcon } from "@heroicons/react/24/outline";
+} from '@material-tailwind/react'
+import Chart from 'react-apexcharts'
+import { GlobeAmericasIcon } from '@heroicons/react/24/outline'
 
 // If you're using Next.js please use the dynamic import for react-apexcharts and remove the import from the top for the react-apexcharts
 // import dynamic from "next/dynamic";
 // const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const chartConfig = {
-  type: "bar",
+  type: 'bar',
   height: 240,
   series: [
     {
-      name: "2024",
+      name: '2024',
       data: [15, 6, 14, 8, 7, 12, 13, 7, 8, 12, 18, 22],
     },
     {
-      name: "2023",
+      name: '2023',
       data: [0, 0, 0, 0, 9, 10, 13, 7, 8, 12, 18, 22],
     },
   ],
@@ -31,15 +31,15 @@ const chartConfig = {
       },
     },
     title: {
-      show: "Policiais Militares de Férias por mês",
+      show: 'Policiais Militares de Férias por mês',
     },
     dataLabels: {
       enabled: false,
     },
-    colors: ["#5d5953", "#000000"],
+    colors: ['#5d5953', '#000000'],
     plotOptions: {
       bar: {
-        columnWidth: "40%",
+        columnWidth: '40%',
         borderRadius: 2,
       },
     },
@@ -52,40 +52,40 @@ const chartConfig = {
       },
       labels: {
         style: {
-          colors: "#616161",
-          fontSize: "12px",
-          fontFamily: "inherit",
+          colors: '#616161',
+          fontSize: '12px',
+          fontFamily: 'inherit',
           fontWeight: 400,
         },
       },
       categories: [
-        "Jan",
-        "Fev",
-        "Mar",
-        "Abr",
-        "Mai",
-        "Jun",
-        "Jul",
-        "Ago",
-        "Set",
-        "Out",
-        "Nov",
-        "Dez",
+        'Jan',
+        'Fev',
+        'Mar',
+        'Abr',
+        'Mai',
+        'Jun',
+        'Jul',
+        'Ago',
+        'Set',
+        'Out',
+        'Nov',
+        'Dez',
       ],
     },
     yaxis: {
       labels: {
         style: {
-          colors: "#616161",
-          fontSize: "12px",
-          fontFamily: "inherit",
+          colors: '#616161',
+          fontSize: '12px',
+          fontFamily: 'inherit',
           fontWeight: 400,
         },
       },
     },
     grid: {
       show: false,
-      borderColor: "#dddddd",
+      borderColor: '#dddddd',
       strokeDashArray: 5,
       xaxis: {
         lines: {
@@ -101,14 +101,14 @@ const chartConfig = {
       opacity: 0.8,
     },
     tooltip: {
-      theme: "dark",
+      theme: 'dark',
     },
   },
-};
+}
 
 export default function BarChart() {
   return (
-    <Card className="dark:bg-slate-700">
+    <Card className="dark:bg-slate-600">
       <CardHeader
         floated={false}
         shadow={false}
@@ -119,14 +119,18 @@ export default function BarChart() {
           <GlobeAmericasIcon className="h-6 w-6" />
         </div>
         <div>
-          <Typography variant="h6" color="blue-gray" className="dark:text-slate-300 ">
+          <Typography
+            variant="h6"
+            color="blue-gray"
+            className="dark:text-slate-300 "
+          >
             Policiais Militares de Férias por mês no ano de 2024
           </Typography>
         </div>
       </CardHeader>
       <CardBody className="px-2 pb-0 dark:text-slate-200">
-        <Chart  {...chartConfig} />
+        <Chart {...chartConfig} />
       </CardBody>
     </Card>
-  );
+  )
 }
