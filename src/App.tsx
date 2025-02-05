@@ -7,7 +7,7 @@ import {
   useLocation,
   BrowserRouter,
 } from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider, useQuery, UseQueryResult } from '@tanstack/react-query'
 import Home from './views/home'
 import Details from './views/details'
 import Dashboard from './views/dashboard'
@@ -46,6 +46,8 @@ import DashboardTeste from './views/dashtest'
 import React from 'react'
 import VacationsPlan from './views/vacation/vacationsPlan'
 import Map from './views/map'
+import { WeaponRequestForm } from './views/weapons/testepdf'
+import fetchUsers from './services/fetchUsers'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -55,6 +57,9 @@ const queryClient = new QueryClient({
     },
   },
 })
+export function useUsers(): UseQueryResult<User[], Error> {
+  return useQuery<User[], Error>(['users'], fetchUsers)
+}
 function App() {
   const Users = lazy(() => import('./components/tablematerial'))
   const Dashboard = lazy(() => import('./views/dashboard'))
@@ -80,6 +85,7 @@ function App() {
           <QueryClientProvider client={queryClient}>
             <Routes>
               <Route path="/signin" element={<SignIn />} />
+
               <Route
                 path="/programacaoferias"
                 element={<AppointmentVacation />}
@@ -99,6 +105,8 @@ function App() {
                       </Suspense>
                     }
                   />
+                  <Route path="/testepdf" element={<WeaponRequestForm />} />
+
                   <Route
                     path="/dashboard"
                     element={

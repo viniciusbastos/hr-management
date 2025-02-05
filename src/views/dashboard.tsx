@@ -6,11 +6,11 @@ import fetchUsers from '../services/fetchUsers'
 import BarChart from '../components/barchart'
 import Loading from '../components/loading'
 import { useEffect, useState } from 'react'
-import { useUsers } from '../components/tablematerial'
+import { useUsers } from '../App'
 
 const Dashboard = () => {
   const { data: users, isLoading, isError, error } = useUsers()
-
+  console.log(users)
   if (isLoading) {
     const token = localStorage.getItem('token')
 

@@ -42,20 +42,8 @@ import {
 import Loading from './loading'
 import DefaultLayout from '../routes/sideBarLayout'
 import { FaCheck, FaCopy } from 'react-icons/fa6'
+import { useUsers } from '../App'
 
-interface User {
-  id: string
-  name: string
-  mat: string
-  email: string
-  status: string
-  role: string
-  posto: string
-}
-
-export function useUsers(): UseQueryResult<User[], Error> {
-  return useQuery<User[], Error>(['users'], fetchUsers)
-}
 const TABS = [
   {
     label: 'All',

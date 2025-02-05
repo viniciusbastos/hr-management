@@ -20,8 +20,11 @@ import { api } from '../../services/api'
 import FormWeapon from '../../components/formWeapon'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { toast, ToastContainer } from 'react-toastify'
-import { PDFDownloadLink } from '@react-pdf/renderer'
+import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer'
 import WeaponsPDF from './weaponChargePdf'
+import CardDashboard from '../../components/cardDashboard'
+import ResponsabilityTermPDF from './termoResponsabilidade'
+import { useUsers } from '../../App'
 
 /**
  * Component for displaying and managing a list of weapons.
@@ -74,8 +77,10 @@ const WeaponsList = () => {
     mat: string
     serialNumber: string
     model: string
+    weaponType: string
+    caliber: string
   }
-
+  const users = useUsers()
   const queryClient = useQueryClient()
   const {
     data: weapons,
@@ -90,6 +95,7 @@ const WeaponsList = () => {
       console.log('Data refetched:', weapons)
     },
   })
+  console.log(weapons)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [deleteId, setDeleteId] = useState(null)
   const [showLoading, setShowLoading] = useState(false)
@@ -131,6 +137,18 @@ const WeaponsList = () => {
 
     setFilteredUsers(filteredItems)
   }
+  const qtdWeaponsExpired = weapons?.filter?.((weapon: Weapon) => {
+    const initialDate = parseISO(weapon.InitialDate)
+    const currentDate = new Date()
+    const expirationDate = addDays(initialDate, 365)
+    return isAfter(currentDate, expirationDate)
+  }).length
+  const individualWeponsCharge =
+    new Set(weapons?.map((weapon: Weapon) => weapon.mat)).size ?? 0
+  const quantityWeaponsType =
+    weapons?.filter((weapon: Weapon) => weapon.weaponType === 'Pistola')
+      .length ?? 0
+  console.log(quantityWeaponsType)
 
   const filteredData = filteredUsers ?? weapons
 
@@ -192,6 +210,25 @@ const WeaponsList = () => {
       setShowLoading(false)
     }
   }
+  const handleDownload = async (id: number) => {
+    try {
+      const response = await api.post(`/generate-pdf/${id}`, {
+        responseType: 'blob',
+      })
+
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', `weapon-${id}-document.pdf`)
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+    } catch (error) {
+      console.error('Error downloading weapon document:', error)
+      toast.error('Failed to download document')
+    }
+  }
+
   return (
     <>
       {isFetching && (
@@ -216,11 +253,11 @@ const WeaponsList = () => {
           </CardHeader>
           <CardBody className="overflow-scroll px-0">
             <Button
-              className="flex items-left gap-3 dark:bg-slate-700 mb-5"
+              className="flex items-left gap-3 dark:bg-slate-700 mb-5 ml-4"
               size="xl"
               onClick={handleOpen}
             >
-              Carga Fixa
+              QtdCarga Fixa
             </Button>
             <Dialog
               size="xs"
@@ -233,7 +270,7 @@ const WeaponsList = () => {
             {isFetching && (
               <div className="refresh-indicator">Refreshing...</div>
             )}
-            <div className="w-full md:w-72 mb-3 flex justify-end">
+            <div className="w-full md:w-72 mb-3 ml-4 flex justify-end">
               <Input
                 value={searchItem}
                 onChange={handleInputChange}
@@ -242,145 +279,210 @@ const WeaponsList = () => {
                 crossOrigin={undefined}
               />
             </div>
-
-            <table className="w-full m-4 min-w-full divide-y divide-gray-200 dark:divide-gray-700 dark:border-gray-700">
-              <thead className="border bg-gray-200 dark:bg-slate-700 dark:text-gray-200">
-                <tr className="border">
-                  <th className="px-4 py-3 text-left">#</th>
-                  <th className="px-4 py-3 text-left">Mat</th>
-                  <th className="px-4 py-3 text-left">Posto</th>
-                  <th className="px-4 py-3 text-left">Nome</th>
-                  <th className="px-4 py-3 text-left">Tipo</th>
-                  <th className="px-4 py-3 text-left">Número de Serie</th>
-                  <th className="px-4 py-3 text-left">Data da Carga</th>
-                  <th className="px-4 py-3 text-left">
-                    Data do Vencimento da Carga
-                  </th>
-                  <th className="px-4 py-3 text-left">Situação</th>
-                  <th className="px-4 py-3 text-left">Renovar</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {filteredData?.map((weapon: Weapon) => (
-                  <tr
-                    key={weapon.id}
-                    className="border hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-200"
-                  >
-                    <td className="px-4 py-3 font-medium">{weapon.id}</td>
-                    <td className="px-4 py-3 font-medium">{weapon.mat}</td>
-                    <td className="px-4 py-3 font-medium">{weapon.posto}</td>
-                    <td className="py-3 px-8 text-left border w-full  md:w-fit">
-                      {weapon.name}
-                    </td>
-                    <td className="px-4 py-3 font-medium">{weapon.model}</td>
-                    <td className="px-4 py-3 font-medium">
-                      {weapon.serialNumber}
-                    </td>
-                    <td className="py-3 px-8 text-left border">
-                      {format(parseISO(weapon.InitialDate), 'dd/MM/yyyy')}
-                    </td>
-                    <td className="py-3 px-8 text-left border">
-                      {format(
-                        addDays(parseISO(weapon.InitialDate), 365),
-                        'dd/MM/yyyy'
-                      )}
-                    </td>
-                    <td className="py-3 px-8 text-left border">
-                      {isAfter(
-                        addDays(parseISO(weapon.InitialDate), 365),
-                        new Date()
-                      ) ? (
-                        <span
-                          className="px-2 inline-flex text-xs leading-5
-                          font-semibold rounded-full bg-green-300 text-green-800"
-                        >
-                          Valid
-                        </span>
-                      ) : (
-                        <span
-                          className="px-2 inline-flex text-xs leading-5
-                          font-semibold rounded-full bg-red-400 text-red-800"
-                        >
-                          Not Valid
-                        </span>
-                      )}
-                    </td>
-
-                    <button
-                      onClick={() => handleDischarge(weapon.id)}
-                      className="bg-red-500 hover:bg-red-700 m-2 text-white font-bold py-1 px-2 rounded"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="white"
-                        className="h-5 w-5"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2.25a.75.75 0 01.75.75v16.19l6.22-6.22a.75.75 0 111.06 1.06l-7.5 7.5a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 111.06-1.06l6.22 6.22V3a.75.75 0 01.75-.75z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </button>
-
-                    <button
-                      onClick={() => handleRenovate(weapon.id)}
-                      className="bg-green-500 hover:bg-green-700 m-2 text-white font-bold py-1 px-2 rounded"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="white"
-                        className="h-5 w-5"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </button>
-
-                    <button
-                      onClick={() => openDeleteModal(weapon.id)}
-                      className="bg-red-500 hover:bg-red-700 text-white m-2 font-bold py-1 px-2 rounded"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        className="h-5 w-5"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </button>
-
-                    <PDFDownloadLink
-                      document={<WeaponsPDF weapon={weapon} />}
-                      fileName={`weapon-${weapon.id}-report.pdf`}
-                    >
-                      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ">
-                        <>
-                          <svg
-                            className="w-5 h-5"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-                          </svg>
-                        </>
-                      </button>
-                    </PDFDownloadLink>
+            <div className="flex flex-wrap">
+              <div className="flex flex-row">
+                <div className="rounded-xl shadow-xl flex-row w-1/4 ml-8">
+                  <CardDashboard
+                    link="/weaponsdashboard"
+                    title={'QTD Armas Cargueadas'}
+                    quant={weapons.length}
+                    color="bg-white"
+                    darkColor="bg-slate-600"
+                    info={'Armas de Fogo'}
+                  />
+                </div>
+                <div className="rounded-xl shadow-xl flex-row w-1/4 ml-2">
+                  <CardDashboard
+                    link="/weaponsdashboard"
+                    title={'Carga Fixa Vencida'}
+                    quant={qtdWeaponsExpired}
+                    color="bg-white"
+                    darkColor="bg-slate-600"
+                    info={'Acaf'}
+                  />
+                </div>
+                <div className="rounded-xl shadow-xl flex-row w-1/4 ml-2">
+                  <CardDashboard
+                    link="/weaponsdashboard"
+                    title={'QTD PM com Carga Fixa'}
+                    quant={individualWeponsCharge}
+                    color="bg-white"
+                    darkColor="bg-slate-600"
+                    info={'Policiais Militares'}
+                  />
+                </div>
+                <div className="rounded-xl shadow-xl flex-row w-1/4 ml-2">
+                  <CardDashboard
+                    link="/weaponsdashboard"
+                    title={'Qtd de Pistolas Cargueadas'}
+                    quant={quantityWeaponsType}
+                    color="bg-white"
+                    darkColor="bg-slate-600"
+                    info={'Policiais Militares'}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="flex px-4 mx-4 mt-4">
+              <table className="w-full  min-w-full divide-y divide-gray-200 dark:divide-gray-700 dark:border-gray-700">
+                <thead className="border bg-gray-200 dark:bg-slate-700 dark:text-gray-200">
+                  <tr className="border">
+                    <th className="px-4 py-3 text-left">#</th>
+                    <th className="px-4 py-3 text-left">Mat</th>
+                    <th className="px-4 py-3 text-left">Posto</th>
+                    <th className="px-4 py-3 text-left">Nome</th>
+                    <th className="px-4 py-3 text-left">Tipo</th>
+                    <th className="px-4 py-3 text-left">Número de Serie</th>
+                    <th className="px-4 py-3 text-left">Data da Carga</th>
+                    <th className="px-4 py-3 text-left">Vencimento da Carga</th>
+                    <th className="px-4 py-3 text-left">Situação</th>
+                    <th className="px-4 py-3 text-left">Renovar</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+
+                <tbody>
+                  {filteredData?.map((weapon: Weapon) => (
+                    <tr
+                      key={weapon.id}
+                      className="border hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-200"
+                    >
+                      <td className="px-4 py-3 font-medium">{weapon.id}</td>
+                      <td className="px-4 py-3 font-medium">{weapon.mat}</td>
+                      <td className="px-4 py-3 font-medium">{weapon.posto}</td>
+                      <td className="py-3 px-8 text-left border w-full  md:w-fit">
+                        {weapon.name}
+                      </td>
+                      <td className="px-4 py-3 font-medium">{weapon.model}</td>
+                      <td className="px-4 py-3 font-medium">
+                        {weapon.serialNumber}
+                      </td>
+                      <td className="py-3 px-8 text-left border">
+                        {format(parseISO(weapon.InitialDate), 'dd/MM/yyyy')}
+                      </td>
+                      <td className="py-3 px-8 text-left border">
+                        {format(
+                          addDays(parseISO(weapon.InitialDate), 365),
+                          'dd/MM/yyyy'
+                        )}
+                      </td>
+                      <td className="py-3 px-8 text-left border">
+                        {isAfter(
+                          addDays(parseISO(weapon.InitialDate), 365),
+                          new Date()
+                        ) ? (
+                          <span
+                            className="px-2 inline-flex text-xs leading-5
+                          font-semibold rounded-full bg-green-300 text-green-800"
+                          >
+                            Válido
+                          </span>
+                        ) : (
+                          <span
+                            className="px-2 inline-flex text-xs leading-5
+                          font-semibold rounded-full bg-red-400 text-red-800"
+                          >
+                            Vencido
+                          </span>
+                        )}
+                      </td>
+
+                      <button
+                        onClick={() => handleDischarge(weapon.id)}
+                        className="bg-red-500 hover:bg-red-700 m-2 text-white font-bold py-1 px-2 rounded"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="white"
+                          className="h-5 w-5"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M12 2.25a.75.75 0 01.75.75v16.19l6.22-6.22a.75.75 0 111.06 1.06l-7.5 7.5a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 111.06-1.06l6.22 6.22V3a.75.75 0 01.75-.75z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </button>
+
+                      <button
+                        onClick={() => handleRenovate(weapon.id)}
+                        className="bg-green-500 hover:bg-green-700 m-2 text-white font-bold py-1 px-2 rounded"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="white"
+                          className="h-5 w-5"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </button>
+
+                      <button
+                        onClick={() => openDeleteModal(weapon.id)}
+                        className="bg-red-500 hover:bg-red-700 text-white m-2 font-bold py-1 px-2 rounded"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          className="h-5 w-5"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </button>
+
+                      <PDFDownloadLink
+                        document={<WeaponsPDF weapon={weapon} />}
+                        fileName={`weapon-${weapon.id}-report.pdf`}
+                      >
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ">
+                          <>
+                            <svg
+                              className="w-5 h-5"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+                            </svg>
+                          </>
+                        </button>
+                      </PDFDownloadLink>
+                      <PDFDownloadLink
+                        document={<ResponsabilityTermPDF weapon={weapon} />}
+                        fileName={`weapon-${weapon.id}-report.pdf`}
+                      >
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ">
+                          <>
+                            <svg
+                              className="w-5 h-5"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+                            </svg>
+                          </>
+                        </button>
+                      </PDFDownloadLink>
+                      <button
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+                        onClick={() => handleDownload(weapon.id)}
+                      >
+                        TESTE
+                      </button>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
             <DeleteModal
               isOpen={isModalOpen}
               onClose={closeDeleteModal}

@@ -28,10 +28,12 @@ const CardDashboard = (props: {
         <div className="text-2xl font-medium text-gray-800 dark:text-gray-200 font-sans">
           {props.title}
         </div>
-        <h2 className="text-lg text-gray-600 dark:text-gray-400  font-sans">
+        <h2 className="text-2xl text-gray-600 dark:text-gray-400  font-sans">
           {props.quant}
         </h2>
-        <p className="text-gray-400 font-sans ">{props.info}</p>
+        <p className="text-gray-400 font-sans dark:text-gray-400">
+          {props.info}
+        </p>
       </div>
     </div>
   )
