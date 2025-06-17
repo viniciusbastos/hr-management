@@ -95,14 +95,13 @@ const WeaponsList = () => {
       console.log('Data refetched:', weapons)
     },
   })
-  console.log(weapons)
+
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [deleteId, setDeleteId] = useState(null)
   const [showLoading, setShowLoading] = useState(false)
   const [searchItem, setSearchItem] = useState('')
   const [filteredUsers, setFilteredUsers] = useState(weapons)
   const openDeleteModal = (id: any) => {
-    console.log(id)
     setDeleteId(id)
     setIsModalOpen(true)
   }
@@ -148,7 +147,6 @@ const WeaponsList = () => {
   const quantityWeaponsType =
     weapons?.filter((weapon: Weapon) => weapon.weaponType === 'Pistola')
       .length ?? 0
-  console.log(quantityWeaponsType)
 
   const filteredData = filteredUsers ?? weapons
 
@@ -177,7 +175,7 @@ const WeaponsList = () => {
     const toastId = toast.loading('Atualizando...')
     try {
       const response = await api.put(`/weaponsfixed/${id}`) // Adjust the API endpoint as needed
-      console.log(response.data)
+
       toast.update(toastId, {
         render: 'Arma Descargueada',
         type: 'warning',
@@ -424,7 +422,7 @@ const WeaponsList = () => {
 
                       <button
                         onClick={() => openDeleteModal(weapon.id)}
-                        className="bg-red-500 hover:bg-red-700 text-white m-2 font-bold py-1 px-2 rounded"
+                        className="bg-red-500 hover:bg-red-700 text-white m-1 font-bold py-1 px-2 rounded"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -472,12 +470,6 @@ const WeaponsList = () => {
                           </>
                         </button>
                       </PDFDownloadLink>
-                      <button
-                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
-                        onClick={() => handleDownload(weapon.id)}
-                      >
-                        TESTE
-                      </button>
                     </tr>
                   ))}
                 </tbody>

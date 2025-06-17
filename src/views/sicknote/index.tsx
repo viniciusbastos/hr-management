@@ -31,13 +31,10 @@ const SickNotes = () => {
     refetch,
   } = useQuery(['sicknote'], fetchSickNote, {
     staleTime: 1500000, // Data is considered fresh for 5 seconds
-    onSuccess: (data) => {
-      console.log('Sick notes loaded:', data)
-    },
+    onSuccess: (data) => {},
   })
 
   const openDeleteModal = (id: string) => {
-    console.log(id)
     setDeleteId(id)
     setIsModalOpen(true)
   }

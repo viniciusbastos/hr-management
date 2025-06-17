@@ -40,7 +40,17 @@ const FormWeapon = ({ refetch }) => {
     reset,
   } = useForm()
   const navigate = useNavigate()
-  const result = useQuery(['users'], fetchUsersSelect)
+  const { data: userselect, isError } = useQuery(
+    ['userselect'],
+    fetchUsersSelect
+  )
+  if (isError) {
+    return (
+      <Alert color="red" className="mt-4">
+        Error loading users
+      </Alert>
+    )
+  }
   const { data: weapon } = useQuery(['weapon'], fetchWeaponSelect)
 
   const {
@@ -101,10 +111,10 @@ const FormWeapon = ({ refetch }) => {
           <div className="mb-3">
             <label>Selecionar Policial</label>
             <Select
-              options={result.data}
+              options={userselect}
               value={
                 belongsToId
-                  ? result.data.find((x) => x.value === belongsToId)
+                  ? userselect.find((x) => x.value === belongsToId)
                   : belongsToId
               }
               onChange={(option) =>

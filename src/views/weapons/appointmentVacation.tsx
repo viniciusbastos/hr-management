@@ -29,7 +29,9 @@ const AppointmentCargaFixa = () => {
     formState: { errors, isValid },
     reset,
   } = useForm()
-  const result = useQuery(['users'], fetchUsersSelect)
+  const { data, isError } = useQuery(['users'], fetchUsersSelect)
+  console.log(data)
+  console.log(isError)
   const {
     field: {
       value: belongsToId,
@@ -78,10 +80,10 @@ const AppointmentCargaFixa = () => {
           <div className="mb-3">
             <label>Selecionar Policial</label>
             <Select
-              options={result.data}
+              options={data}
               value={
                 belongsToId
-                  ? result.data.find((x) => x.value === belongsToId)
+                  ? data.find((x) => x.value === belongsToId)
                   : belongsToId
               }
               onChange={(option) =>
@@ -136,4 +138,4 @@ const AppointmentCargaFixa = () => {
   )
 }
 
-export default AppointmentVacation
+export default AppointmentCargaFixa

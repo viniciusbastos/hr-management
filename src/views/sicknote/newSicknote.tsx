@@ -1,11 +1,11 @@
-import { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { api } from "../../services/api";
-import config from "../../utils/config";
-import { useQuery } from "@tanstack/react-query";
-import fetchUsers from "../../services/fetchUsers";
-import fetchHealthProfessional from "../../services/fetchHealthProfessional";
+import { useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { api } from '../../services/api'
+import config from '../../utils/config'
+import { useQuery } from '@tanstack/react-query'
+import fetchUsers from '../../services/fetchUsers'
+import fetchHealthProfessional from '../../services/fetchHealthProfessional'
 import Select from 'react-select'
 
 import {
@@ -21,7 +21,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import { useForm, useController, type FieldValues } from 'react-hook-form'
 import fetchUsersSelect from '../../services/fetchUsersSelect'
 
-const SicknoteForm: React.FC  = () => {
+const SicknoteForm: React.FC = () => {
   const {
     register,
     handleSubmit,
@@ -29,7 +29,12 @@ const SicknoteForm: React.FC  = () => {
     formState: { errors, isValid },
     reset,
   } = useForm()
-  const result = useQuery(['users'], fetchUsersSelect)
+  const {
+    data: selectuser,
+    isLoading,
+    isError,
+  } = useQuery(['selectuser'], fetchUsersSelect)
+
   const {
     field: {
       value: belongsToId,
@@ -39,7 +44,6 @@ const SicknoteForm: React.FC  = () => {
   } = useController({ name: 'belongsToId', control })
 
   const onSubmit = async (data: FieldValues) => {
-    
     const id = toast.loading('Please wait...')
     try {
       const response = await api.post(`/sicknote/`, data)
@@ -79,10 +83,10 @@ const SicknoteForm: React.FC  = () => {
           <div className="mb-3">
             <label>Selecionar Policial</label>
             <Select
-              options={result.data}
+              options={selectuser}
               value={
                 belongsToId
-                  ? result.data.find((x) => x.value === belongsToId)
+                  ? selectuser.find((x) => x.value === belongsToId)
                   : belongsToId
               }
               onChange={(option) =>
@@ -128,7 +132,7 @@ const SicknoteForm: React.FC  = () => {
               {...register('crm', { required: true })}
             />
           </div>
-          <input  hidden/>
+          <input hidden />
           <div className="mb-6 mt-3">
             <label>Data de Início</label>
             <Input
@@ -138,8 +142,8 @@ const SicknoteForm: React.FC  = () => {
               {...register('InitialDate', { required: true })}
             />
           </div>
-          
-          <input  hidden/>
+
+          <input hidden />
 
           <div className="mt-3 mb-6 relative bottom-0 right-0 ">
             <Button disabled={!isValid} type="submit" color="green">
@@ -152,4 +156,4 @@ const SicknoteForm: React.FC  = () => {
   )
 }
 
-export default SicknoteForm;
+export default SicknoteForm
