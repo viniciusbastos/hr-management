@@ -457,6 +457,7 @@ const WeaponsList = () => {
                               : error
                                 ? 'Failed to create PDF'
                                 : 'Download PDF'}
+                            {error && console.error('PDF error:', error)}{' '}
                           </button>
                         )}
                       </PDFDownloadLink>

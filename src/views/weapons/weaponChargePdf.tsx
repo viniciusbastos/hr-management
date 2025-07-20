@@ -95,7 +95,21 @@ const styles = StyleSheet.create({
   },
 })
 
-const WeaponRequestPDF = ({ weapon }) => (
+type Weapon = {
+  id: string | number
+  name: string
+  posto: string
+  mat: string
+  weaponType: string
+  model: string
+  serialNumber: string
+}
+
+interface WeaponRequestPDFProps {
+  weapon: Weapon
+}
+
+const WeaponRequestPDF = ({ weapon }: WeaponRequestPDFProps) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.headerGrid}>
