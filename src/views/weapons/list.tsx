@@ -442,21 +442,25 @@ const WeaponsList = () => {
                         document={<WeaponsPDF weapon={weapon} />}
                         fileName={`requerimento-${weapon.id}.pdf`}
                       >
-                        <button
-                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
-                          aria-label={`Download requerimento para arma ${weapon.id}`}
-                          title="Download Requerimento"
-                        >
-                          <svg
-                            className="w-5 h-5"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            aria-hidden="true"
-                          >
-                            <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-                          </svg>
-                        </button>
+                        {({
+                          url,
+                          loading,
+                          error,
+                        }: {
+                          url: string | null
+                          loading: boolean
+                          error: Error | null
+                        }) => (
+                          <button disabled={loading || error}>
+                            {loading
+                              ? 'Creating PDF…'
+                              : error
+                                ? 'Failed to create PDF'
+                                : 'Download PDF'}
+                          </button>
+                        )}
                       </PDFDownloadLink>
+
                       <PDFDownloadLink
                         document={<ResponsabilityTermPDF weapon={weapon} />}
                         fileName={`termo-responsabilidade-${weapon.id}.pdf`}
