@@ -109,10 +109,17 @@ const ResponsabilityTermPDF = ({ weapon }) => (
       <Text style={styles.requerimento} wrap={false}>
         {weapon.name}, {weapon.posto}, matrícula {weapon.mat}, ora servindo
         no(a) 6ª CIPM - RIO REAL, assumo total responsabilidade pelo uso e
-        manutenção da arma de fogo, marca {weapon.brand}, modelo {weapon.model}{' '}
-        n° de série {weapon.serialNumber}, espécie {weapon.weaponType},{' '}
-        {weapon.Caliber} E 39 MUNIÇÕES DA MARCA CBC, LOTE: 1113, CALIBRE: .40,
-        MODELO: ETPP 180GR, LOCALIZADOR: ESL99.
+        manutenção da arma de fogo, marca{' '}
+        <Text style={{ fontWeight: 'bold' }}>{weapon.brand}</Text>, modelo{' '}
+        <Text style={{ fontWeight: 'bold' }}>{weapon.model}</Text> n° de série{' '}
+        <Text style={{ fontWeight: 'bold' }}>{weapon.serialNumber}</Text>,
+        espécie <Text style={{ fontWeight: 'bold' }}>{weapon.weaponType}</Text>,{' '}
+        <Text style={{ fontWeight: 'bold' }}> {weapon.Caliber}</Text> E{' '}
+        <Text style={{ fontWeight: 'bold' }}>39 MUNIÇÕES</Text> DA MARCA CBC,{' '}
+        <Text style={{ fontWeight: 'bold' }}>LOTE: 1113</Text>,{' '}
+        <Text style={{ fontWeight: 'bold' }}>CALIBRE: .40</Text>, MODELO:{' '}
+        <Text style={{ fontWeight: 'bold' }}>ETPP 180GR</Text>, LOCALIZADOR:{' '}
+        <Text style={{ fontWeight: 'bold' }}>ESL99</Text>.
       </Text>
       <Text style={styles.requerimento}>
         <Text style={{ textAlign: 'left', fontSize: 12, marginTop: 5 }}>
