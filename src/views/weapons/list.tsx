@@ -254,7 +254,7 @@ const WeaponsList = () => {
               size="xl"
               onClick={handleOpen}
             >
-              NOVA Carga Fixa
+              Nova Carga Fixa
             </Button>
             <Dialog
               size="xs"
