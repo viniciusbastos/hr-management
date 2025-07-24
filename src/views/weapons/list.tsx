@@ -144,9 +144,8 @@ const WeaponsList = () => {
   }).length
   const individualWeponsCharge =
     new Set(weapons?.map((weapon: Weapon) => weapon.mat)).size ?? 0
-  const quantityWeaponsType =
-    weapons?.filter((weapon: Weapon) => weapon.weaponType === 'Pistola')
-      .length ?? 0
+  const quantityWeaponsTypePT100 =
+    weapons?.filter((weapon: Weapon) => weapon.model === 'PT100').length ?? 0
 
   const filteredData = filteredUsers ?? weapons
 
@@ -312,8 +311,8 @@ const WeaponsList = () => {
                 <div className="rounded-xl shadow-xl flex-row w-1/4 ml-2">
                   <CardDashboard
                     link="/weaponsdashboard"
-                    title={'Qtd de Pistolas Cargueadas'}
-                    quant={quantityWeaponsType}
+                    title={'Qtd de Pistolas PT100 Cargueadas'}
+                    quant={quantityWeaponsTypePT100}
                     color="bg-white"
                     darkColor="bg-slate-600"
                     info={'Policiais Militares'}

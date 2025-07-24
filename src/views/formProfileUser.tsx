@@ -48,7 +48,7 @@ const FormUser = () => {
         autoClose: 5000,
       })
       queryClient.invalidateQueries({
-        queryKey: ['vacation']
+        queryKey: ['vacation'],
       }) // Invalidate the query
       reset()
     } catch (error) {
@@ -71,7 +71,7 @@ const FormUser = () => {
         className="bg-caqui-700 p-2 grid h-12 mb-4  place-items-center"
       >
         <Typography variant="h5" color="white" className=" mb-2">
-          Plano de Férias 2025/26
+          Cadastro de Novos Usuários
         </Typography>
       </CardHeader>
       <ToastContainer autoClose={3000} hideProgressBar />
@@ -112,6 +112,24 @@ const FormUser = () => {
               className="mb-6"
               type="email"
               {...register('useremail', { required: true })}
+            />
+          </div>
+          <div className="mb-6 mt-3">
+            <Input
+              crossOrigin
+              label="phone"
+              className="mb-6"
+              type="phone"
+              {...register('phone', { required: true })}
+            />
+          </div>
+          <div className="mb-6 mt-3">
+            <Input
+              crossOrigin
+              label="address"
+              className="mb-6"
+              type="address"
+              {...register('address', { required: true })}
             />
           </div>
 

@@ -48,7 +48,7 @@ const FormUser = () => {
         autoClose: 5000,
       })
       queryClient.invalidateQueries({
-        queryKey: ['vacation']
+        queryKey: ['vacation'],
       }) // Invalidate the query
       reset()
     } catch (error) {
@@ -71,7 +71,7 @@ const FormUser = () => {
         className="bg-caqui-700 p-2 grid h-12 mb-4  place-items-center"
       >
         <Typography variant="h5" color="white" className=" mb-2">
-          Plano de Férias 2025/26
+          Cadastro de Novos Usuários
         </Typography>
       </CardHeader>
       <ToastContainer autoClose={3000} hideProgressBar />
@@ -112,6 +112,96 @@ const FormUser = () => {
               className="mb-6"
               type="email"
               {...register('useremail', { required: true })}
+            />
+          </div>
+          <div className="mb-6 mt-3">
+            <Input
+              crossOrigin
+              label="phone"
+              className="mb-6"
+              type="phone"
+              {...register('phone', { required: true })}
+            />
+          </div>
+          <div className="mb-6 mt-3">
+            <Input
+              crossOrigin
+              label="address"
+              className="mb-6"
+              type="address"
+              {...register('address', { required: true })}
+            />
+          </div>
+          <div className="mb-6 mt-3">
+            <Input
+              crossOrigin
+              label="city"
+              className="mb-6"
+              type="city"
+              {...register('city', { required: true })}
+            />
+          </div>
+          <div className="mb-6 mt-3">
+            <Input
+              crossOrigin
+              label="city"
+              className="mb-6"
+              type="city"
+              {...register('city', { required: true })}
+            />
+          </div>
+          <div className="mb-6 mt-3">
+            <Input
+              crossOrigin
+              label="state"
+              className="mb-6"
+              type="state"
+              {...register('state', { required: true })}
+            />
+          </div>
+          <div className="mb-6 mt-3">
+            <Input
+              crossOrigin
+              label="cpf"
+              className="mb-6"
+              type="cpf"
+              {...register('cpf', { required: true })}
+            />
+          </div>
+          <div className="mb-6 mt-3">
+            <Input
+              crossOrigin
+              label="serviceTime"
+              className="mb-6"
+              type="serviceTime"
+              {...register('serviceTime', { required: true })}
+            />
+          </div>
+          <div className="mb-6 mt-3">
+            <Input
+              crossOrigin
+              label="birthDate"
+              className="mb-6"
+              type="birthDate"
+              {...register('birthDate', { required: true })}
+            />
+          </div>
+          <div className="mb-6 mt-3">
+            <Input
+              crossOrigin
+              label="workPlace"
+              className="mb-6"
+              type="workPlace"
+              {...register('workPlace', { required: true })}
+            />
+          </div>
+          <div className="mb-6 mt-3">
+            <Input
+              crossOrigin
+              label="neighborhood"
+              className="mb-6"
+              type="neighborhood"
+              {...register('neighborhood', { required: true })}
             />
           </div>
 
