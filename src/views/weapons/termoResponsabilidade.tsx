@@ -111,7 +111,8 @@ const ResponsabilityTermPDF = ({ weapon }) => (
         no(a) 6ª CIPM - RIO REAL, assumo total responsabilidade pelo uso e
         manutenção da arma de fogo, marca {weapon.brand}, modelo {weapon.model}{' '}
         n° de série {weapon.serialNumber}, espécie {weapon.weaponType},{' '}
-        {weapon.Caliber}.
+        {weapon.Caliber} E 39 MUNIÇÕES DA MARCA CBC, LOTE: 1113, CALIBRE: .40,
+        MODELO: ETPP 180GR, LOCALIZADOR: ESL99.
       </Text>
       <Text style={styles.requerimento}>
         <Text style={{ textAlign: 'left', fontSize: 12, marginTop: 5 }}>
