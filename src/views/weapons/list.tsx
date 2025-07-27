@@ -100,6 +100,7 @@ const WeaponsList = () => {
   const [deleteId, setDeleteId] = useState(null)
   const [showLoading, setShowLoading] = useState(false)
   const [searchItem, setSearchItem] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [filteredUsers, setFilteredUsers] = useState(weapons)
   const openDeleteModal = (id: any) => {
     setDeleteId(id)
@@ -190,6 +191,9 @@ const WeaponsList = () => {
   }
   const handleRenovate = async (weaponId: string | number) => {
     const toastId = toast.loading('Renovando Carga...')
+    if (isSubmitting) return // Prevent further submits
+
+    setIsSubmitting(true)
     try {
       const response = await api.post(`/weapons/copy/${weaponId}`) // Adjust the API endpoint as needed
       // Invalidate the query
@@ -205,6 +209,7 @@ const WeaponsList = () => {
       console.error('Error renovating weapon:', error)
     } finally {
       setShowLoading(false)
+      setIsSubmitting(false)
     }
   }
   const handleDownload = async (id: number) => {
@@ -403,6 +408,7 @@ const WeaponsList = () => {
 
                       <button
                         onClick={() => handleRenovate(weapon.id)}
+                        disabled={isSubmitting}
                         className="bg-green-500 hover:bg-green-700 m-2 text-white font-bold py-1 px-2 rounded"
                       >
                         <svg
