@@ -7,7 +7,12 @@ import {
   useLocation,
   BrowserRouter,
 } from 'react-router-dom'
-import { QueryClient, QueryClientProvider, useQuery, UseQueryResult } from '@tanstack/react-query'
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+  UseQueryResult,
+} from '@tanstack/react-query'
 import Home from './views/home'
 import Details from './views/details'
 import Dashboard from './views/dashboard'
@@ -48,6 +53,8 @@ import VacationsPlan from './views/vacation/vacationsPlan'
 import Map from './views/map'
 import { WeaponRequestForm } from './views/weapons/testepdf'
 import fetchUsers from './services/fetchUsers'
+import WeaponForm from './views/weapons/formNewWeapon'
+import FormNewWeapon from './views/weapons/formNewWeapon'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -170,6 +177,14 @@ function App() {
                     element={
                       <Suspense fallback={<Loading />}>
                         <WeaponControlDashboard />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="/newweapon"
+                    element={
+                      <Suspense fallback={<Loading />}>
+                        <FormNewWeapon />
                       </Suspense>
                     }
                   />
