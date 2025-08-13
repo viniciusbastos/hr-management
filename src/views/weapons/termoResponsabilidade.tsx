@@ -115,7 +115,7 @@ const ResponsabilityTermPDF = ({ weapon }) => (
         <Text style={{ fontWeight: 'bold' }}>{weapon.serialNumber}</Text>,
         espécie <Text style={{ fontWeight: 'bold' }}>{weapon.weaponType}</Text>,{' '}
         <Text style={{ fontWeight: 'bold' }}> {weapon.Caliber}</Text> E{' '}
-        <Text style={{ fontWeight: 'bold' }}>39 MUNIÇÕES</Text> DA MARCA CBC,{' '}
+        <Text style={{ fontWeight: 'bold' }}>____ MUNIÇÕES</Text> DA MARCA CBC,{' '}
         <Text style={{ fontWeight: 'bold' }}>LOTE: _________</Text>,{' '}
         <Text style={{ fontWeight: 'bold' }}>CALIBRE: .40</Text>, MODELO:{' '}
         <Text style={{ fontWeight: 'bold' }}>ETPP 180GR</Text>, LOCALIZADOR:{' '}

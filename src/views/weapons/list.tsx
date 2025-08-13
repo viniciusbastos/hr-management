@@ -254,8 +254,8 @@ const WeaponsList = () => {
             floated={true}
             className="bg-caqui-700 dark:bg-slate-600 p-2 grid h-12 mb-4  place-items-center"
           >
-            <h3 className="text-xl text-color-white dark:text-slate-200 dark:bg-slate-600 mb-2">
-              Policiais com Carga Fixa
+            <h3 className="text-xl font-bold text-color-white dark:text-slate-200 dark:bg-slate-600 mb-2">
+              CONTROLE DE CARGA FIXA
             </h3>
           </CardHeader>
           <CardBody className="overflow-scroll px-0">
@@ -343,7 +343,9 @@ const WeaponsList = () => {
                     <th className="px-4 py-3 text-left">Data da Carga</th>
                     <th className="px-4 py-3 text-left">Vencimento da Carga</th>
                     <th className="px-4 py-3 text-left">Situação</th>
-                    <th className="px-4 py-3 text-left">Renovar</th>
+                    <th className="px-4 py-3 text-left">Des/Reno</th>
+                    <th className="px-4 py-3 text-left">Imprimir</th>
+                    <th className="px-4 py-3 text-left">Excluir</th>
                   </tr>
                 </thead>
 
@@ -353,14 +355,22 @@ const WeaponsList = () => {
                       key={weapon.id}
                       className="border hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-200"
                     >
-                      <td className="px-4 py-3 font-medium">{weapon.id}</td>
-                      <td className="px-4 py-3 font-medium">{weapon.mat}</td>
-                      <td className="px-4 py-3 font-medium">{weapon.posto}</td>
+                      <td className="px-4 py-3 font-medium border">
+                        {weapon.id}
+                      </td>
+                      <td className="px-4 py-3 font-medium border">
+                        {weapon.mat}
+                      </td>
+                      <td className="px-4 py-3 font-medium border">
+                        {weapon.posto}
+                      </td>
                       <td className="py-3 px-8 text-left border w-full  md:w-fit">
                         {weapon.name}
                       </td>
-                      <td className="px-4 py-3 font-medium">{weapon.model}</td>
-                      <td className="px-4 py-3 font-medium">
+                      <td className="px-4 py-3 font-medium border">
+                        {weapon.model}
+                      </td>
+                      <td className="px-4 py-3 font-medium border">
                         {weapon.serialNumber}
                       </td>
                       <td className="py-3 px-8 text-left border">
@@ -392,82 +402,49 @@ const WeaponsList = () => {
                           </span>
                         )}
                       </td>
-
-                      <button
-                        onClick={() => handleDischarge(weapon.id)}
-                        className="bg-red-500 hover:bg-red-700 m-2 text-white font-bold py-1 px-2 rounded"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="white"
-                          className="h-5 w-5"
+                      <td className="px-4 py-3 font-medium">
+                        <button
+                          onClick={() => handleDischarge(weapon.id)}
+                          className="bg-red-500 hover:bg-red-700 m-2 text-white font-bold py-1 px-2 rounded"
                         >
-                          <path
-                            fillRule="evenodd"
-                            d="M12 2.25a.75.75 0 01.75.75v16.19l6.22-6.22a.75.75 0 111.06 1.06l-7.5 7.5a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 111.06-1.06l6.22 6.22V3a.75.75 0 01.75-.75z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </button>
-
-                      <button
-                        onClick={() => handleRenovate(weapon.id)}
-                        disabled={isSubmitting}
-                        className="bg-green-500 hover:bg-green-700 m-2 text-white font-bold py-1 px-2 rounded"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="white"
-                          className="h-5 w-5"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </button>
-
-                      <button
-                        onClick={() => openDeleteModal(weapon.id)}
-                        className="bg-red-500 hover:bg-red-700 text-white m-1 font-bold py-1 px-2 rounded"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                          className="h-5 w-5"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </button>
-
-                      <button
-                        onClick={() => handleDownloadPDF(weapon)}
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded "
-                      >
-                        <>
                           <svg
-                            className="w-5 h-5"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="white"
+                            className="h-5 w-5"
                           >
-                            <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+                            <path
+                              fillRule="evenodd"
+                              d="M12 2.25a.75.75 0 01.75.75v16.19l6.22-6.22a.75.75 0 111.06 1.06l-7.5 7.5a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 111.06-1.06l6.22 6.22V3a.75.75 0 01.75-.75z"
+                              clipRule="evenodd"
+                            />
                           </svg>
-                        </>
-                      </button>
+                        </button>
 
-                      <PDFDownloadLink
-                        document={<ResponsabilityTermPDF weapon={weapon} />}
-                        fileName={`termo-responsabilidade-${weapon.id}.pdf`}
-                      >
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ">
+                        <button
+                          onClick={() => handleRenovate(weapon.id)}
+                          disabled={isSubmitting}
+                          className="bg-green-500 hover:bg-green-700 m-2 text-white font-bold py-1 px-2 rounded"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="white"
+                            className="h-5 w-5"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </button>
+                      </td>
+                      <td className="px-4 py-3 font-medium border">
+                        <button
+                          onClick={() => handleDownloadPDF(weapon)}
+                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded "
+                        >
                           <>
                             <svg
                               className="w-5 h-5"
@@ -478,7 +455,43 @@ const WeaponsList = () => {
                             </svg>
                           </>
                         </button>
-                      </PDFDownloadLink>
+
+                        <PDFDownloadLink
+                          document={<ResponsabilityTermPDF weapon={weapon} />}
+                          fileName={`termo-responsabilidade-${weapon.id}.pdf`}
+                        >
+                          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ">
+                            <>
+                              <svg
+                                className="w-5 h-5"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                              >
+                                <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+                              </svg>
+                            </>
+                          </button>
+                        </PDFDownloadLink>
+                      </td>
+                      <td className="px-4 py-3 font-medium">
+                        <button
+                          onClick={() => openDeleteModal(weapon.id)}
+                          className="bg-red-500 hover:bg-red-700 text-white m-1 font-bold py-1 px-2 rounded"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            className="h-5 w-5"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
