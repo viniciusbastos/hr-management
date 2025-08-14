@@ -320,6 +320,17 @@ export default function SidebarWithContentSeparator() {
                   </ListItem>
                 </Link>
 
+                <Link to="/dashboardWeaponsCharge">
+                  <ListItem className="text-white">
+                    <ListItemPrefix>
+                      <ChevronRightIcon
+                        strokeWidth={3}
+                        className="h-3 w-5 text-white"
+                      />
+                    </ListItemPrefix>
+                    Dashboard Carga Fixa
+                  </ListItem>
+                </Link>
                 <Link to="/weaponscontrol">
                   <ListItem className="text-white">
                     <ListItemPrefix>

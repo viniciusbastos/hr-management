@@ -55,6 +55,7 @@ import { WeaponRequestForm } from './views/weapons/testepdf'
 import fetchUsers from './services/fetchUsers'
 import WeaponForm from './views/weapons/formNewWeapon'
 import FormNewWeapon from './views/weapons/formNewWeapon'
+import DashboardWeaponsCharge from './views/weapons/dashboardWeaponCharge'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -112,6 +113,15 @@ function App() {
                       </Suspense>
                     }
                   />
+                  <Route
+                    path="/dashboardWeaponsCharge"
+                    element={
+                      <Suspense fallback={<Loading />}>
+                        <DashboardWeaponsCharge />
+                      </Suspense>
+                    }
+                  />
+
                   <Route path="/testepdf" element={<WeaponRequestForm />} />
 
                   <Route
