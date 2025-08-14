@@ -333,7 +333,7 @@ const WeaponsList = () => {
                 </div>
               </div>
             </div>
-            <div className="flex px-4 mx-4 mt-4">
+            <div className="flex px-4 mx-4 mt-8">
               <table className="w-full  min-w-full divide-y divide-gray-200 dark:divide-gray-700 dark:border-gray-700">
                 <thead className="border bg-gray-200 dark:bg-slate-700 dark:text-gray-200">
                   <tr className="border">
