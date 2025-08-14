@@ -315,7 +315,7 @@ const WeaponsList = () => {
                 <div className="rounded-xl shadow-xl flex-row w-1/4 ml-2">
                   <CardDashboard
                     link="/weaponsdashboard"
-                    title={'PM com Carga Fixa'}
+                    title={'Carga Fixa'}
                     quant={individualWeponsCharge}
                     color="bg-white"
                     darkColor="bg-slate-600"
@@ -325,21 +325,21 @@ const WeaponsList = () => {
                 <div className="rounded-xl shadow-xl flex-row w-1/4 ml-2">
                   <CardDashboard
                     link="/weaponsdashboard"
-                    title={'Pistolas PT100 Cargueadas'}
+                    title={'PT100 Cargueadas'}
                     quant={quantityWeaponsTypePT100}
                     color="bg-white"
                     darkColor="bg-slate-600"
-                    info={'Policiais Militares'}
+                    info={'Pistolas'}
                   />
                 </div>
                 <div className="rounded-xl shadow-xl flex-row w-1/4 ml-2">
                   <CardDashboard
                     link="/weaponsdashboard"
-                    title={'Pistolas PT100 Cargueadas'}
+                    title={'PT840 Cargueadas'}
                     quant={quantityWeaponsType840}
                     color="bg-white"
                     darkColor="bg-slate-600"
-                    info={'Policiais Militares'}
+                    info={'Pistolas'}
                   />
                 </div>
               </div>
