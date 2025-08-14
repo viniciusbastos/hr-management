@@ -152,7 +152,8 @@ const WeaponsList = () => {
     new Set(weapons?.map((weapon: Weapon) => weapon.mat)).size ?? 0
   const quantityWeaponsTypePT100 =
     weapons?.filter((weapon: Weapon) => weapon.model === 'PT100').length ?? 0
-
+  const quantityWeaponsType840 =
+    weapons?.filter((weapon: Weapon) => weapon.model === 'PT840').length ?? 0
   const filteredData = filteredUsers ?? weapons
 
   // Set weapons to an empty array if results.data is not an array
@@ -326,6 +327,16 @@ const WeaponsList = () => {
                     link="/weaponsdashboard"
                     title={'Pistolas PT100 Cargueadas'}
                     quant={quantityWeaponsTypePT100}
+                    color="bg-white"
+                    darkColor="bg-slate-600"
+                    info={'Policiais Militares'}
+                  />
+                </div>
+                <div className="rounded-xl shadow-xl flex-row w-1/4 ml-2">
+                  <CardDashboard
+                    link="/weaponsdashboard"
+                    title={'Pistolas PT100 Cargueadas'}
+                    quant={quantityWeaponsType840}
                     color="bg-white"
                     darkColor="bg-slate-600"
                     info={'Policiais Militares'}
