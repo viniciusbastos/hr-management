@@ -291,7 +291,7 @@ const WeaponsList = () => {
                 <div className="rounded-xl shadow-xl flex-row w-1/4 ml-8">
                   <CardDashboard
                     link="/weaponsdashboard"
-                    title={'QTD Armas Cargueadas'}
+                    title={'Armas Cargueadas'}
                     quant={weapons.length}
                     color="bg-white"
                     darkColor="bg-slate-600"
@@ -302,7 +302,10 @@ const WeaponsList = () => {
                   <CardDashboard
                     link="/weaponsdashboard"
                     title={'Carga Fixa Vencida'}
-                    quant={qtdWeaponsExpired}
+                    quant={
+                      qtdWeaponsExpired ||
+                      (qtdWeaponsExpired / weapons.length) * 100
+                    }
                     color="bg-white"
                     darkColor="bg-slate-600"
                     info={'Acaf'}
@@ -311,7 +314,7 @@ const WeaponsList = () => {
                 <div className="rounded-xl shadow-xl flex-row w-1/4 ml-2">
                   <CardDashboard
                     link="/weaponsdashboard"
-                    title={'QTD PM com Carga Fixa'}
+                    title={'PM com Carga Fixa'}
                     quant={individualWeponsCharge}
                     color="bg-white"
                     darkColor="bg-slate-600"
@@ -321,7 +324,7 @@ const WeaponsList = () => {
                 <div className="rounded-xl shadow-xl flex-row w-1/4 ml-2">
                   <CardDashboard
                     link="/weaponsdashboard"
-                    title={'Qtd de Pistolas PT100 Cargueadas'}
+                    title={'Pistolas PT100 Cargueadas'}
                     quant={quantityWeaponsTypePT100}
                     color="bg-white"
                     darkColor="bg-slate-600"
