@@ -1,12 +1,12 @@
-import { saveAs } from 'file-saver';
-import * as XLSX from 'xlsx';
-import { Weapon } from '../interfaces/Weapon';
+import { saveAs } from 'file-saver'
+import * as XLSX from 'xlsx'
+import { Weapon } from '../interfaces/Weapon'
 
 // Function to convert weapons array to CSV format
 export const exportToCSV = (weapons: Weapon[], filename: string) => {
   const csvContent = [
     ['ID', 'Model', 'Serial Number', 'Type', 'Status', 'Caliber', 'Location'],
-    ...weapons.map(weapon => [
+    ...weapons.map((weapon) => [
       weapon.id,
       weapon.model,
       weapon.serialNumber,
@@ -15,47 +15,46 @@ export const exportToCSV = (weapons: Weapon[], filename: string) => {
       weapon.Caliber,
       weapon.location,
     ]),
-  ].map(row => row.join(',')).join('\n');
+  ]
+    .map((row) => row.join(','))
+    .join('\n')
 
-  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-  saveAs(blob, filename);
-};
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+  saveAs(blob, filename)
+}
 
 // Function to convert weapons array to Excel format
-import * as XLSX from 'xlsx';
+import * as XLSX from 'xlsx'
 
-interface ColumnMapping {
-  header: string;
-  key: keyof any;
+interface ColumnMapping<T> {
+  header: string
+  key: keyof T
 }
 
 export const exportToExcel = <T extends Record<string, any>>(
   data: T[],
-  columns: ColumnMapping[],
+  columns: ColumnMapping<T>[],
   filename: string
 ) => {
   // Create the worksheet data with headers and mapped data
   const worksheetData = [
-    columns.map(column => column.header),
-    ...data.map(item =>
-      columns.map(column => item[column.key])
-    ),
-  ];
+    columns.map((column) => column.header),
+    ...data.map((item) => columns.map((column) => item[column.key])),
+  ]
 
   // Create a workbook and add the worksheet
-  const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
-  const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+  const worksheet = XLSX.utils.aoa_to_sheet(worksheetData)
+  const workbook = XLSX.utils.book_new()
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1')
 
   // Write the file to disk
-  XLSX.writeFile(workbook, filename);
-};
+  XLSX.writeFile(workbook, filename)
+}
 
 // Example usage for weapons data
 
-
 export const exportWeaponsToExcel = (weapons: Weapon[], filename: string) => {
-  const columns: ColumnMapping[] = [
+  const columns: ColumnMapping<Weapon>[] = [
     { header: 'ID', key: 'id' },
     { header: 'Model', key: 'model' },
     { header: 'Serial Number', key: 'serialNumber' },
@@ -63,7 +62,7 @@ export const exportWeaponsToExcel = (weapons: Weapon[], filename: string) => {
     { header: 'Status', key: 'Status' },
     { header: 'Caliber', key: 'Caliber' },
     { header: 'Location', key: 'location' },
-  ];
+  ]
 
-  exportToExcel(weapons, columns, filename);
-};
+  exportToExcel(weapons, columns, filename)
+}
