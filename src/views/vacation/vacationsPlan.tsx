@@ -55,7 +55,7 @@ const VacationsPlan = () => {
       }
 
       // Make the API call
-      const response = await api.delete(`/vacations/${deleteId}`)
+      const response = await api.delete(`/vacationsplan/${deleteId}`)
       console.log('Response', response)
       // Check for a successful response status (e.g., 200, 204)
       if (response.status >= 200 && response.status < 300) {
