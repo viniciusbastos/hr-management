@@ -184,6 +184,14 @@ export default function SidebarWithContentSeparator() {
                     Atestados Médicos
                   </ListItem>
                 </Link>
+                <Link to="/vacationsplan">
+                  <ListItem className="mr-auto font-normal text-white">
+                    <ListItemPrefix>
+                      <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                    </ListItemPrefix>
+                    Plano de Férias
+                  </ListItem>
+                </Link>
               </List>
             </AccordionBody>
           </Accordion>

@@ -101,7 +101,7 @@ const VacationsPlan = () => {
           color="white"
           className="mb-2 dark:text-gray-300"
         >
-          Plano de Férias 2025
+          Plano de Férias 2026
         </Typography>
       </CardHeader>
       <CardBody className="p-6">
