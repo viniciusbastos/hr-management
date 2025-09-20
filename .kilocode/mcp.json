@@ -1,55 +1,20 @@
 {
   "mcpServers": {
-    "task-master-ai": {
-      "disabled": true,
-      "timeout": 60,
-      "type": "stdio",
-      "command": "npx",
-      "args": [
-        "-y",
-        "--package=task-master-ai",
-        "task-master-ai"
-      ],
-      "env": {
-        "PERPLEXITY_API_KEY": "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",
-        "GROQ_API_KEY": "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"
-      }
-    },
     "playwright": {
       "disabled": true,
       "timeout": 60,
       "type": "stdio",
       "command": "npx",
-      "args": [
-        "@playwright/mcp@latest"
-      ]
+      "args": ["@playwright/mcp@latest"]
     },
-    "perplexity": {
-      "timeout": 60,
-      "type": "stdio",
-      "command": "npx",
-      "args": [
-        "-y",
-        "perplexity-mcp"
-      ],
-      "env": {
-        "PERPLEXITY_API_KEY": "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"
-      },
-      "disabled": true
-    },
+
     "sequential-thinking": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-sequential-thinking"
-      ]
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
     },
     "context7": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@upstash/context7-mcp"
-      ],
+      "args": ["-y", "@upstash/context7-mcp"],
       "disabled": true,
       "alwaysAllow": []
     }
