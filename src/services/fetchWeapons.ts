@@ -1,18 +1,22 @@
-import { api } from "./api";
+import { api } from './api'
 
-const fetchUser = async ({ queryKey }) => {
-  const id = queryKey[1];
+export const fetchWeapons = async ({ queryKey }) => {
+  const id = queryKey[1]
   const apiRes = api
     .get(`/weapons/fixed`)
     .then((response) => {
-      return response.data;
+      return response.data
     })
     .catch((error) => {
-      throw new Error(`weapons/ fetch not ok`);
-      console.error(error);
-    });
+      throw new Error(`weapons/ fetch not ok` + error)
+      console.error(error)
+    })
 
-  return apiRes;
-};
+  return apiRes
+}
 
-export default fetchUser;
+export const fetchWeaponById = async (id: string) => {
+  console.log('Fetching weapon with ID:', id)
+  const response = await api.get(`/showweaponsbyid/${id}`)
+  return response.data
+}

@@ -1,0 +1,30 @@
+jobs:
+  custom-compose:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Create docker-compose file
+          command: |
+            cat > docker-compose.yml << EOF
+            version: '3.8'
+            services:
+              siyuan:
+                image: b3log/siyuan:v3.3.1
+                ports:
+                  - "6806:6806"
+                volumes:
+                  - ./workspace:/siyuan/workspace
+              test:
+                image: node:16
+                depends_on:
+                  - siyuan
+                command: npm test
+            EOF
+      - docker-compose/install
+      - run:
+          name: Start and test services
+          command: |
+            docker-compose up -d siyuan
+            docker-compose run --rm test
+            docker-compose down

@@ -1,23 +1,36 @@
-import { type FormEvent, useContext, useState } from "react";
-import "../main.css";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../contexts/authContext";
-import loginImage from "../assets/login.png";
+import { type FormEvent, useContext, useState } from 'react'
+import '../main.css'
+import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../contexts/authContext'
+import loginImage from '../assets/login.png'
+import { Button, TextField, Box, Typography, Paper } from '@mui/material'
+import LoadingButton from '@mui/lab/LoadingButton'
 
 const SignIn = () => {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { signIn } = useContext(AuthContext);
+  const navigate = useNavigate()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const { signIn } = useContext(AuthContext)
 
   async function handleSubmit(event: FormEvent) {
-    event.preventDefault();
+    event.preventDefault()
+    setLoading(true)
+    setError('')
 
-    const data = {
-      email: email,
-      password: password,
-    };
-    await signIn(data);
+    try {
+      const data = {
+        email: email,
+        password: password,
+      }
+      await signIn(data)
+    } catch (err) {
+      setError('Invalid credentials. Please try again.')
+      console.error('Sign in error:', err)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -30,44 +43,60 @@ const SignIn = () => {
         />
       </div>
       <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
-        <h1 className="text-2xl font-semibold mb-4 text-gray-200">Login</h1>
-        <form
-          method="post"
-          className="w-full items-center ml-18"
+        <Box
+          component="form"
           onSubmit={handleSubmit}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+            maxWidth: 400,
+            mx: 'auto',
+          }}
         >
-          <div className="flex flex-auto flex-col w-full">
-            <label className="block">
-              <span className="text-gray-200 text-sm">email</span>
-              <input
-                required
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black mb-4 flex-auto"
-              />
-            </label>
-            <label className="block">
-              <span className="text-gray-200 text-sm">senha</span>
-              <input
-                required
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black mb-4 flex-auto"
-              />
-            </label>
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              Submit
-            </button>
-          </div>
-        </form>
+          <Typography variant="h4" component="h1" gutterBottom>
+            Login
+          </Typography>
+
+          {error && (
+            <Typography color="error" variant="body2">
+              {error}
+            </Typography>
+          )}
+
+          <TextField
+            required
+            type="email"
+            label="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            variant="outlined"
+            fullWidth
+          />
+
+          <TextField
+            required
+            type="password"
+            label="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            variant="outlined"
+            fullWidth
+          />
+
+          <LoadingButton
+            type="submit"
+            variant="contained"
+            size="large"
+            loading={loading}
+            fullWidth
+          >
+            Sign In
+          </LoadingButton>
+        </Box>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignIn;
+export default SignIn

@@ -14,7 +14,7 @@ import {
   UseQueryResult,
 } from '@tanstack/react-query'
 import Home from './views/home'
-import Details from './views/details'
+import Details from './views/user/details'
 import Dashboard from './views/dashboard'
 import FormUser from './views/formUser'
 import SignIn from './views/signin'
@@ -52,10 +52,15 @@ import React from 'react'
 import VacationsPlan from './views/vacation/vacationsPlan'
 import Map from './views/map'
 import { WeaponRequestForm } from './views/weapons/testepdf'
-import fetchUsers from './services/fetchUsers'
+import { fetchUsers } from './services/fetchUsers'
 import WeaponForm from './views/weapons/formNewWeapon'
 import FormNewWeapon from './views/weapons/formNewWeapon'
 import DashboardWeaponsCharge from './views/weapons/dashboardWeaponCharge'
+import CsvComparator from './views/weapons/weaponscompare'
+import { User } from './interfaces/User'
+import UserManagementView from './views/user/UserManagementView'
+import EditProfileView from './views/user/EditProfileView'
+import EditWeapon from './views/weapons/editWeapon'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -88,173 +93,187 @@ function App() {
     <Loading />
   ) : (
     <>
-      <BrowserRouter>
-        <AuthProvider>
-          <QueryClientProvider client={queryClient}>
-            <Routes>
-              <Route path="/signin" element={<SignIn />} />
+      <QueryClientProvider client={queryClient}>
+        <Routes>
+          <Route path="/signin" element={<SignIn />} />
+
+          <Route path="/programacaoferias" element={<AppointmentVacation />} />
+          <Route path="/" element={<ProtectedRoute />}>
+            <Route path="/" element={<SidebarLayout />}>
+              <Route path="users/details/:id" element={<Details />} />
+              <Route
+                path="/user/edit/:id"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <EditProfileView />
+                  </Suspense>
+                }
+              />
+              <Route path="/home" element={<Home />} />
+              <Route path="/vacation/submit" element={<Teste />} />
+              <Route path="/ai" element={<AI />} />
+              {/* <Route path="users/" element={<Users />}/> */}
+              <Route
+                path="/users"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <Users />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/dashboardWeaponsCharge"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <DashboardWeaponsCharge />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/weaponscompare"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <CsvComparator />
+                  </Suspense>
+                }
+              />
+              <Route path="/testepdf" element={<WeaponRequestForm />} />
+              <Route path="/usermanager" element={<UserManagementView />} />
 
               <Route
-                path="/programacaoferias"
-                element={<AppointmentVacation />}
+                path="/dashboard"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <Dashboard />
+                  </Suspense>
+                }
               />
-              <Route path="/" element={<ProtectedRoute />}>
-                <Route path="/" element={<SidebarLayout />}>
-                  <Route path="users/details/:id" element={<Details />} />
-                  <Route path="/home" element={<Home />} />
-                  <Route path="/vacation/submit" element={<Teste />} />
-                  <Route path="/ai" element={<AI />} />
-                  {/* <Route path="users/" element={<Users />}/> */}
-                  <Route
-                    path="/users"
-                    element={
-                      <Suspense fallback={<Loading />}>
-                        <Users />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/dashboardWeaponsCharge"
-                    element={
-                      <Suspense fallback={<Loading />}>
-                        <DashboardWeaponsCharge />
-                      </Suspense>
-                    }
-                  />
+              <Route
+                path="/process"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <ProcessTable />
+                  </Suspense>
+                }
+              />
+              <Route path="/formUser" element={<FormUser />} />
+              <Route path="/vacation/:id" element={<VacationDetails />} />
+              <Route
+                path="/vacation"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <Vacation />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/sicknote"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <SickNotes />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/weapons"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <WeaponsList />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/vacationsplan"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <VacationsPlan />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/sicknoteform"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <SicknoteForm />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/weaponscontrol"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <WeaponControlDashboard />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/newweapon"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <FormNewWeapon />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/weaponsdashboard"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <WeaponsDashboard />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/weapons/edit/:id"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <EditWeapon />
+                  </Suspense>
+                }
+              />
 
-                  <Route path="/testepdf" element={<WeaponRequestForm />} />
+              <Route
+                path="/dashteste"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <DashboardTeste />
+                  </Suspense>
+                }
+              />
 
-                  <Route
-                    path="/dashboard"
-                    element={
-                      <Suspense fallback={<Loading />}>
-                        <Dashboard />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/process"
-                    element={
-                      <Suspense fallback={<Loading />}>
-                        <ProcessTable />
-                      </Suspense>
-                    }
-                  />
-                  <Route path="/formUser" element={<FormUser />} />
-                  <Route path="/vacation/:id" element={<VacationDetails />} />
-                  <Route
-                    path="/vacation"
-                    element={
-                      <Suspense fallback={<Loading />}>
-                        <Vacation />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/sicknote"
-                    element={
-                      <Suspense fallback={<Loading />}>
-                        <SickNotes />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/weapons"
-                    element={
-                      <Suspense fallback={<Loading />}>
-                        <WeaponsList />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/vacationsplan"
-                    element={
-                      <Suspense fallback={<Loading />}>
-                        <VacationsPlan />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/sicknoteform"
-                    element={
-                      <Suspense fallback={<Loading />}>
-                        <SicknoteForm />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/weaponscontrol"
-                    element={
-                      <Suspense fallback={<Loading />}>
-                        <WeaponControlDashboard />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/newweapon"
-                    element={
-                      <Suspense fallback={<Loading />}>
-                        <FormNewWeapon />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/weaponsdashboard"
-                    element={
-                      <Suspense fallback={<Loading />}>
-                        <WeaponsDashboard />
-                      </Suspense>
-                    }
-                  />
+              <Route
+                path="/vacation/month/:month/:year"
+                element={<VacationMonth />}
+              />
+              <Route path="/map" element={<Map />} />
+              <Route
+                path="/weapons/termo/:id"
+                element={<TermoResponsabilidade />}
+              />
 
-                  <Route
-                    path="/dashteste"
-                    element={
-                      <Suspense fallback={<Loading />}>
-                        <DashboardTeste />
-                      </Suspense>
-                    }
-                  />
+              <Route path="/courses" element={<Courses />} />
 
-                  <Route
-                    path="/vacation/month/:month/:year"
-                    element={<VacationMonth />}
-                  />
-                  <Route path="/map" element={<Map />} />
-                  <Route
-                    path="/weapons/termo/:id"
-                    element={<TermoResponsabilidade />}
-                  />
+              <Route
+                path="/vacation/vacationcheck"
+                element={<VacationCheck />}
+              />
 
-                  <Route path="/courses" element={<Courses />} />
-
-                  <Route
-                    path="/vacation/vacationcheck"
-                    element={<VacationCheck />}
-                  />
-
-                  <Route path="/courses/:name" element={<CourseName />} />
-                  <Route
-                    path="/courses/details/:id"
-                    element={<CourseDetails />}
-                  />
-                  <Route path="/sicknote/:id" element={<SicknoteDetails />} />
-                  <Route path="*" element={<NotFound />} />
-                  <Route
-                    path="/dashboadtakecareguardians"
-                    element={<DashboardTakeCareGuardian />}
-                  />
-                  <Route path="/appointment" element={<Appointment />} />
-                  <Route
-                    path="/takingcareguardian/list"
-                    element={<TakingCareGuardianList />}
-                  />
-                </Route>
-              </Route>
-            </Routes>
-          </QueryClientProvider>
-        </AuthProvider>
-      </BrowserRouter>
+              <Route path="/courses/:name" element={<CourseName />} />
+              <Route path="/courses/details/:id" element={<CourseDetails />} />
+              <Route path="/sicknote/:id" element={<SicknoteDetails />} />
+              <Route path="*" element={<NotFound />} />
+              <Route
+                path="/dashboadtakecareguardians"
+                element={<DashboardTakeCareGuardian />}
+              />
+              <Route path="/appointment" element={<Appointment />} />
+              <Route
+                path="/takingcareguardian/list"
+                element={<TakingCareGuardianList />}
+              />
+            </Route>
+          </Route>
+        </Routes>
+      </QueryClientProvider>
     </>
   )
 }

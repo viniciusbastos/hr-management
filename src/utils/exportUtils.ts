@@ -24,7 +24,6 @@ export const exportToCSV = (weapons: Weapon[], filename: string) => {
 }
 
 // Function to convert weapons array to Excel format
-import * as XLSX from 'xlsx'
 
 interface ColumnMapping<T> {
   header: string

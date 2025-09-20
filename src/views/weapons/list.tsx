@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { addDays, format, isAfter, parseISO } from 'date-fns'
 import ButtonBack from '../../components/buttonBack'
-import fetchWeapons from '../../services/fetchWeapons'
+import { fetchWeapons } from '../../services/fetchWeapons'
 import {
   Button,
   Card,

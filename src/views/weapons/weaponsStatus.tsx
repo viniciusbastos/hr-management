@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Button } from '@material-tailwind/react'
 import fetchWeaponsInfo from '../../services/fetchWeaponInfo'
 
 interface Weapon {
@@ -13,7 +15,19 @@ interface Weapon {
   location: string
 }
 
+interface OverviewStatistics {
+  [key: string]: {
+    totalWeapons: number
+    operationalWeapons: number
+    emcargaWeapons: number
+    emcargaPercentage: number
+    disponibleWeapons: number
+    operationalPercentage: number
+  }
+}
+
 const WeaponControlDashboard = () => {
+  const navigate = useNavigate()
   const [selectedCategory, setSelectedCategory] = useState<
     'Revolver' | 'Pistola' | 'Carabina' | 'Metralhadora' | 'Fuzil'
   >('Revolver')
@@ -47,7 +61,6 @@ const WeaponControlDashboard = () => {
     )
   }
 
-  // Calculate category-specific statistics
   // Calculate category-specific statistics
   const calculateCategoryStatistics = (
     weaponData: Weapon[]
@@ -108,6 +121,10 @@ const WeaponControlDashboard = () => {
       setSelectedLocation(location)
       setLocationClickCount(locationClickCount + 1)
     }
+  }
+
+  const handleEdit = (weaponId: number) => {
+    navigate(`/weapons/edit/${weaponId}`)
   }
   return (
     <div className="bg-gray-50 dark:bg-inherit min-h-screen p-6">
@@ -249,6 +266,7 @@ const WeaponControlDashboard = () => {
                 <th className="px-4 py-3 text-center">Número de Série</th>
                 <th className="px-4 py-3 text-center">Localização</th>
                 <th className="px-4 py-3 text-center">Status</th>
+                <th className="px-4 py-3 text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -279,6 +297,15 @@ const WeaponControlDashboard = () => {
                     >
                       {weapon.Status.toUpperCase()}
                     </span>
+                  </td>
+                  <td className="px-4 py-3 text-center">
+                    <Button
+                      size="sm"
+                      color="blue"
+                      onClick={() => handleEdit(weapon.id)}
+                    >
+                      Edit
+                    </Button>
                   </td>
                 </tr>
               ))}

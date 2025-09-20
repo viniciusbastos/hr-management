@@ -1,33 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { api } from "../services/api";
-import { Link, useNavigate } from "react-router-dom";
-import foto from "../assets/profile.png";
-import config from "../utils/config";
-import { useQuery } from "@tanstack/react-query";
-import fetchUsers from "../services/fetchUsers";
+import React, { useEffect, useState } from 'react'
+import { api } from '../services/api'
+import { Link, useNavigate } from 'react-router-dom'
+import foto from '../assets/profile.png'
+import config from '../utils/config'
+import { useQuery } from '@tanstack/react-query'
+import { fetchUsers } from '../services/fetchUsers'
 
 function Table() {
-  const navigate = useNavigate();
-  const [users, setUsers] = useState([]);
-  const results = useQuery(["vacation"], fetchUsers);
+  const navigate = useNavigate()
+  const [users, setUsers] = useState([])
+  const results = useQuery(['vacation'], fetchUsers)
   if (results.isLoading) {
     return (
       <div className="loading-pane">
         <h2 className="loader">🌀</h2>
       </div>
-    );
+    )
   }
 
-  
   const getData = () => {
     api.get(`/user`).then((getData) => {
-      setUsers(getData.data);
-    });
-  };
+      setUsers(getData.data)
+    })
+  }
   function handleDelete(id: any) {
     api.delete(`/user/${id}`, config).then(() => {
-      getData();
-    });
+      getData()
+    })
   }
 
   return (
@@ -82,7 +81,7 @@ function Table() {
                     <div
                       className="flex-shrink-0 h-10 w-10"
                       onClick={() => {
-                        navigate(`/details/${user.id}`);
+                        navigate(`/details/${user.id}`)
                       }}
                     >
                       <img
@@ -94,7 +93,7 @@ function Table() {
                     <div
                       className="ml-4"
                       onClick={() => {
-                        navigate(`/details/${user.id}`);
+                        navigate(`/details/${user.id}`)
                       }}
                     >
                       <div className="text-sm font-medium text-gray-900 dark:text-white">
@@ -140,7 +139,7 @@ function Table() {
         </table>
       </div>
     </div>
-  );
+  )
 }
 
-export default Table;
+export default Table

@@ -19,6 +19,8 @@ import {
 } from 'react-hook-form'
 
 import { api } from '../../services/api'
+import { AuthContext, useRoleBasedAccess } from '../../contexts/rbac'
+import { useContext, useEffect, useState } from 'react'
 
 const locationOptions = [
   { value: 1, label: 'CARGA PESSOAL' },
@@ -72,6 +74,32 @@ const typeOptions = [
   { value: 5, label: 'Revolver' },
 ]
 const FormNewWeapon = () => {
+  const { userRole, permissions, hasPermission, hasSufficientRole } =
+    useRoleBasedAccess()
+  const { user } = useContext(AuthContext)
+  const [roleInfo, setRoleInfo] = useState<string | null>(null)
+  const [permissionInfo, setPermissionInfo] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (user) {
+      // Check role level
+      const requiredRole = 'ADMIN'
+      const hasSufficient = hasSufficientRole(requiredRole)
+
+      // Check permissions
+      const requiredPermission = 'manage_users'
+      const hasPermissionCheck = hasPermission(requiredPermission)
+
+      setRoleInfo(
+        hasSufficient ? 'Sufficient role level' : 'Insufficient role level'
+      )
+      setPermissionInfo(
+        hasPermissionCheck
+          ? 'Sufficient permissions'
+          : 'Missing required permission'
+      )
+    }
+  }, [user, hasPermission, hasSufficientRole])
   const queryClient = useQueryClient()
   const {
     register,
@@ -80,12 +108,11 @@ const FormNewWeapon = () => {
     formState: { errors, isValid },
     reset,
   } = useForm()
-  console.log(errors)
-  console.log(isValid)
+
   const onSubmit = async (data: FieldValues) => {
     const id = toast.loading('Please wait...')
     try {
-      const response = await api.post(`/newWeapons/`, data)
+      const response = await api.post(`/newWeapons`, data)
       toast.update(id, {
         render: 'All is good',
         type: 'success',

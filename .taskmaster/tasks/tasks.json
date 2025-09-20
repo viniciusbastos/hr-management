@@ -1,0 +1,16 @@
+{
+  "hrmanager": {
+    "tasks": [
+      "Conduct employee performance reviews",
+      "Update employee records in the HR database",
+      "Organize team-building activities",
+      "Coordinate recruitment and onboarding processes",
+      "Ensure compliance with labor laws and regulations"
+    ],
+    "metadata": {
+      "created": "2025-09-10T11:55:41.089Z",
+      "updated": "2025-09-10T11:55:41.093Z",
+      "description": "Tag created on 9/10/2025"
+    }
+  }
+}

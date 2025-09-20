@@ -1,11 +1,11 @@
-import { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { api } from "../../services/api";
-import config from "../../utils/config";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import fetchUsers from "../../services/fetchUsers";
-import fetchHealthProfessional from "../../services/fetchHealthProfessional";
+import { useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { api } from '../../services/api'
+import config from '../../utils/config'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { fetchUsers } from '../../services/fetchUsers'
+import fetchHealthProfessional from '../../services/fetchHealthProfessional'
 import Select from 'react-select'
 
 import {
@@ -19,10 +19,10 @@ import {
 } from '@material-tailwind/react'
 import { ToastContainer, toast } from 'react-toastify'
 import { useForm, useController, type FieldValues } from 'react-hook-form'
-import fetchUsersSelect from '../../services/fetchUsersSelect'
+import { fetchUserSelected } from '../../services/fetchUsers'
 
 const AppointmentVacation = () => {
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
   const {
     register,
     handleSubmit,
@@ -30,7 +30,7 @@ const AppointmentVacation = () => {
     formState: { errors, isValid },
     reset,
   } = useForm()
-  const result = useQuery(['users'], fetchUsersSelect)
+  const result = useQuery(['users'], fetchUserSelected)
   const {
     field: {
       value: belongsToId,
@@ -40,7 +40,6 @@ const AppointmentVacation = () => {
   } = useController({ name: 'belongsToId', control })
 
   const onSubmit = async (data: FieldValues) => {
-    
     const id = toast.loading('Please wait...')
     try {
       const response = await api.post(`/appointment/`, data)
@@ -50,7 +49,7 @@ const AppointmentVacation = () => {
         isLoading: false,
         autoClose: 5000,
       })
-      queryClient.invalidateQueries(["vacation"]); // Invalidate the query
+      queryClient.invalidateQueries(['vacation']) // Invalidate the query
       reset()
     } catch (error) {
       console.error(error)
@@ -139,4 +138,4 @@ const AppointmentVacation = () => {
   )
 }
 
-export default AppointmentVacation;
+export default AppointmentVacation

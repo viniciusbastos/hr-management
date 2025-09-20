@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { api } from '../services/api'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import Select from 'react-select'
-import fetchUsersSelect from '../services/fetchUsersSelect'
+import { fetchUserSelected } from '../services/fetchUsers'
 import {
   Alert,
   Button,
@@ -42,7 +42,7 @@ const FormWeapon = ({ refetch }) => {
   const navigate = useNavigate()
   const { data: userselect, isError } = useQuery(
     ['userselect'],
-    fetchUsersSelect
+    fetchUserSelected
   )
   if (isError) {
     return (

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
 import config from '../../utils/config'
 import { useQuery } from '@tanstack/react-query'
-import fetchUsers from '../../services/fetchUsers'
+import { fetchUsers } from '../../services/fetchUsers'
 import fetchHealthProfessional from '../../services/fetchHealthProfessional'
 import Select from 'react-select'
 
@@ -19,7 +19,7 @@ import {
 } from '@material-tailwind/react'
 import { ToastContainer, toast } from 'react-toastify'
 import { useForm, useController, type FieldValues } from 'react-hook-form'
-import fetchUsersSelect from '../../services/fetchUsersSelect'
+import { fetchUserSelected } from '../../services/fetchUsers'
 
 const SicknoteForm: React.FC = () => {
   const {
@@ -33,7 +33,7 @@ const SicknoteForm: React.FC = () => {
     data: selectuser,
     isLoading,
     isError,
-  } = useQuery(['selectuser'], fetchUsersSelect)
+  } = useQuery(['selectuser'], fetchUserSelected)
 
   const {
     field: {

@@ -4,6 +4,7 @@ import {
   useContext,
   useEffect,
   useState,
+  useCallback,
 } from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
@@ -20,6 +21,7 @@ type User = {
   name: string
   posto: string
   role: string
+  permissions?: string
 }
 interface CustomJwtPayload {
   id: string
@@ -27,12 +29,16 @@ interface CustomJwtPayload {
   role: string
   name: string
   posto: string
+  permissions?: string
 }
 type AuthContextData = {
   signIn(credetials: SignInCredentials): Promise<void>
   isAuthenticated: boolean
   Logout(): void
   user?: User
+  refreshAuth(): Promise<void>
+  hasPermission(permission: string): boolean
+  hasRole(role: string): boolean
 }
 
 type AuthProviderProps = {
@@ -47,29 +53,65 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const navigate = useNavigate()
   const location = useLocation()
 
+  // Check if user has specific permission
+  const hasPermission = useCallback(
+    (permission: string): boolean => {
+      return user?.permissions?.includes(permission) || false
+    },
+    [user]
+  )
+
+  // Check if user has specific role
+  const hasRole = useCallback(
+    (role: string): boolean => {
+      return user?.role === role || false
+    },
+    [user]
+  )
+
+  // Refresh authentication token
+  const refreshAuth = useCallback(async (): Promise<void> => {
+    try {
+      const token = Cookies.get('token')
+      if (token) {
+        const decodedToken: CustomJwtPayload = jwtDecode(token)
+        setUser({
+          id: decodedToken.id,
+          useremail: decodedToken.useremail,
+          role: decodedToken.role,
+          name: decodedToken.name,
+          posto: decodedToken.posto,
+          permissions: decodedToken.permissions,
+        })
+        setIsAuthenticated(true)
+      } else {
+        setIsAuthenticated(false)
+        setUser(undefined)
+      }
+    } catch (error) {
+      console.error('Failed to refresh authentication:', error)
+      setIsAuthenticated(false)
+      setUser(undefined)
+    }
+  }, [])
+
   function Logout() {
     Cookies.remove('token')
-    const isAutenticated = false
+    setIsAuthenticated(false)
+    setUser(undefined)
     navigate('/signin')
   }
 
   useEffect(() => {
     const token = Cookies.get('token')
     if (token) {
-      const decodedToken: CustomJwtPayload = jwtDecode(token) // Use custom interface here
-      setUser({
-        id: decodedToken.id,
-        useremail: decodedToken.useremail,
-        role: decodedToken.role,
-        name: decodedToken.name,
-        posto: decodedToken.posto,
-      })
-      setIsAuthenticated(true)
-      navigate(location ?? '/dashboard')
+      refreshAuth()
     } else {
+      setIsAuthenticated(false)
+      setUser(undefined)
       navigate('/signin')
     }
-  }, [])
+  }, [refreshAuth])
 
   async function signIn({ email, password }: SignInCredentials) {
     try {
@@ -81,7 +123,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
         }
       )
       const token = response.data.token
-      Cookies.set('token', token, { expires: 30 })
+      // Set secure cookie with proper attributes for JWT
+      Cookies.set('token', token, {
+        expires: 30,
+        secure: import.meta.env.PROD,
+        sameSite: 'strict',
+      })
+
       const decodedToken: CustomJwtPayload = jwtDecode(token)
       setUser({
         id: decodedToken.id,
@@ -89,16 +137,28 @@ export function AuthProvider({ children }: AuthProviderProps) {
         role: decodedToken.role,
         name: decodedToken.name,
         posto: decodedToken.posto,
+        permissions: decodedToken.permissions,
       })
       setIsAuthenticated(true)
       navigate('/dashboard')
     } catch (err) {
-      console.log(err)
+      console.error('Sign in error:', err)
+      throw err
     }
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, Logout, signIn }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        user,
+        Logout,
+        signIn,
+        refreshAuth,
+        hasPermission,
+        hasRole,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   )
